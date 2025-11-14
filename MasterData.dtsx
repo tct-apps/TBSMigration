@@ -1,0 +1,1392 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/13/2025 4:38:13 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-CKMEJ54"
+  DTS:CreatorName="DESKTOP-CKMEJ54\Shafiq-TCT"
+  DTS:DTSID="{B763567D-8615-400E-8361-DADA6399E58C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1008.3"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="MasterData"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{975C921E-DC50-4D3C-B55B-7C6A4673D555}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[eTicketing_old]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}"
+      DTS:ObjectName="eTicketing_old">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_old;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC6BUx5FIJpUTSVytoFiU4qFORshLxVmQ2ttU1vDs2KiAAAAAAOgAAAAAIAACAAAAANpMRNzenWlxvW6ApLEUIgdUMijblSMNlzWYqLDjXAKCAAAABTFTwBOXPSPyf8fWNXBBFzjicH8OtDumwXj3h1+XXVckAAAADLL3bFF3gPR3wjYrGYShK6sDUFd9OYGVnF+1RAEoLkyJtrh8IdT/yhbMdCDv30BG2/haVs+kG2Ho/rtxSUp9n6</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[eTicketing_tbs_new]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3B183B8B-3E62-4E5F-B341-811E93F21315}"
+      DTS:ObjectName="eTicketing_tbs_new">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC63PMdSnwvUYWbdgHuovEq+seqIf20p8b9c25aPAZ+tAAAAAAOgAAAAAIAACAAAAAevY2rbKIJOn5NjjOoW+cpzhiZXB72PQj3a9QngjcwyCAAAABzuuhBrQKYtar8zWKDeAE/5NV7TZKwFePoGJYcCqZ+FkAAAABCVT6kJvvWilmmsvpDcEioMAu9alF617pxeZXgEVPd2TIBYYa9RZwn27Xcc5kTdtuNvf61LfBwfRfeISGHBRVi</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Test BusInfo"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{827549F6-7EBC-4364-AAA8-D8F715D6A3D0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Test BusInfo"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Test BusInfo\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[BusInfo]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Test BusInfo\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_new]"
+                  connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_new]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="crid"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crid]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="crdt"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lmid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="lmid"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmid]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lmdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="lmdt"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[acti]"
+                      cachedDataType="numeric"
+                      cachedName="acti"
+                      cachedPrecision="1"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[acti]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[acti]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SComp]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="SComp"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SComp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Busn]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Busn"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Busn]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Busn]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Desn]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Desn"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Desn]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Desn]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Finc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Finc"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Finc]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Finc]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Btyp]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="35"
+                      cachedName="Btyp"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Btyp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Btyp]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Mfdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Mfdt"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Mfdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Mfdt]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Rsdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Rsdt"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rsdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Rsdt]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EngM]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="EngM"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EngM]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[EngM]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EngN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="EngN"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EngN]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[EngN]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ChaM]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ChaM"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ChaM]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaM]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ChaN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ChaN"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ChaN]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaN]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RouM]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RouM"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RouM]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouM]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RouN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RouN"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RouN]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouN]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RouExp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RouExp"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RouExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouExp]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PerExp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="PerExp"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PerExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[PerExp]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Pusdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Pusdt"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pusdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pusdt]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RoadExp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RoadExp"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoadExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RoadExp]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SingExp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SingExp"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SingExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[SingExp]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InsuComp]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="InsuComp"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InsuComp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[InsuComp]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InsuExp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="InsuExp"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InsuExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[InsuExp]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Remk]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Remk"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Remk]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Remk]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Chart]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Chart"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Chart]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Chart]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DrID1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DrID1"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrID1]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID1]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DrID2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DrID2"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrID2]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID2]" />
+                    <inputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DrID3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DrID3"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrID3]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID3]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="crid" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crdt]"
+                      dataType="dbTimeStamp"
+                      name="crdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="lmid" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmdt]"
+                      dataType="dbTimeStamp"
+                      name="lmdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[acti]"
+                      dataType="numeric"
+                      name="acti"
+                      precision="1" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SComp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Busn]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Busn" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Desn]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Desn" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Finc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Finc" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Btyp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="Btyp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Mfdt]"
+                      dataType="dbTimeStamp"
+                      name="Mfdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rsdt]"
+                      dataType="dbTimeStamp"
+                      name="Rsdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EngM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="EngM" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EngN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="EngN" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ChaM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ChaM" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ChaN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ChaN" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RouM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RouM" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RouN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RouN" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RouExp]"
+                      dataType="dbTimeStamp"
+                      name="RouExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PerExp]"
+                      dataType="dbTimeStamp"
+                      name="PerExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pusdt]"
+                      dataType="dbTimeStamp"
+                      name="Pusdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoadExp]"
+                      dataType="dbTimeStamp"
+                      name="RoadExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SingExp]"
+                      dataType="dbTimeStamp"
+                      name="SingExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InsuComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="InsuComp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InsuExp]"
+                      dataType="dbTimeStamp"
+                      name="InsuExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Remk]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Remk" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Chart]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Chart" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrID1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DrID1" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrID2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DrID2" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrID3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DrID3" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Test BusInfo\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test BusInfo\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test BusInfo\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Test BusInfo\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[BusInfo]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Test BusInfo\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[eTicketing_old]"
+                  connectionManagerRefId="Package.ConnectionManagers[eTicketing_old]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crid]"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]"
+                      name="crid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]"
+                      name="crdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmid]"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]"
+                      name="lmid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]"
+                      name="lmdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[acti]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[acti]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[acti]"
+                      name="acti"
+                      precision="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SComp]"
+                      length="10"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]"
+                      name="SComp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Busn]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Busn]"
+                      length="15"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Busn]"
+                      name="Busn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Desn]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Desn]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Desn]"
+                      name="Desn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Finc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Finc]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Finc]"
+                      name="Finc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Btyp]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Btyp]"
+                      length="35"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Btyp]"
+                      name="Btyp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Mfdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Mfdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Mfdt]"
+                      name="Mfdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Rsdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Rsdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Rsdt]"
+                      name="Rsdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[EngM]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EngM]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[EngM]"
+                      name="EngM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[EngN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EngN]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[EngN]"
+                      name="EngN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaM]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ChaM]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaM]"
+                      name="ChaM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ChaN]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaN]"
+                      name="ChaN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouM]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RouM]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouM]"
+                      name="RouM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RouN]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouN]"
+                      name="RouN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouExp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RouExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RouExp]"
+                      name="RouExp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[PerExp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PerExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[PerExp]"
+                      name="PerExp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pusdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pusdt]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pusdt]"
+                      name="Pusdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RoadExp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RoadExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[RoadExp]"
+                      name="RoadExp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[SingExp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SingExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[SingExp]"
+                      name="SingExp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[InsuComp]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InsuComp]"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[InsuComp]"
+                      name="InsuComp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[InsuExp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InsuExp]"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[InsuExp]"
+                      name="InsuExp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Remk]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Remk]"
+                      length="100"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Remk]"
+                      name="Remk"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Chart]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Chart]"
+                      length="1"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Chart]"
+                      name="Chart"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrID1]"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID1]"
+                      name="DrID1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrID2]"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID2]"
+                      name="DrID2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID3]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrID3]"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrID3]"
+                      name="DrID3"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="crid" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crdt]"
+                      dataType="dbTimeStamp"
+                      name="crdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="lmid" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmdt]"
+                      dataType="dbTimeStamp"
+                      name="lmdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[acti]"
+                      dataType="numeric"
+                      name="acti"
+                      precision="1" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SComp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Busn]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Busn" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Desn]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Desn" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Finc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Finc" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Btyp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="Btyp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Mfdt]"
+                      dataType="dbTimeStamp"
+                      name="Mfdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Rsdt]"
+                      dataType="dbTimeStamp"
+                      name="Rsdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EngM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="EngM" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EngN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="EngN" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ChaM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ChaM" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ChaN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ChaN" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RouM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RouM" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RouN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RouN" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RouExp]"
+                      dataType="dbTimeStamp"
+                      name="RouExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PerExp]"
+                      dataType="dbTimeStamp"
+                      name="PerExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pusdt]"
+                      dataType="dbTimeStamp"
+                      name="Pusdt" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RoadExp]"
+                      dataType="dbTimeStamp"
+                      name="RoadExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SingExp]"
+                      dataType="dbTimeStamp"
+                      name="SingExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InsuComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="InsuComp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InsuExp]"
+                      dataType="dbTimeStamp"
+                      name="InsuExp" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Remk]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Remk" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Chart]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Chart" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrID1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DrID1" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrID2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DrID2" />
+                    <externalMetadataColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrID3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DrID3" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crid]"
+                      name="crid" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crdt]"
+                      name="crdt" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmid]"
+                      name="lmid" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmdt]"
+                      name="lmdt" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[acti]"
+                      dataType="numeric"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[acti]"
+                      name="acti"
+                      precision="1" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SComp]"
+                      name="SComp" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Busn]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Busn]"
+                      name="Busn" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Desn]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Desn]"
+                      name="Desn" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Finc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Finc]"
+                      name="Finc" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Btyp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Btyp]"
+                      name="Btyp" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Mfdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Mfdt]"
+                      name="Mfdt" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Rsdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Rsdt]"
+                      name="Rsdt" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EngM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EngM]"
+                      name="EngM" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EngN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EngN]"
+                      name="EngN" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ChaM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ChaM]"
+                      name="ChaM" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ChaN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ChaN]"
+                      name="ChaN" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RouM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RouM]"
+                      name="RouM" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RouN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RouN]"
+                      name="RouN" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RouExp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RouExp]"
+                      name="RouExp" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PerExp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PerExp]"
+                      name="PerExp" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pusdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pusdt]"
+                      name="Pusdt" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RoadExp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RoadExp]"
+                      name="RoadExp" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SingExp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SingExp]"
+                      name="SingExp" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InsuComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InsuComp]"
+                      name="InsuComp" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InsuExp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InsuExp]"
+                      name="InsuExp" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Remk]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Remk]"
+                      name="Remk" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Chart]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Chart]"
+                      name="Chart" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrID1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrID1]"
+                      name="DrID1" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrID2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrID2]"
+                      name="DrID2" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrID3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrID3]"
+                      name="DrID3" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Test BusInfo.Paths[OLE DB Source Output]"
+              endId="Package\Test BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Test BusInfo\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\Test BusInfo"
+          TopLeft="404.166644583975,188.933332019515" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Test BusInfo">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Test BusInfo\OLE DB Source"
+          TopLeft="432.999979920686,218.033332272636" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Test BusInfo\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
+        <EdgeLayout
+          Id="Package\Test BusInfo.Paths[OLE DB Source Output]"
+          TopLeft="508.799981013438,259.633332272636">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,100.199999222557"
+              Start="0,0"
+              End="0,92.6999992225568">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,92.6999992225568" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test BusInfo\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test BusInfo\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
