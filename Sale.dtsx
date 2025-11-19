@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{48320C9A-C778-4E53-87BC-EE3930F0E943}">
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{97CA01B2-9DEF-4CFF-9612-0B1A05CEC8D3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACCrITIfiawLeVN8mKpm7mLyrNIzyZGsIfBQDThoKrK9gAAAAAOgAAAAAIAACAAAAB9dlu0fElS4gwuSQeve/nRIE2PGdXvMgoXZ20uO1B5VSAAAAAfro73BlKsEeJxEYXRlFMLGKhnF9MwLrqmZ13za1YGyUAAAABDnge+trp4UVwpaKWepxB6HNQTyVWojmq+8nUGx5RO6C0XxbV/Td95Lgk0VSXoX7OAKJTzqfqVMgo5DmhZ4Puj</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACAptjZJxM3uhZBx9OYh9bP7yCYszbm4xwDxPl86ezkNwAAAAAOgAAAAAIAACAAAAAOBeKk/Ax8/Y6ZpFOYTPc8HYHZwKmCJow7UhNDxE+WBSAAAABe9iNsx4+zLHHOaLoSskE3I3faUZ07an8L68A0ijFSX0AAAABtzrd608VEdllVWCC6Jtp6vkiqICJIpCGeXeKOqnNaNWuTETevd+mDqxksyvwzlPP03nMrWv0HziTnhOQrSDZn</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAD8M6Pg/s8mflpXpaj7Ezlic1yjBRSwwmO4B6s2cLbOtAAAAAAOgAAAAAIAACAAAAB9zcz/OIFmu65oJgnzU1qCKHhaCcD3xBXI5fucsXfOkSAAAADwHvtFEcscS8fztk7nUBXa0h3gacHaS4tf0GslUApRU0AAAAC6NYAcnxHDHKt7PSQ8CVjJDQbQtxEVPSMI7vgEDEG6xjLTSamL0JJY7NFrYV5X9+mx8RaTmUpPjxBRvjSrA1MA</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB6rhBhk1p+WGa5S+MUUlPPaIsbxvUXds7VVZ5dfSUO0AAAAAAOgAAAAAIAACAAAACAKaxAIUP+TWx5bf2UxoF9UHtzf9BK0g7zWXoNYPvcyyAAAACQQ3wd5wK+myAT3Ie9dxIY6o02IUox8UfOZ8SyyN4NY0AAAADdKw5CIiS+p/ekSqnBCOyeScDJjVzDsBJ79QK2uKhvSJrxDb7AyOKR8Ut+JbeVY5H1Oz9wzFSrPlwRHmgiZDNc</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -13126,60 +13126,6 @@
                       externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Refn]"
                       lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[Refn]" />
                     <inputColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OChrgStat]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="1"
-                      cachedName="OChrgStat"
-                      externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgStat]"
-                      lineageId="Package\OnlineQR\236:invalid" />
-                    <inputColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OChrgAmnt]"
-                      cachedDataType="numeric"
-                      cachedName="OChrgAmnt"
-                      cachedPrecision="15"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgAmnt]"
-                      lineageId="Package\OnlineQR\239:invalid" />
-                    <inputColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OChrgClosedt]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="OChrgClosedt"
-                      externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgClosedt]"
-                      lineageId="Package\OnlineQR\242:invalid" />
-                    <inputColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OChrgCloseId]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="OChrgCloseId"
-                      externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgCloseId]"
-                      lineageId="Package\OnlineQR\245:invalid" />
-                    <inputColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OChrgGSTRate]"
-                      cachedDataType="numeric"
-                      cachedName="OChrgGSTRate"
-                      cachedPrecision="5"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgGSTRate]"
-                      lineageId="Package\OnlineQR\248:invalid" />
-                    <inputColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OChrgStat2]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="1"
-                      cachedName="OChrgStat2"
-                      externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgStat2]"
-                      lineageId="Package\OnlineQR\251:invalid" />
-                    <inputColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OChrgType]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="1"
-                      cachedName="OChrgType"
-                      externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgType]"
-                      lineageId="Package\OnlineQR\254:invalid" />
-                    <inputColumn
                       refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Crdt]"
                       cachedDataType="dbTimeStamp"
                       cachedName="Crdt"
@@ -15327,14 +15273,6 @@
                       externalMetadataColumnId="Package\TickBoard\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgGSTRate]"
                       lineageId="Package\TickBoard\OLE DB Source.Outputs[OLE DB Source Output].Columns[OChrgGSTRate]" />
                     <inputColumn
-                      refId="Package\TickBoard\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RefuRmk]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="RefuRmk"
-                      externalMetadataColumnId="Package\TickBoard\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ECout]"
-                      lineageId="Package\TickBoard\497:invalid" />
-                    <inputColumn
                       refId="Package\TickBoard\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crid]"
                       cachedCodepage="1252"
                       cachedDataType="str"
@@ -15577,6 +15515,14 @@
                       cachedName="IPayType"
                       externalMetadataColumnId="Package\TickBoard\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IPayType]"
                       lineageId="Package\TickBoard\OLE DB Source.Outputs[OLE DB Source Output].Columns[IPayType]" />
+                    <inputColumn
+                      refId="Package\TickBoard\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ECout]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ECout"
+                      externalMetadataColumnId="Package\TickBoard\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ECout]"
+                      lineageId="Package\TickBoard\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECout]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -17252,14 +17198,6 @@
                       externalMetadataColumnId="Package\TickBoardOperator\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgGSTRate]"
                       lineageId="Package\TickBoardOperator\OLE DB Source.Outputs[OLE DB Source Output].Columns[OChrgGSTRate]" />
                     <inputColumn
-                      refId="Package\TickBoardOperator\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RefuRmk]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="RefuRmk"
-                      externalMetadataColumnId="Package\TickBoardOperator\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ECout]"
-                      lineageId="Package\TickBoardOperator\497:invalid" />
-                    <inputColumn
                       refId="Package\TickBoardOperator\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crid]"
                       cachedCodepage="1252"
                       cachedDataType="str"
@@ -17454,6 +17392,14 @@
                       cachedName="Rphdt"
                       externalMetadataColumnId="Package\TickBoardOperator\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rphdt]"
                       lineageId="Package\TickBoardOperator\OLE DB Source.Outputs[OLE DB Source Output].Columns[Rphdt]" />
+                    <inputColumn
+                      refId="Package\TickBoardOperator\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ECout]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ECout"
+                      externalMetadataColumnId="Package\TickBoardOperator\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ECout]"
+                      lineageId="Package\TickBoardOperator\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECout]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -19161,7 +19107,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DERPosi_202512\OLE DB Source">
+    design-time-name="Package\DERPosi_202512\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19174,7 +19120,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DERPosi_202512\OLE DB Destination">
+    design-time-name="Package\DERPosi_202512\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19225,7 +19171,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DERPosi_202601\OLE DB Source">
+    design-time-name="Package\DERPosi_202601\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19238,7 +19184,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DERPosi_202601\OLE DB Destination">
+    design-time-name="Package\DERPosi_202601\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19289,7 +19235,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DERPosi_202602\OLE DB Source">
+    design-time-name="Package\DERPosi_202602\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19302,7 +19248,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DERPosi_202602\OLE DB Destination">
+    design-time-name="Package\DERPosi_202602\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19353,7 +19299,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DERPosi_202603\OLE DB Source">
+    design-time-name="Package\DERPosi_202603\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19366,7 +19312,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DERPosi_202603\OLE DB Destination">
+    design-time-name="Package\DERPosi_202603\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19417,7 +19363,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DERTicket_202512\OLE DB Source">
+    design-time-name="Package\DERTicket_202512\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19430,7 +19376,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DERTicket_202512\OLE DB Destination">
+    design-time-name="Package\DERTicket_202512\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19481,7 +19427,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DERTicket_202601\OLE DB Source">
+    design-time-name="Package\DERTicket_202601\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19494,7 +19440,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DERTicket_202601\OLE DB Destination">
+    design-time-name="Package\DERTicket_202601\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19545,7 +19491,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DERTicket_202602\OLE DB Source">
+    design-time-name="Package\DERTicket_202602\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19558,7 +19504,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DERTicket_202602\OLE DB Destination">
+    design-time-name="Package\DERTicket_202602\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19609,7 +19555,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DERTicket_202603\OLE DB Source">
+    design-time-name="Package\DERTicket_202603\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19622,7 +19568,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DERTicket_202603\OLE DB Destination">
+    design-time-name="Package\DERTicket_202603\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19638,15 +19584,15 @@
     design-time-name="Package\OnlineQR">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\OnlineQR\OLE DB Source"
-          TopLeft="374.333312920399,162.199998864134" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\OnlineQR\OLE DB Destination"
           TopLeft="362.999980467062,278.499998101592" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\OnlineQR\OLE DB Source"
+          TopLeft="374.333312920399,162.199998864134" />
         <EdgeLayout
           Id="Package\OnlineQR.Paths[OLE DB Source Output]"
           TopLeft="449.46664669373,203.799998864134">
@@ -19666,16 +19612,14 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-8,25.5999996187291,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\OnlineQR\OLE DB Source">
+    design-time-name="Package\OnlineQR\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19688,7 +19632,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\OnlineQR\OLE DB Destination">
+    design-time-name="Package\OnlineQR\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19704,15 +19648,15 @@
     design-time-name="Package\TickBoard">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\TickBoard\OLE DB Source"
-          TopLeft="374.333312920399,162.199998864134" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\TickBoard\OLE DB Destination"
           TopLeft="362.999980467062,278.499998101592" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\TickBoard\OLE DB Source"
+          TopLeft="374.333312920399,162.199998864134" />
         <EdgeLayout
           Id="Package\TickBoard.Paths[OLE DB Source Output]"
           TopLeft="449.46664669373,203.799998864134">
@@ -19732,16 +19676,14 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-8,25.5999996187291,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\TickBoard\OLE DB Source">
+    design-time-name="Package\TickBoard\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19754,7 +19696,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\TickBoard\OLE DB Destination">
+    design-time-name="Package\TickBoard\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19770,7 +19712,7 @@
     design-time-name="Package\TickBoardOperator">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TickBoardOperator\OLE DB Source"
@@ -19798,16 +19740,14 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-8,25.5999996187291,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\TickBoardOperator\OLE DB Source">
+    design-time-name="Package\TickBoardOperator\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -19820,7 +19760,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\TickBoardOperator\OLE DB Destination">
+    design-time-name="Package\TickBoardOperator\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
