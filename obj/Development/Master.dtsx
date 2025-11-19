@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="11/13/2025 4:38:13 PM"
@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterData"
   DTS:PackageType="5"
-  DTS:VersionBuild="75"
-  DTS:VersionGUID="{EC003398-7DC1-420C-8D56-498ADF779962}">
+  DTS:VersionBuild="74"
+  DTS:VersionGUID="{4B1B2245-F1C5-4A65-B6AC-C22D7DF3A222}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAozOU5B0e0dwppqQ1s+qS3RMbP+e3BLtKr9yzDP75WtgAAAAAOgAAAAAIAACAAAAAO2O22Sy7KhLdPEYpqeMe80WyT1xsnXCt6GqAsQ5ergiAAAACEL0L21S+ujjS9CJzJ0YL5S4vFVbBGJYwJkp12wSgHhEAAAACeOwyHpV6D7t9KUOAI+/z1fZQM+GhReDCB4IyRxRhuoYGJ9JdMEZyE5I5p1ecSmyxj46mAweXC2YooWCoR4npC</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB58AFjvQD7sa4H0w/kDIcahlcB9NgagGjvE44BIU6SpgAAAAAOgAAAAAIAACAAAABoZ4Rnqf0xnEzvPy5IWqTx5xtQk7FAr9VuyHjQLWh9ZCAAAAA/wwc9aT5Vf3tW67hMyzxeeUCtyWYTFDQU+T2y5mId+EAAAABhOYnPk2mfQgSeQwW1E0mgghIqX7tjaTfxCGEjOOvs7a2UHqyNAWrNunbckXri7gaPSISgM8DpgxgZOBevhcgK</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACof5LIFz2KS1B8ceOEhuqhkusxNaWFUenk7Mq89lEoPwAAAAAOgAAAAAIAACAAAABg7cGx0I9SIH1aPHwEUOl/Za4ua05l8xa4m5Lq9/aRdCAAAACr4/0fn78RhrEF6XJ8GUykr9BdDMr8q3bFqXZDZNxP8kAAAAC1IMWeuccOlKBMJVYk9EdzD3D+gHcxQhGn7LJpVS1vac83IUqvRhFDd+4HFsDTX/RQEXkvPIstif1u0sTLvHNT</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAkjifYqKNIrK6Jq6NB1Lz1g4f7TAgH/AKkq7UvdaZ0gwAAAAAOgAAAAAIAACAAAAAvgvn5l8a8qBO7AjDFMwIJIXjkeOqj0HvNFSRV+UfFhyAAAADtP8DJkoPdd4jnVI+WNyQANI5HdJj9T1BB2SpiIMcXIEAAAADnpisjyoTDsrr4ZAuiCIAj5VC5wwRcvujWZULkBMdRhesjn2/f39VoEd5lRv/lOGHXwxncxqri0ENXlkup0Gge</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -2840,7 +2840,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{3B183B8B-3E62-4E5F-B341-811E93F21315}"
-          SQLTask:SqlStatementSource="&#xA;DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;SELECT @sql = @sql +&#xA;    'IF OBJECT_ID(''dbo.' + name + ''') IS NOT NULL TRUNCATE TABLE dbo.' + QUOTENAME(name) + ';' + CHAR(10)&#xA;FROM sys.tables&#xA;WHERE name IN (&#xA;    'BusInfo',&#xA;    'BusServCate',&#xA;    'BusType',&#xA;    'BusTypeSeat',&#xA;    'MImage',&#xA;    'SysComp',&#xA;    'SysCompGroupD',&#xA;    'SysCompGroupH',&#xA;    'SysCurr',&#xA;    'SysDistrict',&#xA;    'SysFacilityOnlineChrg',&#xA;    'SysInsu',&#xA;    'SysMachine',&#xA;    'SysMarkGrpD',&#xA;    'SysMarkGrpH',&#xA;    'SysMsg',&#xA;    'SysOnPara',&#xA;    'SysOnRate',&#xA;    'SysOTA',&#xA;    'SysOTAD',&#xA;    'SysOTAPara',&#xA;    'SysPGroup',&#xA;    'SysUser',&#xA;    'SysUserGrp',&#xA;    'TCounter',&#xA;    'TCounterMergeD',&#xA;    'TCounterMergeH',&#xA;    'TRoute',&#xA;    'TRouteCout',&#xA;    'TRouteExtra',&#xA;    'TRoutePrice',&#xA;    'TRouteTimerD',&#xA;    'TRouteTimerH',&#xA;    'Ulevel',&#xA;    'UlevelD',&#xA;    'UlevelP'&#xA;);&#xA;&#xA;EXEC (@sql); &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#xA;-- 1) BusInfo&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'BusInfo' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[BusInfo](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[SComp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[Busn] [varchar](15) NOT NULL,&#xA;&#x9;&#x9;[Desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Finc] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Btyp] [varchar](35) NOT NULL,&#xA;&#x9;&#x9;[Mfdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[Rsdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[EngM] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[EngN] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[ChaM] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[ChaN] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[RouM] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[RouN] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[RouExp] [datetime] NOT NULL,&#xA;&#x9;&#x9;[PerExp] [datetime] NOT NULL,&#xA;&#x9;&#x9;[Pusdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[RoadExp] [datetime] NOT NULL,&#xA;&#x9;&#x9;[SingExp] [datetime] NOT NULL,&#xA;&#x9;&#x9;[InsuComp] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[InsuExp] [datetime] NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[Chart] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[DrID1] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[DrID2] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[DrID3] [varchar](20) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.BusInfo;&#xA;END&#xA;&#xA;-- 2) BusServCate&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'BusServCate' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[BusServCate](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[ServCate] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9; CONSTRAINT [BusServCate_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[ServCate] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.BusServCate;&#xA;END&#xA;&#xA;-- 3) BusType&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'BusType' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[BusType](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Btyp] [varchar](35) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[Col1] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Col2] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Row1] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[SeatN] [numeric](3, 0) NOT NULL,&#xA;&#x9;&#x9;[SComp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[ServCate] [varchar](10) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[BusType] ADD  DEFAULT ('') FOR [ServCate]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.BusType;&#xA;END&#xA;&#xA;-- 4) BusTypeSeat&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'BusTypeSeat' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[BusTypeSeat](&#xA;&#x9;&#x9;[Btyp] [varchar](35) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](15, 0) NOT NULL,&#xA;&#x9;&#x9;[Desn] [varchar](8) NOT NULL,&#xA;&#x9;&#x9;[DSeat] [varchar](1) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.BusTypeSeat;&#xA;END&#xA;&#xA;-- 5) MImage&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'MImage' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[MImage](&#xA;&#x9;&#x9;[IMGID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[IMGBIN] [image] NOT NULL&#xA;&#x9;) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.MImage;&#xA;END&#xA;&#xA;-- 6) SysComp&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysComp' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysComp](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[SComp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[TComm] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[TAmnt] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[IMGID] [varchar](15) NOT NULL,&#xA;&#x9;&#x9;[FNam] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Add1] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[Add2] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[Add3] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[Cont] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[MTel] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[OTel] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[FTel] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Emai] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[WSite] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[UDay] [numeric](3, 0) NOT NULL,&#xA;&#x9;&#x9;[TCod] [varchar](5) NOT NULL,&#xA;&#x9;&#x9;[IP] [varchar](300) NOT NULL,&#xA;&#x9;&#x9;[SOAPIP] [varchar](200) NOT NULL,&#xA;&#x9;&#x9;[XMLNS] [varchar](200) NOT NULL,&#xA;&#x9;&#x9;[SoapAct] [varchar](200) NOT NULL,&#xA;&#x9;&#x9;[SOAPPass] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Kflg] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[IncomingIP] [varchar](300) NOT NULL,&#xA;&#x9;&#x9;[Embed] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[EmbedExe] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[FullDesn] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[Insuflg] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[BackEndQflg] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[Manifestflg] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[Warrenflg] [varchar](1) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysComp] ADD  DEFAULT ('0') FOR [Warrenflg]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysComp;&#xA;END&#xA;&#xA;-- 7) SysCompGroupD&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysCompGroupD' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysCompGroupD](&#xA;&#x9;&#x9;[SComp] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[SCompD] [varchar](20) NOT NULL,&#xA;&#x9; CONSTRAINT [SysCompGroupD_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[SComp] ASC,&#xA;&#x9;&#x9;[SCompD] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysCompGroupD;&#xA;END&#xA;&#xA;-- 8) SysCompGroupH&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysCompGroupH' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysCompGroupH](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[SComp] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[CompN] [numeric](2, 0) NOT NULL,&#xA;&#x9; CONSTRAINT [SysCompGroupH_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[SComp] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysCompGroupH;&#xA;END&#xA;&#xA;-- 9) SysCurr&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysCurr' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysCurr](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[SCurr] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysCurr;&#xA;END&#xA;&#xA;-- 10) SysDistrict&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysDistrict' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysDistrict](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[Acti] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[District] [varchar](2) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[desnM] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[desnB] [nvarchar](20) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysDistrict] ADD  DEFAULT ('') FOR [desnB]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysDistrict;&#xA;END&#xA;&#xA;-- 11) SysFacilityOnlineChrg&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysFacilityOnlineChrg' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysFacilityOnlineChrg](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[effdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[FacChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OnChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OnChrgDisValue] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[FacChrgFlgC] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FacChrgFlgK] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FacChrgFlgO] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FacChrgFlgOpe] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FacChrgFlgB] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OnChrgFlgC] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OnChrgFlgK] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OnChrgFlgO] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OnChrgFlgOpe] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OnChrgFlgB] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[RefundFacChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[RefundOnChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OTAHandType] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OTAHandFixed] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OTAHandPerc] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OTAHandMax] [numeric](5, 2) NOT NULL,&#xA;&#x9; CONSTRAINT [SysFacilityOnlineChrg_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[effdt] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysFacilityOnlineChrg] ADD  DEFAULT ('V') FOR [OTAHandType]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysFacilityOnlineChrg] ADD  DEFAULT ((0)) FOR [OTAHandFixed]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysFacilityOnlineChrg] ADD  DEFAULT ((0)) FOR [OTAHandPerc]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysFacilityOnlineChrg] ADD  DEFAULT ((0)) FOR [OTAHandMax]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysFacilityOnlineChrg;&#xA;END&#xA;&#xA;-- 12) SysInsu&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysInsu' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysInsu](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[UsID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Unam] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[UPass] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[PassTry] [numeric](1, 0) NOT NULL,&#xA;&#x9; CONSTRAINT [SysInsu_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[UsID] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysInsu;&#xA;END&#xA;&#xA;-- 13) SysMachine&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysMachine' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysMachine](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[MID] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[MIP] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[KioskToken] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[KTExpdt] [datetime] NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysMachine] ADD  DEFAULT ('') FOR [KioskToken]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysMachine] ADD  DEFAULT ('1999-01-01') FOR [KTExpdt]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysMachine;&#xA;END&#xA;&#xA;-- 14) SysMarkGrpD&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysMarkGrpD' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysMarkGrpD](&#xA;&#x9;&#x9;[Mgrp] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Ugrp] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](2, 0) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysMarkGrpD;&#xA;END&#xA;&#xA;-- 15) SysMarkGrpH&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysMarkGrpH' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysMarkGrpH](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Mgrp] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[CoutN] [numeric](2, 0) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysMarkGrpH;&#xA;END&#xA;&#xA;-- 16) SysMsg&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysMsg' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysMsg](&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[Msg1] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[Msg2] [varchar](200) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysMsg;&#xA;END&#xA;&#xA;-- 17) SysOnPara&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysOnPara' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysOnPara](&#xA;&#x9;&#x9;[AdTime] [numeric](3, 0) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysOnPara;&#xA;END&#xA;&#xA;-- 18) SysOnRate&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysOnRate' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysOnRate](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[effdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[ChrgAmnt] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[GSTRate] [numeric](5, 2) NOT NULL,&#xA;&#x9; CONSTRAINT [SysOnRate_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[effdt] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysOnRate;&#xA;END&#xA;&#xA;-- 19) SysOTA&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysOTA' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysOTA](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[OTA] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[IncomingIP] [varchar](300) NOT NULL,&#xA;&#x9;&#x9;[soapPass] [varchar](20) NOT NULL,&#xA;&#x9; CONSTRAINT [SysOTA_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[OTA] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysOTA;&#xA;END&#xA;&#xA;-- 20) SysOTAD&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysOTAD' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysOTAD](&#xA;&#x9;&#x9;[OTA] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Scomp] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](3, 0) NULL,&#xA;&#x9; CONSTRAINT [SysOTAD_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[OTA] ASC,&#xA;&#x9;&#x9;[Scomp] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysOTAD;&#xA;END&#xA;&#xA;-- 21) SysOTAPara&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysOTAPara' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysOTAPara](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[OTA] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[effdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[FacChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OnChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OnChrgDisValue] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[RefundFacChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[RefundOnChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OnlineQRReserveTime] [numeric](5, 0) NOT NULL,&#xA;&#x9;&#x9;[OnlineQRStopCancelBeforeDeparture] [numeric](5, 0) NOT NULL,&#xA;&#x9;&#x9;[InsuFlg] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[CollectFacChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[CollectOnChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[RefundCollectFacChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[RefundCollectOnChrg] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OTAHandType] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OTAHandFixed] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OTAHandPerc] [numeric](5, 2) NOT NULL,&#xA;&#x9;&#x9;[OTAHandMax] [numeric](5, 2) NOT NULL,&#xA;&#x9; CONSTRAINT [SysOTAPara_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[OTA] ASC,&#xA;&#x9;&#x9;[effdt] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysOTAPara] ADD  DEFAULT ((0)) FOR [CollectFacChrg]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysOTAPara] ADD  DEFAULT ((0)) FOR [CollectOnChrg]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysOTAPara] ADD  DEFAULT ((0)) FOR [RefundCollectFacChrg]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysOTAPara] ADD  DEFAULT ((0)) FOR [RefundCollectOnChrg]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysOTAPara] ADD  DEFAULT ('V') FOR [OTAHandType]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysOTAPara] ADD  DEFAULT ((0)) FOR [OTAHandFixed]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysOTAPara] ADD  DEFAULT ((0)) FOR [OTAHandPerc]&#xA;&#xA;&#x9;ALTER TABLE [dbo].[SysOTAPara] ADD  DEFAULT ((0)) FOR [OTAHandMax]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysOTAPara;&#xA;END&#xA;&#xA;-- 22) SysPGroup&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysPGroup' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysPGroup](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Pgrp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[SCurr] [varchar](10) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysPGroup;&#xA;END&#xA;&#xA;-- 23) SysUser&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysUser' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysUser](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[SComp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[UsID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Unam] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[UPass] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Slvl] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[Ulvl] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[Cout] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Pgrp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[Agid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[Disc] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[Ugrp] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[PassEdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[PassTry] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Typ] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[MRefund] [varchar](1) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysUser;&#xA;END&#xA;&#xA;-- 24) SysUserGrp&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'SysUserGrp' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[SysUserGrp](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Ugrp] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.SysUserGrp;&#xA;END&#xA;&#xA;-- 25) TCounter&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TCounter' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TCounter](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Cout] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Desn] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[TCod] [varchar](8) NOT NULL,&#xA;&#x9;&#x9;[Inte] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Remk] [varchar](100) NOT NULL,&#xA;&#x9;&#x9;[PickN] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[DropN] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[State] [varchar](5) NOT NULL,&#xA;&#x9;&#x9;[Dflg] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[KDflg] [varchar](1) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TCounter;&#xA;END&#xA;&#xA;-- 26) TCounterMergeD&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TCounterMergeD' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TCounterMergeD](&#xA;&#x9;&#x9;[Cout] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[CoutD] [varchar](20) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TCounterMergeD;&#xA;END&#xA;&#xA;-- 27) TCounterMergeH&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TCounterMergeH' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TCounterMergeH](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[Cout] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[CoutN] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[CoutFull] [varchar](500) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TCounterMergeH;&#xA;END&#xA;&#xA;-- 28) TRoute&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TRoute' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TRoute](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[SComp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[RID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[RNam] [varchar](150) NOT NULL,&#xA;&#x9;&#x9;[Desn] [varchar](150) NOT NULL,&#xA;&#x9;&#x9;[Auth] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[Mill] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[CoutN] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[Stat] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OConf] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[OpeRoute] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[FullRouteDesn] [varchar](1000) NOT NULL,&#xA;&#x9;&#x9;[Msg2Cust] [varchar](100) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TRoute;&#xA;END&#xA;&#xA;-- 29) TRouteCout&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TRouteCout' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TRouteCout](&#xA;&#x9;&#x9;[RID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Cout] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[Stat] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[Pform] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[TOSDis] [varchar](1) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TRouteCout;&#xA;END&#xA;&#xA;-- 30) TRouteExtra&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TRouteExtra' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TRouteExtra](&#xA;&#x9;&#x9;[RID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Pgrp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[SCurr] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[Desn] [varchar](30) NOT NULL,&#xA;&#x9;&#x9;[Amnt] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[Compulsory] [varchar](1) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TRouteExtra;&#xA;END&#xA;&#xA;-- 31) TRoutePrice&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TRoutePrice' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TRoutePrice](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[RID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[SCout] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[ECout] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Pgrp] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[SCurr] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[SAPric] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[SCPric] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[SSPric] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[SOPric] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[AAPric] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[ACPric] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[ASPric] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[AOPric] [numeric](15, 2) NOT NULL,&#xA;&#x9;&#x9;[Stat] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[AComm] [numeric](13, 4) NOT NULL,&#xA;&#x9;&#x9;[CComm] [numeric](13, 4) NOT NULL,&#xA;&#x9;&#x9;[SComm] [numeric](13, 4) NOT NULL,&#xA;&#x9;&#x9;[OComm] [numeric](13, 4) NOT NULL,&#xA;&#x9;&#x9;[TComm] [varchar](2) NOT NULL,&#xA;&#x9;&#x9;[ExtraAmnt] [numeric](15, 2) NOT NULL,&#xA;&#x9; CONSTRAINT [TRoutePrice_P01] UNIQUE NONCLUSTERED &#xA;&#x9;(&#xA;&#x9;&#x9;[RID] ASC,&#xA;&#x9;&#x9;[Pgrp] ASC,&#xA;&#x9;&#x9;[SCout] ASC,&#xA;&#x9;&#x9;[ECout] ASC&#xA;&#x9;)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TRoutePrice;&#xA;END&#xA;&#xA;-- 32) TRouteTimerD&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TRouteTimerD' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TRouteTimerD](&#xA;&#x9;&#x9;[RID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[Cout] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Sflg] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[Oflg] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[TTime] [varchar](6) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TRouteTimerD;&#xA;END&#xA;&#xA;-- 33) TRouteTimerH&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'TRouteTimerH' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[TRouteTimerH](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[RID] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[Posi] [numeric](2, 0) NOT NULL,&#xA;&#x9;&#x9;[Busn] [varchar](15) NOT NULL,&#xA;&#x9;&#x9;[TripN] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[WDay] [varchar](7) NOT NULL,&#xA;&#x9;&#x9;[Stat] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[Cflg] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[Iflg] [varchar](1) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.TRouteTimerH;&#xA;END&#xA;&#xA;-- 34) Ulevel&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'Ulevel' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[Ulevel](&#xA;&#x9;&#x9;[crid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[crdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[lmid] [varchar](20) NOT NULL,&#xA;&#x9;&#x9;[lmdt] [datetime] NOT NULL,&#xA;&#x9;&#x9;[acti] [numeric](1, 0) NOT NULL,&#xA;&#x9;&#x9;[ulvl] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[desn] [varchar](50) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.Ulevel;&#xA;END&#xA;&#xA;-- 35) UlevelD&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'UlevelD' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[UlevelD](&#xA;&#x9;&#x9;[ulvl] [varchar](10) NOT NULL,&#xA;&#x9;&#x9;[PageID] [varchar](3) NOT NULL,&#xA;&#x9;&#x9;[FView] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FAdd] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FEdit] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FDelete] [varchar](1) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.UlevelD;&#xA;END&#xA;&#xA;-- 36) UlevelP&#xA;IF NOT EXISTS (&#xA;    SELECT 1 &#xA;    FROM sys.tables &#xA;    WHERE name = 'UlevelP' AND schema_id = SCHEMA_ID('dbo')&#xA;)&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[UlevelP](&#xA;&#x9;&#x9;[PageID] [varchar](3) NOT NULL,&#xA;&#x9;&#x9;[PageDesc] [varchar](50) NOT NULL,&#xA;&#x9;&#x9;[FView] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FAdd] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FEdit] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[FDelete] [varchar](1) NOT NULL,&#xA;&#x9;&#x9;[Ptyp] [numeric](2, 0) NOT NULL&#xA;&#x9;) ON [PRIMARY]&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE dbo.UlevelP;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -21910,7 +21910,7 @@
     design-time-name="Package\BusInfo">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\BusInfo\OLE DB Source"
@@ -21938,9 +21938,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -21976,15 +21974,15 @@
     design-time-name="Package\BusServeCate">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\BusServeCate\OLE DB Source"
-          TopLeft="434.999979890884,218.033332272636" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\BusServeCate\OLE DB Destination"
           TopLeft="422.99998210619,359.833331495192" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\BusServeCate\OLE DB Source"
+          TopLeft="434.999979890884,218.033332272636" />
         <EdgeLayout
           Id="Package\BusServeCate.Paths[OLE DB Source Output]"
           TopLeft="509.799980998537,259.633332272636">
@@ -22004,9 +22002,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22042,15 +22038,15 @@
     design-time-name="Package\BusType">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\BusType\OLE DB Source"
-          TopLeft="432.999979920686,218.033332272636" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\BusType\OLE DB Destination"
           TopLeft="422.99998210619,359.833331495192" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\BusType\OLE DB Source"
+          TopLeft="432.999979920686,218.033332272636" />
         <EdgeLayout
           Id="Package\BusType.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -22070,9 +22066,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22108,7 +22102,7 @@
     design-time-name="Package\BusTypeSeat">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\BusTypeSeat\OLE DB Source"
@@ -22136,9 +22130,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22174,15 +22166,15 @@
     design-time-name="Package\MImage">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\MImage\OLE DB Source"
-          TopLeft="432.999979920686,218.033332272636" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\MImage\OLE DB Destination"
           TopLeft="422.99998210619,359.833331495192" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\MImage\OLE DB Source"
+          TopLeft="432.999979920686,218.033332272636" />
         <EdgeLayout
           Id="Package\MImage.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -22202,9 +22194,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22240,15 +22230,15 @@
     design-time-name="Package\SysComp">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\SysComp\OLE DB Source"
-          TopLeft="432.999979920686,218.033332272636" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\SysComp\OLE DB Destination"
           TopLeft="422.99998210619,359.833331495192" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\SysComp\OLE DB Source"
+          TopLeft="432.999979920686,218.033332272636" />
         <EdgeLayout
           Id="Package\SysComp.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -22268,9 +22258,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22306,15 +22294,15 @@
     design-time-name="Package\SysCurr">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\SysCurr\OLE DB Destination"
-          TopLeft="422.99998210619,359.833331495192" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysCurr\OLE DB Source"
           TopLeft="432.999979920686,218.033332272636" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\SysCurr\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
         <EdgeLayout
           Id="Package\SysCurr.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -22334,9 +22322,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22372,15 +22358,15 @@
     design-time-name="Package\SysDistrict">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\SysDistrict\OLE DB Destination"
-          TopLeft="422.99998210619,359.833331495192" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysDistrict\OLE DB Source"
           TopLeft="432.999979920686,218.033332272636" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\SysDistrict\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
         <EdgeLayout
           Id="Package\SysDistrict.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -22400,9 +22386,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22438,7 +22422,7 @@
     design-time-name="Package\SysFacilityOnlineChrg">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysFacilityOnlineChrg\OLE DB Source"
@@ -22466,9 +22450,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22504,7 +22486,7 @@
     design-time-name="Package\SysInsu">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysInsu\OLE DB Source"
@@ -22532,9 +22514,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22570,7 +22550,7 @@
     design-time-name="Package\SysMachine">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysMachine\OLE DB Source"
@@ -22598,9 +22578,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22636,7 +22614,7 @@
     design-time-name="Package\SysMarkGrpD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysMarkGrpD\OLE DB Source"
@@ -22664,9 +22642,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22702,7 +22678,7 @@
     design-time-name="Package\SysMarkGrpH">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysMarkGrpH\OLE DB Source"
@@ -22730,9 +22706,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22768,7 +22742,7 @@
     design-time-name="Package\SysMsg">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysMsg\OLE DB Source"
@@ -22796,9 +22770,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22834,15 +22806,15 @@
     design-time-name="Package\SysOnPara">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\SysOnPara\OLE DB Destination"
-          TopLeft="422.99998210619,359.833331495192" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysOnPara\OLE DB Source"
           TopLeft="432.999979920686,218.033332272636" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\SysOnPara\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
         <EdgeLayout
           Id="Package\SysOnPara.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -22862,9 +22834,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22900,7 +22870,7 @@
     design-time-name="Package\SysOnRate">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysOnRate\OLE DB Source"
@@ -22928,9 +22898,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22966,7 +22934,7 @@
     design-time-name="Package\SysOTA">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysOTA\OLE DB Source"
@@ -22994,9 +22962,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23032,7 +22998,7 @@
     design-time-name="Package\SysOTAD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysOTAD\OLE DB Source"
@@ -23060,9 +23026,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23098,7 +23062,7 @@
     design-time-name="Package\SysOTAPara">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysOTAPara\OLE DB Source"
@@ -23126,9 +23090,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23164,7 +23126,7 @@
     design-time-name="Package\SysPGroup">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysPGroup\OLE DB Source"
@@ -23192,9 +23154,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23230,7 +23190,7 @@
     design-time-name="Package\SysUser">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysUser\OLE DB Source"
@@ -23258,9 +23218,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23296,15 +23254,15 @@
     design-time-name="Package\SysUserGrp">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\SysUserGrp\OLE DB Destination"
-          TopLeft="422.99998210619,359.833331495192" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysUserGrp\OLE DB Source"
           TopLeft="432.999979920686,218.033332272636" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\SysUserGrp\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
         <EdgeLayout
           Id="Package\SysUserGrp.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -23324,9 +23282,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23362,15 +23318,15 @@
     design-time-name="Package\TCounter">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\TCounter\OLE DB Destination"
-          TopLeft="422.99998210619,359.833331495192" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TCounter\OLE DB Source"
           TopLeft="432.999979920686,218.033332272636" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\TCounter\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
         <EdgeLayout
           Id="Package\TCounter.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -23390,9 +23346,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23428,7 +23382,7 @@
     design-time-name="Package\TCounterMergeD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TCounterMergeD\OLE DB Source"
@@ -23456,9 +23410,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23494,15 +23446,15 @@
     design-time-name="Package\TCounterMergeH">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\TCounterMergeH\OLE DB Destination"
-          TopLeft="422.99998210619,359.833331495192" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TCounterMergeH\OLE DB Source"
           TopLeft="432.999979920686,218.033332272636" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\TCounterMergeH\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
         <EdgeLayout
           Id="Package\TCounterMergeH.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -23522,9 +23474,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23560,7 +23510,7 @@
     design-time-name="Package\TRoute">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TRoute\OLE DB Source"
@@ -23588,9 +23538,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23626,7 +23574,7 @@
     design-time-name="Package\TRouteCout">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TRouteCout\OLE DB Source"
@@ -23654,9 +23602,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23692,7 +23638,7 @@
     design-time-name="Package\TRouteExtra">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TRouteExtra\OLE DB Source"
@@ -23720,9 +23666,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23758,7 +23702,7 @@
     design-time-name="Package\TRoutePrice">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TRoutePrice\OLE DB Source"
@@ -23786,9 +23730,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23824,7 +23766,7 @@
     design-time-name="Package\TRouteTimerD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TRouteTimerD\OLE DB Source"
@@ -23852,9 +23794,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23890,15 +23830,15 @@
     design-time-name="Package\TRouteTimerH">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\TRouteTimerH\OLE DB Destination"
-          TopLeft="422.99998210619,359.833331495192" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TRouteTimerH\OLE DB Source"
           TopLeft="432.999979920686,218.033332272636" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\TRouteTimerH\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
         <EdgeLayout
           Id="Package\TRouteTimerH.Paths[OLE DB Source Output]"
           TopLeft="508.799981013438,259.633332272636">
@@ -23918,9 +23858,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23956,7 +23894,7 @@
     design-time-name="Package\Ulevel">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Ulevel\OLE DB Source"
@@ -23984,9 +23922,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24022,7 +23958,7 @@
     design-time-name="Package\UlevelD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\UlevelD\OLE DB Source"
@@ -24050,9 +23986,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24088,7 +24022,7 @@
     design-time-name="Package\UlevelP">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\UlevelP\OLE DB Source"
@@ -24116,9 +24050,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
