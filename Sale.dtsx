@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="24"
-  DTS:VersionGUID="{97CA01B2-9DEF-4CFF-9612-0B1A05CEC8D3}">
+  DTS:VersionBuild="26"
+  DTS:VersionGUID="{0CADF978-0CDF-4C4B-9B20-C7E690DF07B9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACAptjZJxM3uhZBx9OYh9bP7yCYszbm4xwDxPl86ezkNwAAAAAOgAAAAAIAACAAAAAOBeKk/Ax8/Y6ZpFOYTPc8HYHZwKmCJow7UhNDxE+WBSAAAABe9iNsx4+zLHHOaLoSskE3I3faUZ07an8L68A0ijFSX0AAAABtzrd608VEdllVWCC6Jtp6vkiqICJIpCGeXeKOqnNaNWuTETevd+mDqxksyvwzlPP03nMrWv0HziTnhOQrSDZn</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAqgpXZ+iP17wlAhIGmhlSb0hK1jzuBa46VlX9yfcB7+AAAAAAOgAAAAAIAACAAAABvqd2vk9Ua8JnBqAl5+ThVubSmAg8tgZzzIrFyVCHtNyAAAADIGRy1bno9djGni2h9ARvZX2XbyKq0VzQjnGHAf390nUAAAACug9oQku0TukwolMeGylLJmz4l7FPsNqGZxyJELgwDl0ulJGb7mkNAwxNJuo0vfl5lbL+/0vWeO4RRhIwFzymY</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB6rhBhk1p+WGa5S+MUUlPPaIsbxvUXds7VVZ5dfSUO0AAAAAAOgAAAAAIAACAAAACAKaxAIUP+TWx5bf2UxoF9UHtzf9BK0g7zWXoNYPvcyyAAAACQQ3wd5wK+myAT3Ie9dxIY6o02IUox8UfOZ8SyyN4NY0AAAADdKw5CIiS+p/ekSqnBCOyeScDJjVzDsBJ79QK2uKhvSJrxDb7AyOKR8Ut+JbeVY5H1Oz9wzFSrPlwRHmgiZDNc</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABGcxzrxMnQDoRkbRCNMwg07Th3k8e2o/x9qbPldMpHlQAAAAAOgAAAAAIAACAAAAAOkJRI+AO5NYHEooGZ+byQu18wEeF93csAdj9wZerl9iAAAAAUKa9xpCZamwqkGTh3q8TZ3OrtLvFf8bicYoJiUJCJ9kAAAADRAcf+p2gyR+SuhfnDJJ8uFjgt4gJZZp8JgBd43QwV2xW6ZUNWkKMm4bm7i8qd8RoD7edmEQTMG/WodE6IIXhQ</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -12926,6 +12926,22 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C523FC7D-B305-45DD-944B-26870D27CE5F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3B183B8B-3E62-4E5F-B341-811E93F21315}"
+          SQLTask:SqlStatementSource="&#xA;DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;SELECT @sql = @sql +&#xA;    'IF OBJECT_ID(''dbo.' + name + ''') IS NOT NULL TRUNCATE TABLE dbo.' + QUOTENAME(name) + ';' + CHAR(10)&#xA;FROM sys.tables&#xA;WHERE name IN (&#xA;    'DERPosi_202512','DERPosi_202601','DERPosi_202602','DERPosi_202603','DERPosi_202604','DERPosi_202605','DERPosi_202606',&#xA;&#x9;'DERPosi_202607','DERPosi_202608','DERPosi_202609','DERPosi_202610','DERPosi_202611','DERPosi_202612',&#xA;    'DERTicket_202512','DERTicket_202601','DERTicket_202602','DERTicket_202603','DERTicket_202604','DERTicket_202605','DERTicket_202606',&#xA;&#x9;'DERTicket_202607','DERTicket_202608','DERTicket_202609','DERTicket_202610','DERTicket_202611','DERTicket_202612',&#xA;    'OnlineQR','TickBoard','TickBoardOperator'&#xA;);&#xA;&#xA;EXEC (@sql); &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\OnlineQR"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
@@ -18725,6 +18741,14 @@
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\DERPosi_202602" />
     <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{C8588980-ED45-486A-9642-699EF04D9C2B}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\DERPosi_202512" />
+    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{B89D8E48-F324-447A-9100-00D7A23B43EA}"
@@ -18804,50 +18828,50 @@
         <NodeLayout
           Size="160.8,41.6"
           Id="Package\DERPosi_202512"
-          TopLeft="233.333320584563,120.466665828957" />
+          TopLeft="288.333317579496,216.666665159994" />
         <NodeLayout
           Size="160.8,41.6"
           Id="Package\DERPosi_202601"
-          TopLeft="233.333320584563,201.933331929114" />
+          TopLeft="288.333317579496,298.133331260151" />
         <NodeLayout
           Size="160.8,41.6"
           Id="Package\DERPosi_202602"
-          TopLeft="234.999987160167,280.133332091835" />
+          TopLeft="289.9999841551,376.333331422872" />
         <NodeLayout
           Size="160.8,41.6"
           Id="Package\DERPosi_202603"
-          TopLeft="234.166653872365,359.199998915196" />
+          TopLeft="289.166650867298,455.399998246233" />
         <NodeLayout
           Size="168.8,41.6"
           Id="Package\DERTicket_202512"
-          TopLeft="469.999974320333,361.133332941598" />
+          TopLeft="524.999971315266,457.333332272635" />
         <NodeLayout
           Size="168.8,41.6"
           Id="Package\DERTicket_202601"
-          TopLeft="467.499974456927,283.333334189124" />
+          TopLeft="522.49997145186,379.533333520161" />
         <NodeLayout
           Size="168.8,41.6"
           Id="Package\DERTicket_202602"
-          TopLeft="465.833307881323,202.733334749606" />
+          TopLeft="520.833304876256,298.933334080643" />
         <NodeLayout
           Size="168.8,41.6"
           Id="Package\DERTicket_202603"
-          TopLeft="465.833307881323,122.133335310088" />
+          TopLeft="520.833304876256,218.333334641125" />
         <NodeLayout
           Size="124,41.6"
           Id="Package\OnlineQR"
-          TopLeft="726.666626963352,118.666668667528" />
+          TopLeft="781.666623958285,214.866667998565" />
         <NodeLayout
           Size="125.6,41.6"
           Id="Package\TickBoard"
-          TopLeft="725.83329367555,201.000001428326" />
+          TopLeft="780.833290670483,297.200000759363" />
         <NodeLayout
           Size="166.4,41.6"
           Id="Package\TickBoardOperator"
-          TopLeft="707.499961343906,282.466667528484" />
+          TopLeft="762.499958338839,378.666666859521" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="313.733320584563,162.066665828957">
+          TopLeft="368.733317579496,258.266665159994">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -18869,7 +18893,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="314.566653872365,243.533331929114">
+          TopLeft="369.566650867298,339.733331260151">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -18891,7 +18915,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="314.983320516266,321.733332091835">
+          TopLeft="369.983317511199,417.933331422872">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -18913,7 +18937,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="394.966653872365,380.966665928397">
+          TopLeft="449.966650867298,477.166665259434">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -18935,7 +18959,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="553.14997438863,361.133332941598">
+          TopLeft="608.149971383563,457.333332272635">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -18957,7 +18981,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="551.066641169125,283.333334189124">
+          TopLeft="606.066638164058,379.533333520161">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -18979,7 +19003,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="550.233307881323,202.733334749606">
+          TopLeft="605.233304876256,298.933334080643">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -19001,7 +19025,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="634.633307881323,141.200001988808">
+          TopLeft="689.633304876256,237.400001319845">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -19023,7 +19047,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="788.649960319451,160.266668667528">
+          TopLeft="843.649957314384,256.466667998565">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -19045,7 +19069,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="789.666627509728,242.600001428326">
+          TopLeft="844.666624504661,338.800000759363">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -19057,6 +19081,32 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,32.3666661001577" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="284.999984428287,106.599999258717" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="368.066651003891,148.199999258717">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.4666659012771"
+              Start="0,0"
+              End="0,60.9666659012771">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.9666659012771" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
