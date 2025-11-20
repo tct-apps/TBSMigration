@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterData"
   DTS:PackageType="5"
-  DTS:VersionBuild="92"
-  DTS:VersionGUID="{F934C009-4413-40DD-A2A4-611F14C369CD}">
+  DTS:VersionBuild="96"
+  DTS:VersionGUID="{11C7DA7D-4934-4E14-9219-BCFE6E022119}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACEH5eZ+0jTeCkUK8wiHAUbADt3sUB6cL1pr/heTQFTBQAAAAAOgAAAAAIAACAAAACM4OA2Rpt9gAaHd69rMa/safb7tykwu4PTd/YUl1WFJyAAAAAWK1VUGhd7VkBnf11U1QKpO0OUT2qWIO4+5SM/nlFFTEAAAABZitOdKrgYq688LjnopxFqtVj/zUnSikByT10FXpb8DmG9SjjcsB9wk7+lxLkNK0IcttR6tFB7MrqUC0Gdtb6b</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAEOhRO3fqOtfZnVFJcW1KxvAohyNbnp74tha7R8z8w0gAAAAAOgAAAAAIAACAAAAAMVlT02dzluvaX/475c/kkRrWsZav1UBGoAPnLjTHwfSAAAABwZbn/nTf1N7VxJ2UAI2RAZNGRBNsHavfaNVIIwD0AmEAAAAArFIjaQIa7feLdcERCkyDCgtoLRtsIyD7KP1z82Ng93Wo3CsMMlkaEUVvPdQFm/K2R05R38e3HFPe2gAJhh9nE</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAD3R6ckedhH4Szs5MjUI1yvtxfnUR65pc3A81J5cjBRyAAAAAAOgAAAAAIAACAAAABCT6ur93iKQbeLvv0OnGAMLjEIMlCDoEDyC6G12CiU3SAAAADNZjROYYSIcyZ30D1UNK31vgy+IbwS8ejbSeomFTPnFkAAAAA91CDX5Lq66U0XHz4bKq5B9uZ1dUxO1LOYvkmT6j5VgfCUQ/FdoQNanuze+XiqlBc+PjmhtqKiGXdZgAkfPftC</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC24w/6EUMOhity7g4bYvp/IgBrK0S2+rOlg3v4wu3TqAAAAAAOgAAAAAIAACAAAAC6RqmWagqYgmbRW/bElu2uFklATkN+gAaWhK5YxRJ2ziAAAABP0p1IkUOv2LDEk/lRk7ud/sQdaAngYLmz/2SNLi+uEkAAAAAZusO8gaSW/rOCSoXTDmz04YFRdtRi5cQj+z0PvaUMilBB025+kpEO+50QzqpoQN7cyZbz7buU61RMOCKHlqin</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -396,7 +396,7 @@
                       refId="Package\BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Busn]"
                       codePage="1252"
                       dataType="str"
-                      length="10"
+                      length="15"
                       name="Busn" />
                     <externalMetadataColumn
                       refId="Package\BusInfo\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Desn]"
@@ -12825,7 +12825,7 @@
                       refId="Package\SysUser\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Remk]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="100"
                       name="Remk" />
                     <externalMetadataColumn
                       refId="Package\SysUser\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UsID]"
@@ -19071,7 +19071,7 @@
                       refId="Package\TRouteTimerH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Busn]"
                       codePage="1252"
                       dataType="str"
-                      length="10"
+                      length="15"
                       name="Busn" />
                     <externalMetadataColumn
                       refId="Package\TRouteTimerH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RID]"
@@ -21258,67 +21258,67 @@
         <NodeLayout
           Size="139.2,41.6"
           Id="Package\SysOTAPara"
-          TopLeft="765.799986613791,638.666665051513" />
+          TopLeft="759.966653599177,637.799998390873" />
         <NodeLayout
           Size="131.2,41.6"
           Id="Package\SysPGroup"
-          TopLeft="766.633319901592,536.199998390873" />
+          TopLeft="760.799986886978,535.333331730233" />
         <NodeLayout
           Size="117.6,41.6"
           Id="Package\SysUser"
-          TopLeft="769.966653052801,434.599998390873" />
+          TopLeft="764.133320038187,433.733331730233" />
         <NodeLayout
           Size="135.2,41.6"
           Id="Package\SysUserGrp"
-          TopLeft="758.299987023572,333.866665051513" />
+          TopLeft="752.466654008958,332.999998390873" />
         <NodeLayout
           Size="121.6,41.6"
           Id="Package\TCounter"
-          TopLeft="761.633320174781,235.733331694074" />
+          TopLeft="755.799987160167,234.866665033434" />
         <NodeLayout
           Size="158.4,41.6"
           Id="Package\TCounterMergeD"
-          TopLeft="742.733330692517,134.333332399197" />
+          TopLeft="736.899997677903,133.466665738557" />
         <NodeLayout
           Size="158.4,41.6"
           Id="Package\TCounterMergeH"
-          TopLeft="963.56665196005,134.53333310432" />
+          TopLeft="948.566652779614,135.39999976496" />
         <NodeLayout
           Size="112.8,41.6"
           Id="Package\TRoute"
-          TopLeft="984.3999841551,236.999999764959" />
+          TopLeft="969.399984974664,237.866666425599" />
         <NodeLayout
           Size="134.4,41.6"
           Id="Package\TRouteCout"
-          TopLeft="972.733318125871,337.73333310432" />
+          TopLeft="957.733318945435,338.59999976496" />
         <NodeLayout
           Size="136.8,41.6"
           Id="Package\TRouteExtra"
-          TopLeft="973.566651413674,437.599999783039" />
+          TopLeft="958.566652233238,438.466666443679" />
         <NodeLayout
           Size="136,41.6"
           Id="Package\TRoutePrice"
-          TopLeft="973.566651413676,536.59999980112" />
+          TopLeft="958.56665223324,537.46666646176" />
         <NodeLayout
           Size="146.4,41.6"
           Id="Package\TRouteTimerD"
-          TopLeft="971.333327687448,639.733332417276" />
+          TopLeft="956.333328507012,640.599999077916" />
         <NodeLayout
           Size="146.4,41.6"
           Id="Package\TRouteTimerH"
-          TopLeft="1190.49998237937,638.666665051513" />
+          TopLeft="1160.4999840185,639.533331712153" />
         <NodeLayout
           Size="107.2,41.6"
           Id="Package\Ulevel"
-          TopLeft="1209.66664799882,535.333331730233" />
+          TopLeft="1179.66664963795,536.199998390873" />
         <NodeLayout
           Size="115.2,41.6"
           Id="Package\UlevelD"
-          TopLeft="1205.49998155981,433.733331730233" />
+          TopLeft="1175.49998319894,434.599998390873" />
         <NodeLayout
           Size="114.4,41.6"
           Id="Package\UlevelP"
-          TopLeft="1203.83331498421,332.999998390873" />
+          TopLeft="1173.83331662334,333.866665051513" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="213.133325228758,174.199999077917">
@@ -21541,18 +21541,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 19]"
-          TopLeft="684.766664526695,660.866665395034">
+          TopLeft="684.766664526695,660.433332064714">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="81.0333220870963,0"
+              EndConnector="75.1999890724821,0"
               Start="0,0"
-              End="73.5333220870963,0">
+              End="67.6999890724821,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="73.5333220870963,0" />
+                    End="67.6999890724821,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -21585,7 +21585,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 20]"
-          TopLeft="833.816653257691,638.666665051513">
+          TopLeft="827.983320243077,637.799998390873">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21607,7 +21607,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 21]"
-          TopLeft="830.499986477197,536.199998390873">
+          TopLeft="824.666653462583,535.333331730233">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21629,7 +21629,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 22]"
-          TopLeft="827.333320038187,434.599998390873">
+          TopLeft="821.499987023573,433.733331730233">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21651,7 +21651,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 23]"
-          TopLeft="824.166653599177,333.866665051513">
+          TopLeft="818.333320584563,332.999998390873">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21673,7 +21673,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 24]"
-          TopLeft="821.316658129544,235.733331694074">
+          TopLeft="815.48332511493,234.866665033434">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21695,18 +21695,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 25]"
-          TopLeft="901.133330692517,155.233332751758">
+          TopLeft="895.299997677903,155.233332751759">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="62.4333212675327,0"
+              EndConnector="53.266655101711,0"
               Start="0,0"
-              End="54.9333212675327,0">
+              End="45.766655101711,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="54.9333212675327,0" />
+                    End="45.766655101711,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -21717,7 +21717,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 26]"
-          TopLeft="1041.78331805757,176.133333104319">
+          TopLeft="1026.78331887713,176.999999764959">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21739,7 +21739,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 27]"
-          TopLeft="1040.36665114049,278.599999764959">
+          TopLeft="1025.36665196005,279.466666425599">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21761,7 +21761,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 28]"
-          TopLeft="1040.94998476977,379.33333310432">
+          TopLeft="1025.94998558933,380.19999976496">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21783,7 +21783,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 29]"
-          TopLeft="1041.76665141367,479.199999783039">
+          TopLeft="1026.76665223323,480.066666443679">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21827,18 +21827,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 30]"
-          TopLeft="1041.51665567085,578.19999980112">
+          TopLeft="1028.04999037013,579.06666646176">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,61.5333326161561"
+              EndConnector="0,61.5333326161559"
               Start="0,0"
-              End="0,54.0333326161561">
+              End="0,54.0333326161559">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,54.0333326161561" />
+                    End="0,54.0333326161559" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -21849,18 +21849,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 31]"
-          TopLeft="1117.73332768745,659.999998734394">
+          TopLeft="1102.73332850701,660.866665395034">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="72.766654691924,0"
+              EndConnector="57.7666555114856,0"
               Start="0,0"
-              End="65.266654691924,0">
+              End="50.2666555114856,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="65.266654691924,0" />
+                    End="50.2666555114856,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -21871,7 +21871,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 32]"
-          TopLeft="1263.4833151891,638.666665051513">
+          TopLeft="1233.48331682822,639.533331712153">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21893,7 +21893,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 33]"
-          TopLeft="1263.18331477932,535.333331730233">
+          TopLeft="1233.18331641845,536.199998390873">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -21915,7 +21915,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 34]"
-          TopLeft="1262.06664827201,433.733331730233">
+          TopLeft="1232.06664991114,434.599998390873">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -22463,7 +22463,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\SysComp\OLE DB Destination">
+    design-time-name="Package\SysComp\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -22476,7 +22476,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\SysComp\OLE DB Source">
+    design-time-name="Package\SysComp\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -23440,7 +23440,7 @@
     design-time-name="Package\SysUser">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\SysUser\OLE DB Source"
@@ -23468,9 +23468,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24100,7 +24098,7 @@
     design-time-name="Package\TRouteTimerH">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\TRouteTimerH\OLE DB Destination"
@@ -24128,9 +24126,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
