@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{3E530202-C95F-446E-A7A8-5069F5418315}">
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{9E109EFD-C0C7-4334-9465-3A24159EFE87}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAClx/ZzJEGjgPgpL1paSpiXjdXiRvaUui3NSKcWHlqdxAAAAAAOgAAAAAIAACAAAAAJkqvkMYv6EsDcpfTtZzaIPNuK/AOviWOGxXsutIx7bSAAAAAPyLpJ/rL/xizl4noUGCBleT4am4M23sc/m0y4cj/U90AAAAC99q6+g4FtuOYwYl0+ZXbkXJbqcQB1WZyTSXmxBJTTAl+oIi6KYZ8/Rft2s0ZIdPrLfWzhGdflNdPGrVz7goZQ</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADbwDiA4G8kbPHE6r0Bfjjd82XCcsBVNRBu1H1Q1CWGAAAAAAAOgAAAAAIAACAAAAAjRz2FJJRPktuptqhJFk9xN81MI/aR14nz+aN9v5GjPiAAAABzjWaXIkAtSc/twNX9lygJOcFhZIneE0eiROT4lFxh50AAAABQA4eGDT9n2S97xB+YFpYh+wL5SatWpjIRyPEucQwtjYSHFu0Uq6YK71pfW5YBZhSnorsL3Zw9djDYJ73TO9yF</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAXEt8jRcT33wAYsmoEJMtjnWhsXoz1VKVAxdN8dowJKwAAAAAOgAAAAAIAACAAAAArxynyAVD/sy43P4fX8dCne9NSlHkJu1NVBCQ9bKDWnSAAAAC2NXwqmf4dOtzXQdB1g19ns3hVIWhKrpxgMTf7UzF5P0AAAAAmn0Hata3APRb9c7PJHgl0bPTzXtk58KbY2FiGbdFBb7mbpXGyqpnpw6/jo8DfTkStO2oAFkJzj1m9WwepSjF8</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABM5ydZreTer+xbnnOa86UjYn5tMx9SJuUmEmhlS0Ll/gAAAAAOgAAAAAIAACAAAABteYYLnbVIkra3EuVajhOvXF1KG2Pk/6QtzK4xpXw5UCAAAAB+WBt3Ht1CGuNmIpWx/G6a55Cc7Xf+6V5k0d9PGrGgoEAAAACI7VBqDY+o7OJMBRqJQs38YBAucBIchQ45yf2PEXtICAIafTafEhs8/6cY+c5kk2Qe2us/06UgHY1ED1mYr6FO</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -13083,7 +13083,7 @@
                       refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TripN]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="10"
+                      cachedLength="20"
                       cachedName="TripN"
                       externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TripN]"
                       lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[TripN]" />
@@ -13399,13 +13399,13 @@
                       externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[X_HandCharge]"
                       lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[X_HandCharge]" />
                     <inputColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RefuRmk]"
+                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ECout]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="RefuRmk"
+                      cachedLength="20"
+                      cachedName="ECout"
                       externalMetadataColumnId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ECout]"
-                      lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefuRmk]" />
+                      lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECout]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -13500,46 +13500,6 @@
                       length="50"
                       name="Refn" />
                     <externalMetadataColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgStat]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
-                      name="OChrgStat" />
-                    <externalMetadataColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgAmnt]"
-                      dataType="numeric"
-                      name="OChrgAmnt"
-                      precision="15"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgClosedt]"
-                      dataType="dbTimeStamp"
-                      name="OChrgClosedt" />
-                    <externalMetadataColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgCloseId]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="OChrgCloseId" />
-                    <externalMetadataColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgGSTRate]"
-                      dataType="numeric"
-                      name="OChrgGSTRate"
-                      precision="5"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgStat2]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
-                      name="OChrgStat2" />
-                    <externalMetadataColumn
-                      refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OChrgType]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
-                      name="OChrgType" />
-                    <externalMetadataColumn
                       refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Crdt]"
                       dataType="dbTimeStamp"
                       name="Crdt" />
@@ -13577,7 +13537,7 @@
                       refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QR]"
                       codePage="1252"
                       dataType="str"
-                      length="100"
+                      length="150"
                       name="QR" />
                     <externalMetadataColumn
                       refId="Package\OnlineQR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QRCharge]"
@@ -13906,17 +13866,6 @@
                       length="6"
                       lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[TTime]"
                       name="TTime"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[TripN]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TripN]"
-                      length="10"
-                      lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[TripN]"
-                      name="TripN"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[SeatT]"
@@ -14396,6 +14345,17 @@
                       lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[Stat]"
                       name="Stat"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[TripN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TripN]"
+                      length="20"
+                      lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Output].Columns[TripN]"
+                      name="TripN"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -14788,13 +14748,6 @@
                       lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TTime]"
                       name="TTime" />
                     <outputColumn
-                      refId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TripN]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TripN]"
-                      name="TripN" />
-                    <outputColumn
                       refId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SeatT]"
                       codePage="1252"
                       dataType="str"
@@ -15078,6 +15031,13 @@
                       length="1"
                       lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Stat]"
                       name="Stat" />
+                    <outputColumn
+                      refId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TripN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\OnlineQR\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TripN]"
+                      name="TripN" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -19122,7 +19082,7 @@
     design-time-name="Package\DERPosi_202512">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\DERPosi_202512\OLE DB Source"
@@ -19150,7 +19110,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19186,7 +19148,7 @@
     design-time-name="Package\DERPosi_202601">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\DERPosi_202601\OLE DB Source"
@@ -19214,7 +19176,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19250,7 +19214,7 @@
     design-time-name="Package\DERPosi_202602">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\DERPosi_202602\OLE DB Source"
@@ -19278,7 +19242,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19314,7 +19280,7 @@
     design-time-name="Package\DERPosi_202603">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\DERPosi_202603\OLE DB Source"
@@ -19342,7 +19308,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19378,7 +19346,7 @@
     design-time-name="Package\DERTicket_202512">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\DERTicket_202512\OLE DB Source"
@@ -19406,7 +19374,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19442,7 +19412,7 @@
     design-time-name="Package\DERTicket_202601">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\DERTicket_202601\OLE DB Source"
@@ -19470,7 +19440,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19506,7 +19478,7 @@
     design-time-name="Package\DERTicket_202602">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\DERTicket_202602\OLE DB Source"
@@ -19534,7 +19506,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19570,7 +19544,7 @@
     design-time-name="Package\DERTicket_202603">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\DERTicket_202603\OLE DB Source"
@@ -19598,7 +19572,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19698,7 +19674,7 @@
     design-time-name="Package\TickBoard">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\TickBoard\OLE DB Destination"
@@ -19726,7 +19702,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -19762,7 +19740,7 @@
     design-time-name="Package\TickBoardOperator">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\TickBoardOperator\OLE DB Source"
@@ -19790,7 +19768,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

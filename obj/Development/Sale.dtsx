@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{0CADF978-0CDF-4C4B-9B20-C7E690DF07B9}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{3E530202-C95F-446E-A7A8-5069F5418315}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAV5De9flBGTdg5FkbG8m2/1nWRO5aZ9byYoStkNgOgiQAAAAAOgAAAAAIAACAAAACLE6oCuohFZqzJgkRNK3vtA3DisF27r5Pw7/MPKrvE3CAAAACKT7HFxwSTSzxaTb7dXdcCE5Zi+3VYNjEY725nXIweNUAAAAD9BKqEiVsV8125pgAX/fkdR1zJcSmyh0WRPl96no1lbXA70R7HR1soENYLHUOfOR4VORiZy2vo4057hbNVqhj6</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACUfSJDjJd8WRKhw+YwAOVV7k/YK8spiBDHqRry9zV8EgAAAAAOgAAAAAIAACAAAABdu4Khk96IAnBJAjcvkQVfVxW8PDRxyuXyrrAhcxH04SAAAACTBhSg1AEk2RzOSXjEYAhNhU0KzG8UkbFgcM8I7hvalkAAAADDtLoHw6nYPlrqczN0Ek0LwjM5L7X/yHbP7x1RDLYWSFIGUbO94PGI1iVzEo4uamNXXm4Q43M+R4OUWRyCtd+G</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACu/ZanyPD/KGG6Kg8yu0dndWDffPM7O09xnQEjXmpbGgAAAAAOgAAAAAIAACAAAAA4mR7MakT7VydMoCffwImt6Zf6qmTciY2Tza4NAjZJPCAAAAAXkgB93NdcDjMwAgvuAgmdp1rwhZ0t+/S99o4FnLjI2kAAAADuUJ+sJq/On0EhrJ/rToGjjA0/5KA8+DyUTVfoXQ+J7zOhuMc/TKnySVwV6fPu9bnYbDIwK4u9eVX5uAQTbkE3</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAbFnoB5PPGoJ5rjjNr35xNmpaEI/kHLiIspTYgjugWBgAAAAAOgAAAAAIAACAAAABWSww8oWqk0mq6FiqO8OQA17plsGUIKEATlKU0yfWKMCAAAADa3wjqd7EvebjOj70uPC27r0zmV55avO9KKGRhsD3mU0AAAADlv3Gy5IuodtzTVXkcngaHrRFFWT4fgXI8j6tkg2KQwVMFES6RfMVWJSEmANhivFEBD56AVkTZ1PnnIxCZ5tOH</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -18858,17 +18858,21 @@
           Id="Package\DERTicket_202603"
           TopLeft="520.833304876256,218.333334641125" />
         <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="284.999984428287,106.599999258717" />
+        <NodeLayout
           Size="124,41.6"
           Id="Package\OnlineQR"
-          TopLeft="781.666623958285,214.866667998565" />
+          TopLeft="774.999957655869,215.733334659205" />
         <NodeLayout
           Size="125.6,41.6"
           Id="Package\TickBoard"
-          TopLeft="780.833290670483,297.200000759363" />
+          TopLeft="774.166624368067,298.066667420003" />
         <NodeLayout
           Size="166.4,41.6"
           Id="Package\TickBoardOperator"
-          TopLeft="762.499958338839,378.666666859521" />
+          TopLeft="755.833292036423,379.533333520161" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="368.733317579496,258.266665159994">
@@ -18905,6 +18909,28 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,29.1000001627206" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="368.066651003891,148.199999258717">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.4666659012771"
+              Start="0,0"
+              End="0,60.9666659012771">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.9666659012771" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -19025,18 +19051,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="689.633304876256,237.400001319845">
+          TopLeft="689.633304876256,237.833334650165">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="92.0333190820285,0"
+              EndConnector="85.366652779613,0"
               Start="0,0"
-              End="84.5333190820285,0">
+              End="77.866652779613,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="84.5333190820285,0" />
+                    End="77.866652779613,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -19047,7 +19073,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="843.649957314384,256.466667998565">
+          TopLeft="836.983291011968,257.333334659205">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -19069,7 +19095,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="844.666624504661,338.800000759363">
+          TopLeft="837.999958202245,339.666667420003">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -19081,32 +19107,6 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,32.3666661001577" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="164.8,41.6"
-          Id="Package\Execute SQL Task"
-          TopLeft="284.999984428287,106.599999258717" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="368.066651003891,148.199999258717">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,68.4666659012771"
-              Start="0,0"
-              End="0,60.9666659012771">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,60.9666659012771" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
