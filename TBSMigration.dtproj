@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DESKTOP-CKMEJ54</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAACAAAAAAAQZgAAAAEAACAAAABIVsAAj+Bz5X9055hOanVPbu7m6wI5iRkNQEfEIHlnzQAAAAAOgAAAAAIAACAAAAB1j5owGL/7zdmqSMJCslwOAKkbe1Yidp6fW5JbQfquK5AAAAABvfmh9UHtMDNk4gOSxlL6bq71kjBy2GpTk1evckAbQQtSl9k7zeXN1FaAZ5jQFY6W1p4FCUjcSd6oLpYu+WFPLi/2SxqUBAEvzHfppT78Ksve7o30Bkoke8FV7xdZFJPZ4bDwQ6MDtiOO9LMNRxABkcTDgRfyo/VzaUvgeAhggxRP3eXKQmL8kPFv3nDJC69AAAAAK9Rv8lWjUhRsMa9vpTfIy4bKHj79bwqexyjOCiwsfX6yBveAr1p6rlBsL/JLXLBu4SZ2zsdTROmS0EI5sDMTHQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAACAAAAAAAQZgAAAAEAACAAAACxKQKsUd1Avmicm7TVel0dUELoCrTllb3+ANn8HzR5TQAAAAAOgAAAAAIAACAAAACoQcJ0BKC46wMedpDCo6WT9ftCWWYBJJAz6svnLTOGuZAAAAC3lO6OWNDi3Ycl20nV+wOd3wUXHOs2vSSa7LUcIMNXio0SEKp+2H8mPOUwIj9yfYlUeRRAqcd1Y13Ayt3GoYh05F8Byn9Zsztu15jc5R3ZZvo0+uL0veIVKip2NJ94v6HAXAnvlJNsQYET1PI8OkrxZfPKGuuQBax/bGR3xHsFSUerUOwfTqNcaX3aeruqevFAAAAAAUdV/ih4lbIrjyVnD+RLC2oxj9WNTZe00LGevNeO3g6XaTjAVsGoqLuzhJ0+CwhOz4/bHsKTBgc3y+SiTkRVSw==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -44,10 +44,10 @@
                 <SSIS:Property SSIS:Name="Name">MasterData</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">75</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">76</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{EC003398-7DC1-420C-8D56-498ADF779962}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{DB3702E7-EACE-416A-9AF2-491E0235C6F2}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -80,7 +80,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Auto Translate=False;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Auto Translate=False;Application Name=SSIS-MasterData-{3B183B8B-3E62-4E5F-B341-811E93F21315}eTicketing_tbs_new;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -229,7 +229,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_old;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_old;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-MasterData-{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}eTicketing_tbs_old;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterData"
   DTS:PackageType="5"
-  DTS:VersionBuild="75"
-  DTS:VersionGUID="{EC003398-7DC1-420C-8D56-498ADF779962}">
+  DTS:VersionBuild="80"
+  DTS:VersionGUID="{18E175F0-902E-4A08-946B-4B9AB65AE910}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,11 +25,11 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Auto Translate=False;Application Name=SSIS-MasterData-{3B183B8B-3E62-4E5F-B341-811E93F21315}eTicketing_tbs_new;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAozOU5B0e0dwppqQ1s+qS3RMbP+e3BLtKr9yzDP75WtgAAAAAOgAAAAAIAACAAAAAO2O22Sy7KhLdPEYpqeMe80WyT1xsnXCt6GqAsQ5ergiAAAACEL0L21S+ujjS9CJzJ0YL5S4vFVbBGJYwJkp12wSgHhEAAAACeOwyHpV6D7t9KUOAI+/z1fZQM+GhReDCB4IyRxRhuoYGJ9JdMEZyE5I5p1ecSmyxj46mAweXC2YooWCoR4npC</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACqPPKkyhmp2G380GlBwQjPKjZbbhZfRzRBP7OZhQ6W2gAAAAAOgAAAAAIAACAAAABWwCHQC3y/dGBT9KGMiFdjtCyTkDfnsBx5QM0qgrbbZSAAAACQRbnay/bEaS2Gm8SJ4cBnIwecHNUL2tHHjBKFSGmjEkAAAAA6zMFod2hTm4vpFVAvwalTCJ2evdKYH+l/KBexXVbng59BM4suRtL71szgNBKdx4Z1tXG6723d7Smmp3Wco7tS</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,11 +42,11 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_old;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_old;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-MasterData-{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}eTicketing_tbs_old;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACof5LIFz2KS1B8ceOEhuqhkusxNaWFUenk7Mq89lEoPwAAAAAOgAAAAAIAACAAAABg7cGx0I9SIH1aPHwEUOl/Za4ua05l8xa4m5Lq9/aRdCAAAACr4/0fn78RhrEF6XJ8GUykr9BdDMr8q3bFqXZDZNxP8kAAAAC1IMWeuccOlKBMJVYk9EdzD3D+gHcxQhGn7LJpVS1vac83IUqvRhFDd+4HFsDTX/RQEXkvPIstif1u0sTLvHNT</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAQt3aGrMplr594zKGa4j9wSngdxdg99sSoVhzykvEdewAAAAAOgAAAAAIAACAAAABd94OiEDh0S3NuW43UdNdl3qqSfQNa24RE8udb6Y2XDyAAAABqiE1RPXM/TxUkbdSZuCsDcAH0W8UBDl5QHhIYSigLQ0AAAAC0h4dUJy8yewHL7GPbZvq7+b0VZHe0DznVSBnUA6oylzaX6pHPMFjJf5U+DAlSIaYcqlWsdGLfVAclplLqOsRL</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -4733,6 +4733,783 @@
               endId="Package\SysComp\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
               startId="Package\SysComp\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SysCompGroupD"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8dcdb47b-1ecc-4874-85ce-036d6cb48515}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SysCompGroupD"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\SysCompGroupD\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[SysCompGroupD]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SysCompGroupD\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_new]"
+                  connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_new]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SComp]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="SComp"
+                      externalMetadataColumnId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SComp]"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]" />
+                    <inputColumn
+                      refId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Posi]"
+                      cachedDataType="numeric"
+                      cachedName="Posi"
+                      cachedPrecision="2"
+                      externalMetadataColumnId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Posi]"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[Posi]" />
+                    <inputColumn
+                      refId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCompD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="SCompD"
+                      externalMetadataColumnId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SCompD]"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCompD]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SComp" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Posi]"
+                      dataType="numeric"
+                      name="Posi"
+                      precision="2" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SCompD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SCompD" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\SysCompGroupD\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SysCompGroupD\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SysCompGroupD\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SysCompGroupD\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[SysCompGroupD]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SysCompGroupD\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
+                  connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[Posi]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Posi]"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[Posi]"
+                      name="Posi"
+                      precision="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCompD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCompD]"
+                      length="20"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCompD]"
+                      name="SCompD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SComp]"
+                      length="20"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]"
+                      name="SComp"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SComp" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Posi]"
+                      dataType="numeric"
+                      name="Posi"
+                      precision="2" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCompD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SCompD" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Posi]"
+                      dataType="numeric"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Posi]"
+                      name="Posi"
+                      precision="2" />
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCompD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCompD]"
+                      name="SCompD" />
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SComp]"
+                      name="SComp" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\SysCompGroupD.Paths[OLE DB Source Output]"
+              endId="Package\SysCompGroupD\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\SysCompGroupD\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SysCompGroupH"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{b0105b2d-baad-400e-a2ef-9a09c84f33e0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SysCompGroupH"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\SysCompGroupH\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[SysCompGroupH]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SysCompGroupH\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_new]"
+                  connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_new]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SComp]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="SComp"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SComp]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]" />
+                    <inputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="crid"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crid]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]" />
+                    <inputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="crdt"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crdt]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]" />
+                    <inputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lmid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="lmid"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmid]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]" />
+                    <inputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lmdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="lmdt"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmdt]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]" />
+                    <inputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[acti]"
+                      cachedDataType="numeric"
+                      cachedName="acti"
+                      cachedPrecision="1"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[acti]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[acti]" />
+                    <inputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CompN]"
+                      cachedDataType="numeric"
+                      cachedName="CompN"
+                      cachedPrecision="2"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompN]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompN]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SComp" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="crid" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crdt]"
+                      dataType="dbTimeStamp"
+                      name="crdt" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="lmid" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmdt]"
+                      dataType="dbTimeStamp"
+                      name="lmdt" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[acti]"
+                      dataType="numeric"
+                      name="acti"
+                      precision="1" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompN]"
+                      dataType="numeric"
+                      name="CompN"
+                      precision="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\SysCompGroupH\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SysCompGroupH\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SysCompGroupH\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SysCompGroupH\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[SysCompGroupH]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SysCompGroupH\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
+                  connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SComp]"
+                      length="20"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComp]"
+                      name="SComp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crid]"
+                      length="20"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]"
+                      name="crid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crdt]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]"
+                      name="crdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmid]"
+                      length="20"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]"
+                      name="lmid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmdt]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]"
+                      name="lmdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[acti]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[acti]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[acti]"
+                      name="acti"
+                      precision="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompN]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CompN]"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompN]"
+                      name="CompN"
+                      precision="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SComp" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="crid" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crdt]"
+                      dataType="dbTimeStamp"
+                      name="crdt" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="lmid" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmdt]"
+                      dataType="dbTimeStamp"
+                      name="lmdt" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[acti]"
+                      dataType="numeric"
+                      name="acti"
+                      precision="1" />
+                    <externalMetadataColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CompN]"
+                      dataType="numeric"
+                      name="CompN"
+                      precision="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crid]"
+                      name="crid" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crdt]"
+                      name="crdt" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmid]"
+                      name="lmid" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmdt]"
+                      name="lmdt" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[acti]"
+                      dataType="numeric"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[acti]"
+                      name="acti"
+                      precision="1" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CompN]"
+                      dataType="numeric"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CompN]"
+                      name="CompN"
+                      precision="2" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SComp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SComp]"
+                      name="SComp" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\SysCompGroupH.Paths[OLE DB Source Output]"
+              endId="Package\SysCompGroupH\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\SysCompGroupH\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -20969,10 +21746,26 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
       DTS:CreationName=""
-      DTS:DTSID="{F6A2F7B4-8EDF-4BA0-91C5-AB4716764021}"
+      DTS:DTSID="{AA09DDFB-B01C-46E6-864E-926B0C33A81D}"
       DTS:From="Package\SysComp"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
+      DTS:To="Package\SysCompGroupD" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{C7AFEF44-283C-4EF2-B57D-1914904DB1E7}"
+      DTS:From="Package\SysCompGroupD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\SysCompGroupH" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{40A11D7E-72C1-4E9C-A59A-77ED8E9AB35E}"
+      DTS:From="Package\SysCompGroupH"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
       DTS:To="Package\SysCurr" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
@@ -21826,40 +22619,6 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="239.133324682382,641.266665033434">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="173.299998770655,-162.933331911035"
-              Start="0,0"
-              End="173.299998770655,-155.433331911035">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,-31.2266663037674" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,-31.2266663037674"
-                    Point2="0,-35.2266663037674"
-                    Point3="4,-35.2266663037674" />
-                  <mssgle:LineSegment
-                    End="169.299998770655,-35.2266663037674" />
-                  <mssgle:CubicBezierSegment
-                    Point1="169.299998770655,-35.2266663037674"
-                    Point2="173.299998770655,-35.2266663037674"
-                    Point3="173.299998770655,-39.2266663037674" />
-                  <mssgle:LineSegment
-                    End="173.299998770655,-155.433331911035" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
           TopLeft="411.683323657928,436.733333122399">
           <EdgeLayout.Curve>
@@ -21895,6 +22654,80 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,-54.23333332128" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\SysCompGroupD"
+          TopLeft="333.833315393991,641.466665738557" />
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\SysCompGroupH"
+          TopLeft="332.999982106189,539.400000488163" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="281.533324682382,662.166665385995">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="52.2999907116094,0"
+              Start="0,0"
+              End="44.7999907116094,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="44.7999907116094,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="413.41664875009,641.466665738557">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-60.4666652503942"
+              Start="0,0"
+              End="0,-52.9666652503942">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-52.9666652503942" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="412.716652779613,539.400000488163">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-61.0666673657637"
+              Start="0,0"
+              End="0,-53.5666673657637">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-53.5666673657637" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -24139,6 +24972,134 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\UlevelP\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\SysCompGroupD">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\SysCompGroupD\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\SysCompGroupD\OLE DB Source"
+          TopLeft="432.999979920686,218.033332272636" />
+        <EdgeLayout
+          Id="Package\SysCompGroupD.Paths[OLE DB Source Output]"
+          TopLeft="508.799981013438,259.633332272636">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,100.199999222557"
+              Start="0,0"
+              End="0,92.6999992225568">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,92.6999992225568" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SysCompGroupD\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SysCompGroupD\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\SysCompGroupH">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\SysCompGroupH\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\SysCompGroupH\OLE DB Source"
+          TopLeft="432.999979920686,218.033332272636" />
+        <EdgeLayout
+          Id="Package\SysCompGroupH.Paths[OLE DB Source Output]"
+          TopLeft="508.799981013438,259.633332272636">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,100.199999222557"
+              Start="0,0"
+              End="0,92.6999992225568">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,92.6999992225568" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SysCompGroupH\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SysCompGroupH\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
