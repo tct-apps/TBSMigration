@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PushTripTOS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05afb3221cd7aac2121863d60a8f3430cc8cc6c1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb3c6ba9863e481a26ab9a0ef6b4f484b16bd4f8")]
 [assembly: System.Reflection.AssemblyProductAttribute("PushTripTOS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PushTripTOS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

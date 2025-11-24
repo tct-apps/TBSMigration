@@ -1,25 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\SourceGitHub\\TBSMigration\\PushTripTOS\\PushTripTOS.csproj": {}
+    "C:\\Users\\ainva\\Documents\\GitHub\\TBSMigration\\PushTripTOS\\PushTripTOS.csproj": {}
   },
   "projects": {
-    "C:\\SourceGitHub\\TBSMigration\\PushTripTOS\\PushTripTOS.csproj": {
+    "C:\\Users\\ainva\\Documents\\GitHub\\TBSMigration\\PushTripTOS\\PushTripTOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\SourceGitHub\\TBSMigration\\PushTripTOS\\PushTripTOS.csproj",
+        "projectUniqueName": "C:\\Users\\ainva\\Documents\\GitHub\\TBSMigration\\PushTripTOS\\PushTripTOS.csproj",
         "projectName": "PushTripTOS",
-        "projectPath": "C:\\SourceGitHub\\TBSMigration\\PushTripTOS\\PushTripTOS.csproj",
-        "packagesPath": "C:\\Users\\shafi\\.nuget\\packages\\",
-        "outputPath": "C:\\SourceGitHub\\TBSMigration\\PushTripTOS\\obj\\",
+        "projectPath": "C:\\Users\\ainva\\Documents\\GitHub\\TBSMigration\\PushTripTOS\\PushTripTOS.csproj",
+        "packagesPath": "C:\\Users\\ainva\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ainva\\Documents\\GitHub\\TBSMigration\\PushTripTOS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\shafi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ainva\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,17 +37,49 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.66, )"
+            },
+            "FastMember": {
+              "target": "Package",
+              "version": "[1.5.0, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.1.1, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Serilog.Sinks.MSSqlServer": {
+              "target": "Package",
+              "version": "[8.2.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -66,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
