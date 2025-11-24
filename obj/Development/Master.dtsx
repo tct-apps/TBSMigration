@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterData"
   DTS:PackageType="5"
-  DTS:VersionBuild="97"
-  DTS:VersionGUID="{9253A311-6891-42B7-A5F4-16BA4F819587}">
+  DTS:VersionBuild="105"
+  DTS:VersionGUID="{CEA01EB8-937B-41A4-9826-50F6EBD121EF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABWZEwRbEPl3UqKrxQBnFFVMMFuJTLX8l34sevTUqUEiAAAAAAOgAAAAAIAACAAAAAHXNVBMYRmlM43GKw1UK8lKKnfO2h7A9zr+ru5qhtw7SAAAADzeovo4wlnlmLTuZcc9jOIr7d6VDyBxVoDIWdFRSuopkAAAACdugQinf52cznt1jYTlCX1S7jpQ/M9Ly06rPP6G/sXtS8AsW/z9QKB40bXtEOowFM2ISKRzXICtnJyHg7iibrr</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAq0yvKaq5B6vaIU2Udhny9jN6WNEoNkED+ffwifcmIsgAAAAAOgAAAAAIAACAAAACsdZW1RgLPSPFBzQUhlv+g24tWMitJqrjcf/a3BRsTECAAAABQMNpmpqLgk/L2nu0TBa3rMk9CD4uyFW5wZq9wVvNyUEAAAAD0GTuHbzYyctUIzFdmdiFIFc1ELsRjAZzY+8yx0OjLArCGjMScM6uRX2//FphD8gaxkS1xypLoGBwO9kUsy0yk</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,12 +46,37 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACeb2iqzegW4rKwA6MEORF7ado7WJ7FNq3ZLauiMQ0nWQAAAAAOgAAAAAIAACAAAAB/+k4A5z9jYzDbp5b50oPAeK6Al32+lmyEX/a/sxbUmiAAAAAbzhZArrIEFuS+9mXV9PLP6ZJHhjsSL7KIh6QiD2+WaUAAAADQgcs7p13lxcD7gw0cZWTS+RGLfvQfE7IxzbVv0MbhbJynb62R/bGgEy+rNmP1xkjv644216Rt8iZYCCcQnnC3</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADCFLzDQi7tu2bzRmGndzzPVcyV7Ef0/eM56mVFxWYVSwAAAAAOgAAAAAIAACAAAAAqdC2cmJPDDyTzbPdYw5hJm35LUKQ5RF0uoo0pmbG7yyAAAAAp9mrx778vgTb1I5AVCoCpcihBpODWj+09RYaSuzcNZkAAAACD68qMMsVMXeWPja8X1K6z4KhOs7durhBtbdzK0BjxOBLYKU3yJBjw9biQU3L4PVpThrOwtbWvgHyrIyu5Qtu8</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Logging.xlsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{0710D5DA-9E80-4375-9C02-10A9E551EEC9}"
+      DTS:ObjectName="Logging.xlsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\shafi\Desktop\TBS Migration\Logging\Logging.xlsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="eTicketing_tbs_new"
+      DTS:CreationName="Microsoft.LogProviderSQLServer"
+      DTS:Description="Writes log entries for events to a SQL Server database"
+      DTS:DTSID="{361F9633-F36E-4B9F-A269-202E811546DB}"
+      DTS:ObjectName="SSIS log provider for SQL Server">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
   <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1" />
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\BusInfo"
@@ -63,6 +88,9 @@
       DTS:ObjectName="BusInfo"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -1314,6 +1342,9 @@
       DTS:ObjectName="BusServeCate"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -1771,6 +1802,9 @@
       DTS:ObjectName="BusType"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -2474,6 +2508,9 @@
       DTS:ObjectName="BusTypeSeat"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -2837,10 +2874,13 @@
       DTS:ObjectName="Execute SQL Task"
       DTS:ThreadHint="0">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{3B183B8B-3E62-4E5F-B341-811E93F21315}"
-          SQLTask:SqlStatementSource="&#xA;DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;SELECT @sql = @sql +&#xA;    'IF OBJECT_ID(''dbo.' + name + ''') IS NOT NULL TRUNCATE TABLE dbo.' + QUOTENAME(name) + ';' + CHAR(10)&#xA;FROM sys.tables&#xA;WHERE name IN (&#xA;    'BusInfo',&#xA;    'BusServCate',&#xA;    'BusType',&#xA;    'BusTypeSeat',&#xA;    'MImage',&#xA;    'SysComp',&#xA;    'SysCompGroupD',&#xA;    'SysCompGroupH',&#xA;    'SysCurr',&#xA;    'SysDistrict',&#xA;    'SysFacilityOnlineChrg',&#xA;    'SysInsu',&#xA;    'SysMachine',&#xA;    'SysMarkGrpD',&#xA;    'SysMarkGrpH',&#xA;    'SysMsg',&#xA;    'SysOnPara',&#xA;    'SysOnRate',&#xA;    'SysOTA',&#xA;    'SysOTAD',&#xA;    'SysOTAPara',&#xA;    'SysPGroup',&#xA;    'SysUser',&#xA;    'SysUserGrp',&#xA;    'TCounter',&#xA;    'TCounterMergeD',&#xA;    'TCounterMergeH',&#xA;    'TRoute',&#xA;    'TRouteCout',&#xA;    'TRouteExtra',&#xA;    'TRoutePrice',&#xA;    'TRouteTimerD',&#xA;    'TRouteTimerH',&#xA;    'Ulevel',&#xA;    'UlevelD',&#xA;    'UlevelP'&#xA;);&#xA;&#xA;EXEC (@sql); &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#xA;DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;SELECT @sql = @sql +&#xA;    'IF OBJECT_ID(''dbo.' + name + ''') IS NOT NULL TRUNCATE TABLE dbo.' + QUOTENAME(name) + ';' + CHAR(10)&#xA;FROM sys.tables&#xA;WHERE name IN (&#xA;    'BusInfo',&#xA;    'BusServCate',&#xA;    'BusType',&#xA;    'BusTypeSeat',&#xA;    'MImage',&#xA;    'SysComp',&#xA;    'SysCurr',&#xA;    'SysDistrict',&#xA;    'SysFacilityOnlineChrg',&#xA;    'SysInsu',&#xA;    'SysMachine',&#xA;    'SysMarkGrpD',&#xA;    'SysMarkGrpH',&#xA;    'SysMsg',&#xA;    'SysOnPara',&#xA;    'SysOnRate',&#xA;    'SysOTA',&#xA;    'SysOTAD',&#xA;    'SysOTAPara',&#xA;    'SysPGroup',&#xA;    'SysUser',&#xA;    'SysUserGrp',&#xA;    'TCounter',&#xA;    'TCounterMergeD',&#xA;    'TCounterMergeH',&#xA;    'TRoute',&#xA;    'TRouteCout',&#xA;    'TRouteExtra',&#xA;    'TRoutePrice',&#xA;    'TRouteTimerD',&#xA;    'TRouteTimerH',&#xA;    'Ulevel',&#xA;    'UlevelD',&#xA;    'UlevelP'&#xA;);&#xA;&#xA;EXEC (@sql); &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2853,6 +2893,9 @@
       DTS:ObjectName="MImage"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -3135,6 +3178,9 @@
       DTS:ObjectName="SysComp"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -4835,6 +4881,9 @@
       DTS:ObjectName="SysCurr"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -5330,6 +5379,9 @@
       DTS:ObjectName="SysDistrict"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -5851,6 +5903,9 @@
       DTS:ObjectName="SysFacilityOnlineChrg"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -6985,6 +7040,9 @@
       DTS:ObjectName="SysInsu"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -7513,6 +7571,9 @@
       DTS:ObjectName="SysMachine"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -8112,6 +8173,9 @@
       DTS:ObjectName="SysMarkGrpD"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -8437,6 +8501,9 @@
       DTS:ObjectName="SysMarkGrpH"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -8965,6 +9032,9 @@
       DTS:ObjectName="SysMsg"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -9323,6 +9393,9 @@
       DTS:ObjectName="SysOnPara"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -9572,6 +9645,9 @@
       DTS:ObjectName="SysOnRate"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -10118,6 +10194,9 @@
       DTS:ObjectName="SysOTA"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -10651,6 +10730,9 @@
       DTS:ObjectName="SysOTAD"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -10976,6 +11058,9 @@
       DTS:ObjectName="SysOTAPara"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -12018,6 +12103,9 @@
       DTS:ObjectName="SysPGroup"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -12551,6 +12639,9 @@
       DTS:ObjectName="SysUser"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -13525,6 +13616,9 @@
       DTS:ObjectName="SysUserGrp"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -14020,6 +14114,9 @@
       DTS:ObjectName="TCounter"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -14766,6 +14863,9 @@
       DTS:ObjectName="TCounterMergeD"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -15091,6 +15191,9 @@
       DTS:ObjectName="TCounterMergeH"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -15581,6 +15684,9 @@
       DTS:ObjectName="TRoute"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -16419,6 +16525,9 @@
       DTS:ObjectName="TRouteCout"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -16858,6 +16967,9 @@
       DTS:ObjectName="TRouteExtra"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -17335,6 +17447,9 @@
       DTS:ObjectName="TRoutePrice"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -18443,6 +18558,9 @@
       DTS:ObjectName="TRouteTimerD"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -18877,6 +18995,9 @@
       DTS:ObjectName="TRouteTimerH"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -19524,6 +19645,9 @@
       DTS:ObjectName="Ulevel"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -19981,6 +20105,9 @@
       DTS:ObjectName="UlevelD"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -20425,6 +20552,9 @@
       DTS:ObjectName="UlevelP"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -23088,10 +23218,6 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="152,41.6"
-          Id="Package\SysOnRate\OLE DB Source"
-          TopLeft="432.999979920686,218.033332272636" />
-        <NodeLayout
           Size="171.2,41.6"
           Id="Package\SysOnRate\OLE DB Destination"
           TopLeft="425.999982061486,443.833330243494" />
@@ -23099,6 +23225,10 @@
           Size="152.8,41.6"
           Id="Package\SysOnRate\Derived Column"
           TopLeft="435.999993503094,331.999995052815" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\SysOnRate\OLE DB Source"
+          TopLeft="432.999979920686,218.033332272636" />
         <EdgeLayout
           Id="Package\SysOnRate.Paths[OLE DB Source Output]"
           TopLeft="510.69998671189,259.633332272636">

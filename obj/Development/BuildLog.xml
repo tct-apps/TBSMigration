@@ -2,13 +2,13 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>TBSMigration</Name>
-    <LastWriteTime>2025-11-20T09:59:13.0765543Z</LastWriteTime>
+    <LastWriteTime>2025-11-24T08:30:35.1234087Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>Master.dtsx</Name>
-      <LastWriteTime>2025-11-20T09:09:13.1226366Z</LastWriteTime>
+      <LastWriteTime>2025-11-24T07:23:16.7941807Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -18,7 +18,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Sale.dtsx</Name>
-      <LastWriteTime>2025-11-20T09:56:09.4913228Z</LastWriteTime>
+      <LastWriteTime>2025-11-24T08:30:16.8488071Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
