@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterData"
   DTS:PackageType="5"
-  DTS:VersionBuild="97"
-  DTS:VersionGUID="{9253A311-6891-42B7-A5F4-16BA4F819587}">
+  DTS:VersionBuild="98"
+  DTS:VersionGUID="{F2143A67-7124-47FB-A2D5-4872A2186F35}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAZ6o9+LOtFMroksOqOtbkW1MgpPEPHRePQzwC1lrrXQAAAAAAOgAAAAAIAACAAAABWSnBDDPvip+zK75+fuDTq9hs+3kexZptH9e8xhXQ/4CAAAAAbzSdEbRMGA4BWtaDMkiUXFPaUw+QYhkfFKzNcy/HK40AAAAC/S59z69Ef+Pp0r3wnKeYvcRyddZdiAQP0vuq1yZhvfXzMhNHkHX+FtlXZZCjeZbEtS6z0OQpObxtfF8F6pIee</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACRHqtvFixhw8LJ152Q/c449Ke+bnwCdcXX2fxxV18+ywAAAAAOgAAAAAIAACAAAABCgtJgyK/dIjErWHAnULV/r+jW/2KjMa+n6/8xQfvLkSAAAACeEsF4X3xsxM3NR3S37tiOt1Zg4/i7wNf0IQMqcQwCAEAAAADXTl33RWgti13QL4iYVJbrAWMGTTgAh0uvmebypHVe+uGXFDrrl+3TlqzmBEqdJP+AcLOkLTpLj+5UKp/L9+O5</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAZlzA0eEaFurwh3PL4Dz0Pquq7LKR43jc4MqaAQ6XSgAAAAAAOgAAAAAIAACAAAACp8qaJmJtTn50CNiYc5AS7J368MlFZAXuoT0g+gHmHmyAAAAD2vZty72x3kqA9RTcH/gYGGxlBKokpP0E4s1RUdOiih0AAAACInNRdmoZvL7PdHGzUDgzV5bdn4yyoz9oRKV0Po+DEG8B6IIu2XhZTCzv6blMwHCVxn7lTAS9+BpfRzY5pMfIf</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADW0I2dZcp4IeHRvhjBr6zFu08OkM9aeWiqeu7otnHlpwAAAAAOgAAAAAIAACAAAAA6Tpefq7kXHaVqIdn0GqAi9+pk+K9in+chkD898Uy25yAAAAAQE5cvm2SXy9Q7/7PkRzcgqr4rCIebUwt/wAb/nnzUSkAAAABSPdJr59+ve3DyupDRxEEVm/T+VG40bP+fd1/ReWaah1BUcf04YC8vXY03eTLD8Cdca2L+dJ23jDQvnsZcqg5B</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -2840,7 +2840,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{3B183B8B-3E62-4E5F-B341-811E93F21315}"
-          SQLTask:SqlStatementSource="&#xA;DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;SELECT @sql = @sql +&#xA;    'IF OBJECT_ID(''dbo.' + name + ''') IS NOT NULL TRUNCATE TABLE dbo.' + QUOTENAME(name) + ';' + CHAR(10)&#xA;FROM sys.tables&#xA;WHERE name IN (&#xA;    'BusInfo',&#xA;    'BusServCate',&#xA;    'BusType',&#xA;    'BusTypeSeat',&#xA;    'MImage',&#xA;    'SysComp',&#xA;    'SysCompGroupD',&#xA;    'SysCompGroupH',&#xA;    'SysCurr',&#xA;    'SysDistrict',&#xA;    'SysFacilityOnlineChrg',&#xA;    'SysInsu',&#xA;    'SysMachine',&#xA;    'SysMarkGrpD',&#xA;    'SysMarkGrpH',&#xA;    'SysMsg',&#xA;    'SysOnPara',&#xA;    'SysOnRate',&#xA;    'SysOTA',&#xA;    'SysOTAD',&#xA;    'SysOTAPara',&#xA;    'SysPGroup',&#xA;    'SysUser',&#xA;    'SysUserGrp',&#xA;    'TCounter',&#xA;    'TCounterMergeD',&#xA;    'TCounterMergeH',&#xA;    'TRoute',&#xA;    'TRouteCout',&#xA;    'TRouteExtra',&#xA;    'TRoutePrice',&#xA;    'TRouteTimerD',&#xA;    'TRouteTimerH',&#xA;    'Ulevel',&#xA;    'UlevelD',&#xA;    'UlevelP'&#xA;);&#xA;&#xA;EXEC (@sql); &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#xA;DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;SELECT @sql = @sql +&#xA;    'IF OBJECT_ID(''dbo.' + name + ''') IS NOT NULL TRUNCATE TABLE dbo.' + QUOTENAME(name) + ';' + CHAR(10)&#xA;FROM sys.tables&#xA;WHERE name IN (&#xA;    'BusInfo',&#xA;    'BusServCate',&#xA;    'BusType',&#xA;    'BusTypeSeat',&#xA;    'MImage',&#xA;    'SysComp',&#xA;    'SysCurr',&#xA;    'SysDistrict',&#xA;    'SysFacilityOnlineChrg',&#xA;    'SysInsu',&#xA;    'SysMachine',&#xA;    'SysMarkGrpD',&#xA;    'SysMarkGrpH',&#xA;    'SysMsg',&#xA;    'SysOnPara',&#xA;    'SysOnRate',&#xA;    'SysOTA',&#xA;    'SysOTAD',&#xA;    'SysOTAPara',&#xA;    'SysPGroup',&#xA;    'SysUser',&#xA;    'SysUserGrp',&#xA;    'TCounter',&#xA;    'TCounterMergeD',&#xA;    'TCounterMergeH',&#xA;    'TRoute',&#xA;    'TRouteCout',&#xA;    'TRouteExtra',&#xA;    'TRoutePrice',&#xA;    'TRouteTimerD',&#xA;    'TRouteTimerH',&#xA;    'Ulevel',&#xA;    'UlevelD',&#xA;    'UlevelP'&#xA;);&#xA;&#xA;EXEC (@sql); &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
