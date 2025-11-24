@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Sale"
   DTS:PackageType="5"
-  DTS:VersionBuild="39"
-  DTS:VersionGUID="{0CC1C7FD-7903-45AB-BC57-2D866D075393}">
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{504F80DE-D777-48ED-89D3-40D9D382F40F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABHTim3YM2qSVHxcRaL5I7xgJUQGd1BRUWsuNfpvav5egAAAAAOgAAAAAIAACAAAAB4i9E23AFsGIcIxzNNPJrzEdAPFt++pXjUAqYP10Vs2yAAAADxEJM7Dt8nrQDeYwnhqtV822Gkyw0+bl2t3kUa+6DreUAAAADs+XLteLUAcWIxLpTXooMj+F/GW58qJXQaydgCKfeZSM3V9WKFfFyEQxZx7o4zso7pCU9zyoxTIvPKZ1zkIyJj</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADIqKhyPRS0lGKC6tHOdZydn2scmPIWx8VdkxFxWhf9EgAAAAAOgAAAAAIAACAAAACYrY0jmZ4zcCh9GHIrXPI+QtbcFH04ba/vF62M2XEMTiAAAAA//9u7CNpsCLcclzYyq0fD2NJksdNNquISGQ9ytuq3QUAAAABg59BGLtbYr8Uhsh+33qPGtWAz69wIPiDZy8CelKL7X22JNXXtP2y2aIM8mQhWf4ySToGWnv3hvOB5lnO2YvMA</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAA1/ZHbm08OiMv0ciItpy8HUKF+Rx+GiFzFVFsCPCBKVwAAAAAOgAAAAAIAACAAAABGE6w75zm2FhQeUcSUBK+GDgwNWs8+NJFTN3Mx07aH/CAAAAC0eM91P1jVcOrCspIRaIqWB0XLpjueXJgoFaJBtIRZD0AAAAAfvDZponeYJ/L95cVN5YssQMDUl/qbYA6IpojMWcBhNbEmcUo8tXaFKidnt9J8zu9YstAa0nVCoCOtioLIj2vX</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACTfdRgWA6KEfjslv1eKNtUTiMWxL+DQeIQM48uVG8YiQAAAAAOgAAAAAIAACAAAADXYo2WRAWqM+MuAg042GQSViAOluK4wAEGZbWYwDyqXiAAAAAlk3QNoSq5Y3D2o8FASAG1Q2XNMQcOqnFo3/158AC5yEAAAADKmdx9Eu4mk5jF+julvurwXxbJYLKMb+sReZ4a+88nk9rNrtaLUuGy+3eoIJT38V6Af1DHF7MXqCiOPN0JPnoS</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -18899,9 +18899,13 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="119.2,41.6"
-          Id="Package\Truncate"
-          TopLeft="172.499990575015,361.39999748687" />
+          Size="140,41.6"
+          Id="Package\Package End"
+          TopLeft="1215.83326690313,359.666664165589" />
+        <NodeLayout
+          Size="143.2,41.6"
+          Id="Package\Package Start"
+          TopLeft="154.999991531174,265.199998155832" />
         <NodeLayout
           Size="160.8,41.6"
           Id="Package\Sequence Container\DERPosi_202512"
@@ -19173,6 +19177,10 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           Size="735.2,416"
           Id="Package\Sequence Container"
           TopLeft="391.666645266944,169.733332236475" />
+        <NodeLayout
+          Size="119.2,41.6"
+          Id="Package\Truncate"
+          TopLeft="172.499990575015,361.39999748687" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="291.699990575016,379.966664861673">
@@ -19195,10 +19203,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="143.2,41.6"
-          Id="Package\Package Start"
-          TopLeft="154.999991531174,265.199998155832" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="229.349991053094,306.799998155832">
@@ -19221,10 +19225,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="140,41.6"
-          Id="Package\Package End"
-          TopLeft="1215.83326690313,359.666664165589" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="1126.86664526695,379.099998201032">
@@ -19250,6 +19250,18 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="138.4,41.6"
+          Id="Package.EventHandlers[OnError]\Package Fail"
+          TopLeft="634.166663905812,173.666664008631" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <TaskHost
     design-time-name="Package\Sequence Container\DERPosi_202512">
     <LayoutInfo>
@@ -19974,17 +19986,5 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="138.4,41.6"
-          Id="Package.EventHandlers[OnError]\Package Fail"
-          TopLeft="779.999989271164,294.999996498227" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
