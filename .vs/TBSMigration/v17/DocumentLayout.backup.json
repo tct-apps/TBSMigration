@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\SourceGitHub\\TBSMigration\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B61072B4-E913-5374-374D-AA66EF273E9E}|TBSMigration.dtproj|C:\\SourceGitHub\\TBSMigration\\Master.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{B61072B4-E913-5374-374D-AA66EF273E9E}|TBSMigration.dtproj|solutionrelative:Master.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B61072B4-E913-5374-374D-AA66EF273E9E}|TBSMigration.dtproj|C:\\SourceGitHub\\TBSMigration\\Trip.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
       "RelativeMoniker": "D:0:0:{B61072B4-E913-5374-374D-AA66EF273E9E}|TBSMigration.dtproj|solutionrelative:Trip.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B61072B4-E913-5374-374D-AA66EF273E9E}|TBSMigration.dtproj|C:\\SourceGitHub\\TBSMigration\\Sale.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
       "RelativeMoniker": "D:0:0:{B61072B4-E913-5374-374D-AA66EF273E9E}|TBSMigration.dtproj|solutionrelative:Sale.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B61072B4-E913-5374-374D-AA66EF273E9E}|TBSMigration.dtproj|C:\\SourceGitHub\\TBSMigration\\Master.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{B61072B4-E913-5374-374D-AA66EF273E9E}|TBSMigration.dtproj|solutionrelative:Master.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 20,
+          "SelectedChildIndex": 21,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Sale.dtsx [Design]",
               "DocumentMoniker": "C:\\SourceGitHub\\TBSMigration\\Sale.dtsx",
               "RelativeDocumentMoniker": "Sale.dtsx",
@@ -114,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Trip.dtsx [Design]",
               "DocumentMoniker": "C:\\SourceGitHub\\TBSMigration\\Trip.dtsx",
               "RelativeDocumentMoniker": "Trip.dtsx",
@@ -126,7 +126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Master.dtsx [Design]",
               "DocumentMoniker": "C:\\SourceGitHub\\TBSMigration\\Master.dtsx",
               "RelativeDocumentMoniker": "Master.dtsx",

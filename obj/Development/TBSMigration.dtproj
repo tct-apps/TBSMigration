@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DESKTOP-CKMEJ54</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAACAAAAAAAQZgAAAAEAACAAAAAraB1Ecgo1byWPGEDN+AUV6Iv/reDYWMcoGsPPaAiyLwAAAAAOgAAAAAIAACAAAAD26WMVhZhg/inRgTMRibkRvFCSQnL1F7raJOrEmZVdZpAAAAABoZcu1E6dNZ3RlpCalb/FGZ2Mbt6UIRn66WrytIjb0c7Ui3r4qVFNDjL8liok+iok4g1nzuUUagjEXDHvdjTayDzI1St0DVEzBc5NIbpjZjK88WYh58G6/pfYatUAjjFm4ibynt0zIE736jE4T5VG6G9oESXZ+IJYvu6qVMHhqIU0s++0EtBGM9zCwkVFHstAAAAAbpmlAkn4GkF4jC3kItkfg6YkKcejIx+fIS0WrAJ18csrf+JIPcKZzcy3FmzelilPuRSQhJcu9Aony1BTX3qxMw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAACAAAAAAAQZgAAAAEAACAAAABcz/bLenZGdyfg4XMgS/BvwdakDvSokLwueJo2iawTXgAAAAAOgAAAAAIAACAAAAAdVlLUg1/M6fcYkPkOaMn6+/rl5JNIHwBKDZxyeF+ra5AAAAAnG1lDgiJisuuC7bD6y06Iy0/wT/Swl0cdIsDOi3EMi7SaTz214lHAzeiSZNxKTCU7IHChPOzUAQtb7naTA+GCZgX7E7zRN+D/tZ3JJTBoHqi670R75fWlJFobFfvathLcqYJQw41cs2YDKi2xHIx5b46q7o54vnkXhH+g9/VyRhqUQWr2CollnAEW4/DTt2VAAAAAuJWmDMKPUQVIyE7HxgtylyaTjOPp13Tak0E48Tfj+nSY+Th8BViSReRiNfp/tr1zIz04U2fWXZcASgEOGqZvNQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -41,13 +41,13 @@
             <SSIS:PackageMetaData SSIS:Name="Master.dtsx">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">{B763567D-8615-400E-8361-DADA6399E58C}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">MasterData</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">Master</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">105</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">120</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{CEA01EB8-937B-41A4-9826-50F6EBD121EF}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{CC730331-9FCA-44D1-BBF4-85B500240194}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -349,36 +349,6 @@
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Value">tctdev</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.Logging.xlsx.ConnectByProxy">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.Logging.xlsx.ConnectionString">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">C:\Users\shafi\Desktop\TBS Migration\Logging\Logging.xlsx</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
