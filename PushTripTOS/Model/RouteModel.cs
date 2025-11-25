@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace PushTripTOS.Model
+namespace PushMasterTOS.Model
 {
     public class RouteModel
     {

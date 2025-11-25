@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace PushTripTOS.Model.Common
+namespace PushMasterTOS.Model.Common
 {
     [XmlRoot("Envelope", Namespace = "http://schemas.xmlsoap.org/soap/envelope/")]
     public class XmlRequestEnvelope

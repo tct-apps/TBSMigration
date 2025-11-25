@@ -1,8 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using PushTripTOS.Model;
-using PushTripTOS.Model.Common;
+using PushMasterTOS.Model;
+using PushMasterTOS.Model.Common;
 using Serilog;
 using Serilog.Settings.Configuration;
 using Serilog.Sinks.MSSqlServer;

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "TBSMigration", "TBSMigration.dtproj", "{B61072B4-E913-5374-374D-AA66EF273E9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushTripTOS", "PushTripTOS\PushTripTOS.csproj", "{DB435DAC-EB05-4932-B858-CFFC389B6F58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushMasterTOS", "PushTripTOS\PushMasterTOS.csproj", "{DB435DAC-EB05-4932-B858-CFFC389B6F58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
