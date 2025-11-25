@@ -93,11 +93,8 @@ class Program
             // Read
             try
             {
-                stateList = multi.Read<StateModel>().ToList();
-
                 // Prepare connection.
                 #region Get value 
-                //var integrationInfo = vendorAccount.VendorAccountIntegrationInfo.ToList();
                 string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
                 string SoapAction = "http://tos.org";
                 string xmlns = "http://tos.org/";
@@ -110,9 +107,10 @@ class Program
                 Uri requestUrl = new Uri(url);
                 string soapAction = SoapAction + ApiUrlKey.StateInsert;
 
+                stateList = multi.Read<StateModel>().ToList();
+
                 foreach (var state in stateList)
                 {
-
                     StateRequestModel requestContent = new StateRequestModel()
                     {
                         StateCode = state.StateCode,
@@ -148,7 +146,7 @@ class Program
         //Obj console app proses n see if success or has any error
     }
 
-    static void City(string sourceConn)
+    static async void City(string sourceConn)
     {
         var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
@@ -174,7 +172,35 @@ class Program
             // Read
             try
             {
+                // Prepare connection.
+                #region Get value 
+                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+                string SoapAction = "http://tos.org";
+                string xmlns = "http://tos.org/";
+                #endregion
+
+                if (string.IsNullOrEmpty(url))
+                {
+                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+                }
+                Uri requestUrl = new Uri(url);
+                string soapAction = SoapAction + ApiUrlKey.CityInsert;
+
                 cityList = multi.Read<CityModel>().ToList();
+
+                foreach (var city in cityList)
+                {
+                    CityRequestModel requestContent = new CityRequestModel
+                    {
+                        CityCode = city.CityCode,
+                        CityName = city.CityName,
+                        StateCode = city.StateCode
+                    };
+
+                    // Call API
+                    CityResponseModel response = await WebServicePostAsync<CityResponseModel>(requestUrl, soapAction, xmlns, requestContent);
+
+                }
 
                 // logging process read
                 logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"CityRead", $"City Read process started"));
@@ -200,7 +226,7 @@ class Program
         //Obj console app proses n see if success or has any error
     }
 
-    static void BusOperator(string sourceConn)
+    static async void BusOperator(string sourceConn)
     {
         var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
@@ -226,6 +252,20 @@ class Program
             // Read
             try
             {
+                // Prepare connection.
+                #region Get value 
+                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+                string SoapAction = "http://tos.org";
+                string xmlns = "http://tos.org/";
+                #endregion
+
+                if (string.IsNullOrEmpty(url))
+                {
+                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+                }
+                Uri requestUrl = new Uri(url);
+                string soapAction = SoapAction + ApiUrlKey.BusOperatorInsert;
+
                 busOperatorList = multi.Read<BusOperatorModel>().ToList();
 
                 foreach (var bo in busOperatorList)
@@ -234,6 +274,27 @@ class Program
                     {
                         bo.Base64Logo = Convert.ToBase64String(bo.OperatorLogo);
                     }
+
+                    BusOperatorRequestModel requestContent = new BusOperatorRequestModel
+                    {
+                        OperatorCode = bo.OperatorCode,
+                        OperatorName = bo.OperatorName,
+                        OperatorLogo = bo.Base64Logo,
+                        ContactPerson = bo.ContactPerson,
+                        Address1 = bo.Address1,
+                        Address2 = bo.Address2,
+                        Address3 = bo.Address3,
+                        ContactNumber1 = bo.ContactNumber1,
+                        ContactNumber2 = bo.ContactNumber2,
+                        FaxNumber = bo.FaxNumber,
+                        EmailId = bo.EmailId,
+                        Website = bo.Website,
+                        Description = bo.Description,
+                        RegisterNo = bo.RegisterNo,
+                    };
+
+                    // Call API
+                    BusOperatorResponseModel response = await WebServicePostAsync<BusOperatorResponseModel>(requestUrl, soapAction, xmlns, requestContent);
                 }
 
                 // logging process read
@@ -260,7 +321,7 @@ class Program
         //Obj console app proses n see if success or has any error
     }
 
-    static void Vehicle(string sourceConn)
+    static async void Vehicle(string sourceConn)
     {
         var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
@@ -286,7 +347,34 @@ class Program
             // Read
             try
             {
+                // Prepare connection.
+                #region Get value 
+                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+                string SoapAction = "http://tos.org";
+                string xmlns = "http://tos.org/";
+                #endregion
+
+                if (string.IsNullOrEmpty(url))
+                {
+                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+                }
+                Uri requestUrl = new Uri(url);
+                string soapAction = SoapAction + ApiUrlKey.VehicleInsert;
+
                 vehicleList = multi.Read<VehicleModel>().ToList();
+
+                foreach (var vehicle in vehicleList)
+                {
+                    VehicleRequestModel requestContent = new VehicleRequestModel
+                    {
+                        PlateNo = vehicle.PlateNo,
+                        OperatorCode = vehicle.OperatorCode
+                    };
+
+                    // Call API
+                    VehicleResponseModel response = await WebServicePostAsync<VehicleResponseModel>(requestUrl, soapAction, xmlns, requestContent);
+
+                }
 
                 // logging process read
                 logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleRead", $"Vehicle Read process started"));
@@ -312,7 +400,7 @@ class Program
         //Obj console app proses n see if success or has any error
     }
 
-    static void Route(string sourceConn)
+    static async void Route(string sourceConn)
     {
         var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
@@ -339,6 +427,20 @@ class Program
             // Read
             try
             {
+                // Prepare connection.
+                #region Get value 
+                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+                string SoapAction = "http://tos.org";
+                string xmlns = "http://tos.org/";
+                #endregion
+
+                if (string.IsNullOrEmpty(url))
+                {
+                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+                }
+                Uri requestUrl = new Uri(url);
+                string soapAction = SoapAction + ApiUrlKey.RouteInsert;
+
                 routeList = multi.Read<RouteModel>().ToList();
                 routeDetailList = multi.Read<RouteDetailModel>().ToList();
 
@@ -347,6 +449,26 @@ class Program
                     route.RouteDetails = routeDetailList
                         .Where(d => d.RouteNo == route.RouteNo)
                         .ToList();
+
+                    RouteRequestModel requestContent = new RouteRequestModel
+                    {
+                        OperatorCode = route.OperatorCode,
+                        RouteNo = route.RouteNo,
+                        RouteName = route.RouteName,
+                        OriginCity = route.OriginCity,
+                        DestinationCity = route.DestinationCity,
+                        RouteDetails = route.RouteDetails.Select(d => new RouteDetail
+                        {
+                            OperatorCode = d.OperatorCode,
+                            RouteNo = d.RouteNo,
+                            Display = d.Display,
+                            ViaCity = d.ViaCity,
+                            StageNo = d.StageNo
+                        }).ToList()
+                    };
+
+                    // Call API
+                    RouteResponseModel response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent);
                 }
 
                 // logging process read
