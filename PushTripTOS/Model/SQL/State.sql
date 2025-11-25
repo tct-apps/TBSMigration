@@ -1,5 +1,5 @@
 ﻿SELECT 
-	S.State AS state_code,
-	S.desn AS state_name
+	S.State AS StateCode,
+	S.desn AS StateName
 FROM SysState S
 WHERE S.acti = 1
