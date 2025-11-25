@@ -83,3 +83,7 @@ C:\Users\ainva\Documents\GitHub\TBSMigration\PushTripTOS\obj\Debug\net8.0\refint
 C:\Users\ainva\Documents\GitHub\TBSMigration\PushTripTOS\obj\Debug\net8.0\PushTripTOS.pdb
 C:\Users\ainva\Documents\GitHub\TBSMigration\PushTripTOS\obj\Debug\net8.0\PushTripTOS.genruntimeconfig.cache
 C:\Users\ainva\Documents\GitHub\TBSMigration\PushTripTOS\obj\Debug\net8.0\ref\PushTripTOS.dll
+C:\Users\ainva\Documents\GitHub\TBSMigration\PushTripTOS\bin\Debug\net8.0\appsettings.json
+C:\Users\ainva\Documents\GitHub\TBSMigration\PushTripTOS\bin\Debug\net8.0\Model\SQL\State.sql
+C:\Users\ainva\Documents\GitHub\TBSMigration\PushTripTOS\bin\Debug\net8.0\Model\SQL\City.sql
+C:\Users\ainva\Documents\GitHub\TBSMigration\PushTripTOS\bin\Debug\net8.0\Model\SQL\Vehicle.sql
