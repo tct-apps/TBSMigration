@@ -261,6 +261,10 @@ __pycache__/
 *.pyc
 profile.arm.json
 
+# Build outputs
+bin/
+obj/
+
 # SSIS
 .vs/*/config/applicationhost.config
 **/.dtbcache.v2
