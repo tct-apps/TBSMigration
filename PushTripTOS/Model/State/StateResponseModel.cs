@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace PushMasterTOS.Model
 {
-    [XmlRoot(ElementName = "stateInsertResponse ", Namespace = "http://tos.org/")]
+    [XmlRoot(ElementName = "stateInsertResponse", Namespace = "http://tos.org/")]
     public class StateResponseModel
     {
         [XmlElement(ElementName = "stateInsertResult")]
