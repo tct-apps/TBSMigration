@@ -7,6 +7,7 @@ using PushMasterTOS.Model.City;
 using PushMasterTOS.Model.Common;
 using PushMasterTOS.Model.Route;
 using PushMasterTOS.Model.Vehicle;
+using PushMasterTOS.Model.State;
 using Serilog;
 using Serilog.Settings.Configuration;
 using Serilog.Sinks.MSSqlServer;
@@ -66,7 +67,7 @@ class Program
         }
     }
 
-    static void State(string sourceConn)
+    static async Task State(string sourceConn)
     {
         var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
@@ -97,21 +98,31 @@ class Program
                 // Prepare connection.
                 #region Get value 
                 //var integrationInfo = vendorAccount.VendorAccountIntegrationInfo.ToList();
-                string url = "http://10.238.1.4/toswebservice_Test/";
-                string SoapAction = "stateInsert";
-                //string xmlns = integrationInfo.FirstOrDefault(x => x.mdVendorIntegrationInfoKey == Constant.VendorAccountIntegrationInfoKey.Xmlns)?.Value;
+                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+                string SoapAction = "http://tos.org";
+                string xmlns = "http://tos.org/";
                 #endregion
 
-                //if (string.IsNullOrEmpty(url))
-                //{
-                //    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, Constant.VendorAccountIntegrationInfoKey.ApiUrl));
-                //}
-                //Uri requestUrl = new Uri(url);
+                if (string.IsNullOrEmpty(url))
+                {
+                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo,"ApiUrl"));
+                }
+                Uri requestUrl = new Uri(url);
+                string soapAction = SoapAction + ApiUrlKey.StateInsert;
 
-                //// Call API
-                //string soapAction = SoapAction + Constant.ApiUrlKey.BlockSeat;
-                //Entity.BlockSeat.BlockSeatResponse response = await WebServicePostAsync<Entity.BlockSeat.BlockSeatResponse>(requestUrl, soapAction, xmlns, blockSeatRequest,
-                //    new LogInformation(batchId, jobId, vendorAccount.OperatorCode, nameof(Reserve), vendorAccount.mdVendorKey, vendorAccount.Code, booking.BookingId, bookingOperator.BookingOperatorId));
+                foreach (var state in stateList)
+                {
+
+                    StateRequestModel requestContent = new StateRequestModel()
+                    {
+                        StateCode = state.StateCode,
+                        StateName = state.StateName
+                    };
+
+                    // Call API
+                    StateResponseModel response = await WebServicePostAsync<StateResponseModel>(requestUrl, soapAction, xmlns, requestContent);
+                }
+                
 
                 // logging process read
                 logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateRead", $"State Read process started"));
