@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Model\SQL\BusOperator.sql" />
     <None Remove="Model\SQL\City.sql" />
+    <None Remove="Model\SQL\Route.sql" />
     <None Remove="Model\SQL\State.sql" />
     <None Remove="Model\SQL\Vehicle.sql" />
   </ItemGroup>
@@ -18,7 +20,13 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Model\SQL\BusOperator.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Model\SQL\City.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Model\SQL\Route.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Model\SQL\State.sql">

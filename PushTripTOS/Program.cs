@@ -44,7 +44,9 @@ class Program
 
             State(sourceConn);
             City(sourceConn);
+            BusOperator(sourceConn);
             Vehicle(sourceConn);
+            Route(sourceConn);
         }
         catch (Exception ex)
         {
@@ -183,6 +185,66 @@ class Program
         //Obj console app proses n see if success or has any error
     }
 
+    static void BusOperator(string sourceConn)
+    {
+        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+        // Log process start
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorStart", $"BusOperator process started"));
+
+        try
+        {
+            string sqlPath = Path.Combine(
+                             Directory.GetCurrentDirectory(),
+                             "Model", "SQL", "BusOperator.sql");
+
+            string sql = File.ReadAllText(sqlPath);
+
+            using var source = new SqlConnection(sourceConn);
+            source.Open();
+
+            using var multi = source.QueryMultiple(sql);
+
+            List<BusOperatorModel> busOperatorList;
+
+            // Read
+            try
+            {
+                busOperatorList = multi.Read<BusOperatorModel>().ToList();
+
+                foreach (var bo in busOperatorList)
+                {
+                    if (bo.operator_logo != null)
+                    {
+                        bo.base64Logo = Convert.ToBase64String(bo.operator_logo);
+                    }
+                }
+
+                // logging process read
+                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorRead", $"BusOperator Read process started"));
+            }
+            catch (Exception ex)
+            {
+                var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                throw;
+            }
+
+            // Write process logs
+            //LogETLProcess.WriteAll(logs);
+        }
+        catch (Exception ex)
+        {
+            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+            //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
+            throw;
+        }
+
+        //New table last jalan bila dan masa jalan tu ada error tak
+        //Obj console app proses n see if success or has any error
+    }
+
     static void Vehicle(string sourceConn)
     {
         var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
@@ -213,6 +275,67 @@ class Program
 
                 // logging process read
                 logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleRead", $"Vehicle Read process started"));
+            }
+            catch (Exception ex)
+            {
+                var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                throw;
+            }
+
+            // Write process logs
+            //LogETLProcess.WriteAll(logs);
+        }
+        catch (Exception ex)
+        {
+            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+            //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
+            throw;
+        }
+
+        //New table last jalan bila dan masa jalan tu ada error tak
+        //Obj console app proses n see if success or has any error
+    }
+
+    static void Route(string sourceConn)
+    {
+        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+        // Log process start
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteStart", $"Route process started"));
+
+        try
+        {
+            string sqlPath = Path.Combine(
+                             Directory.GetCurrentDirectory(),
+                             "Model", "SQL", "Route.sql");
+
+            string sql = File.ReadAllText(sqlPath);
+
+            using var source = new SqlConnection(sourceConn);
+            source.Open();
+
+            using var multi = source.QueryMultiple(sql);
+
+            List<RouteModel> routeList;
+            List<RouteDetailModel> routeDetailList;
+
+            // Read
+            try
+            {
+                routeList = multi.Read<RouteModel>().ToList();
+                routeDetailList = multi.Read<RouteDetailModel>().ToList();
+
+                foreach (var route in routeList)
+                {
+                    route.route_details = routeDetailList
+                        .Where(d => d.route_no == route.route_no)
+                        .ToList();
+                }
+
+                // logging process read
+                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteRead", $"Route Read process started"));
             }
             catch (Exception ex)
             {

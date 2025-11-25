@@ -7,6 +7,7 @@ SELECT
     (SELECT TOP 1 Cout FROM TRouteCout WHERE RID = R.RID ORDER BY Posi DESC) AS destination_city
 INTO #TempR
 FROM TRoute R
+WHERE R.acti = 1
 
 SELECT * FROM #TempR
 

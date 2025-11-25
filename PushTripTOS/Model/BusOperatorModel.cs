@@ -11,7 +11,7 @@ namespace PushTripTOS.Model
     {
         public string operator_code { get; set; }
         public string operator_name { get; set; }
-        public string operator_logo { get; set; }
+        public byte[] operator_logo { get; set; }
         public string contact_person { get; set; }
         public string address1 { get; set; }
         public string address2 { get; set; }
@@ -23,5 +23,6 @@ namespace PushTripTOS.Model
         public string website {  get; set; }
         public string description { get; set; }
         public string register_no { get; set; }
+        public string base64Logo { get; set; }
     }
 }
