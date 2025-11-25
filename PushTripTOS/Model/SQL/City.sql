@@ -1,5 +1,6 @@
-﻿SELECT Cout as city_code
-	,Desn as city_name
-	,[State] as state_code
-FROM TCounter
-WHERE acti = 1
+﻿SELECT 
+	C.Cout AS city_code,
+	C.Desn AS city_name,
+	C.State AS state_code
+FROM TCounter C
+WHERE C.acti = 1

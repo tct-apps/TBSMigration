@@ -1,5 +1,5 @@
 ﻿SELECT 
-	Busn as plate_no,
-	SComp as operator_code
-FROM BusInfo
-WHERE acti = 1
+	B.Busn AS plate_no,
+	B.SComp AS operator_code
+FROM BusInfo B
+WHERE B.acti = 1
