@@ -7,13 +7,8 @@ using System.Xml.Serialization;
 
 namespace PushMasterTOS.Model.State
 {
+    [XmlRoot(ElementName = "stateInsert", Namespace = "http://tos.org/")]
     public class StateRequestModel
-    {
-        [XmlElement(ElementName = "stateInsert", Namespace = "http://tos.org/")]
-        public StateInsertRequest StateInsert { get; set; }
-    }
-
-    public class StateInsertRequest
     {
         [XmlElement(ElementName = "state_code")]
         public string StateCode { get; set; }

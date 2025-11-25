@@ -1,10 +1,10 @@
 ﻿--Route
 SELECT 
-    R.SComp AS operator_code,
-    R.RID AS route_no,
-    R.Desn AS route_name,
-    (SELECT TOP 1 Cout FROM TRouteCout WHERE RID = R.RID ORDER BY Posi ASC) AS origin_city,
-    (SELECT TOP 1 Cout FROM TRouteCout WHERE RID = R.RID ORDER BY Posi DESC) AS destination_city
+    R.SComp AS OperatorCode,
+    R.RID AS RouteNo,
+    R.Desn AS RouteName,
+    (SELECT TOP 1 Cout FROM TRouteCout WHERE RID = R.RID ORDER BY Posi ASC) AS OriginCity,
+    (SELECT TOP 1 Cout FROM TRouteCout WHERE RID = R.RID ORDER BY Posi DESC) AS DestinationCity
 INTO #TempR
 FROM TRoute R
 WHERE R.acti = 1
@@ -13,12 +13,12 @@ SELECT * FROM #TempR
 
 --Route Details
 SELECT 
-	R.operator_code,
-	R.route_no,
-	C.TOSDis AS display,
-	C.Cout AS via_city,
-	C.Posi AS stage_no
+	R.OperatorCode,
+	R.RouteNo,
+	C.TOSDis AS Display,
+	C.Cout AS ViaCity,
+	C.Posi AS StageNo
 FROM TRouteCout C
-INNER JOIN #TempR R ON C.RID = R.route_no
+INNER JOIN #TempR R ON C.RID = R.RouteNo
 
 DROP TABLE IF EXISTS #TempR 

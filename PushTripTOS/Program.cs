@@ -2,7 +2,11 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using PushMasterTOS.Model;
+using PushMasterTOS.Model.BusOperator;
+using PushMasterTOS.Model.City;
 using PushMasterTOS.Model.Common;
+using PushMasterTOS.Model.Route;
+using PushMasterTOS.Model.Vehicle;
 using Serilog;
 using Serilog.Settings.Configuration;
 using Serilog.Sinks.MSSqlServer;
@@ -215,9 +219,9 @@ class Program
 
                 foreach (var bo in busOperatorList)
                 {
-                    if (bo.operator_logo != null)
+                    if (bo.OperatorLogo != null)
                     {
-                        bo.base64Logo = Convert.ToBase64String(bo.operator_logo);
+                        bo.Base64Logo = Convert.ToBase64String(bo.OperatorLogo);
                     }
                 }
 
@@ -329,8 +333,8 @@ class Program
 
                 foreach (var route in routeList)
                 {
-                    route.route_details = routeDetailList
-                        .Where(d => d.route_no == route.route_no)
+                    route.RouteDetails = routeDetailList
+                        .Where(d => d.RouteNo == route.RouteNo)
                         .ToList();
                 }
 

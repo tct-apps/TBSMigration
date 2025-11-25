@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PushMasterTOS.Model
+namespace PushMasterTOS.Model.Vehicle
 {
     public class VehicleModel
     {
-        public string plate_no { get; set; }
-        public string operator_code { get; set; }
+        public string PlateNo { get; set; }
+        public string OperatorCode { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿SELECT 
-	C.Cout AS city_code,
-	C.Desn AS city_name,
-	C.State AS state_code
+	C.Cout AS CityCode,
+	C.Desn AS CityName,
+	C.State AS StateCode
 FROM TCounter C
 WHERE C.acti = 1
