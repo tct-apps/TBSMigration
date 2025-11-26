@@ -8,15 +8,7 @@ using PushMasterTOS.Model.Common;
 using PushMasterTOS.Model.Route;
 using PushMasterTOS.Model.Vehicle;
 using PushMasterTOS.Model.State;
-using Serilog;
-using Serilog.Settings.Configuration;
-using Serilog.Sinks.MSSqlServer;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
 using System.Net.Http.Headers;
-using System.Reflection;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -25,12 +17,27 @@ using static Dapper.SqlMapper;
 
 class Program
 {
-    static void Main()
+    // Single shared HttpClient (do not recreate per-request).
+    static readonly HttpClient SharedHttpClient = CreateHttpClient();
+
+    static HttpClient CreateHttpClient()
+    {
+        var hc = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(60) // global timeout; adjust as needed
+        };
+
+        // Default Accept header (optional).
+        hc.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
+
+        return hc;
+    }
+
+    static async Task Main()
     {
         try
         {
-            #region Load configuration
-            // Load configuration from appsettings
+            // Load configuration
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -45,13 +52,10 @@ class Program
             //    .CreateLogger();
 
             string sourceConn = config.GetConnectionString("Source");
-            #endregion
 
-            State(sourceConn);
-            City(sourceConn);
-            BusOperator(sourceConn);
-            Vehicle(sourceConn);
-            Route(sourceConn);
+            // await the async worker
+            await State(sourceConn).ConfigureAwait(false);
+            await City(sourceConn).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -72,144 +76,128 @@ class Program
         var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        // Log process start
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateStart", $"State process started"));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "StateStart", "State process started"));
 
         try
         {
-            string sqlPath = Path.Combine(
-                             Directory.GetCurrentDirectory(),
-                             "Model", "SQL", "State.sql");
-
+            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "Model", "SQL", "State.sql");
             string sql = File.ReadAllText(sqlPath);
 
             using var source = new SqlConnection(sourceConn);
-            source.Open();
+            await source.OpenAsync().ConfigureAwait(false);
 
-            using var multi = source.QueryMultiple(sql);
+            using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
+            List<StateModel> stateList = multi.Read<StateModel>().ToList();
 
-            List<StateModel> stateList;
+            // Prepare request settings (could be moved to config)
+            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+            string soapActionBase = "http://tos.org";
+            string xmlns = "http://tos.org/";
 
-            // Read
-            try
+            if (string.IsNullOrEmpty(url))
+                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+
+            Uri requestUrl = new Uri(url);
+            string soapAction = soapActionBase + ApiUrlKey.StateInsert;
+
+            foreach (var state in stateList)
             {
-                // Prepare connection.
-                #region Get value 
-                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
-                string SoapAction = "http://tos.org";
-                string xmlns = "http://tos.org/";
-                #endregion
-
-                if (string.IsNullOrEmpty(url))
+                StateRequestModel requestContent = new StateRequestModel
                 {
-                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo,"ApiUrl"));
-                }
-                Uri requestUrl = new Uri(url);
-                string soapAction = SoapAction + ApiUrlKey.StateInsert;
+                    StateCode = state.StateCode,
+                    StateName = state.StateName
+                };
 
-                stateList = multi.Read<StateModel>().ToList();
-
-                foreach (var state in stateList)
+                // CancellationToken per-call (optionally pass a global token).
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+                try
                 {
-                    StateRequestModel requestContent = new StateRequestModel()
-                    {
-                        StateCode = state.StateCode,
-                        StateName = state.StateName
-                    };
+                    StateResponseModel response = await WebServicePostAsync<StateResponseModel>(
+                        requestUrl,
+                        soapAction,
+                        xmlns,
+                        requestContent,
+                        cts.Token).ConfigureAwait(false);
 
-                    // Call API
-                    StateResponseModel response = await WebServicePostAsync<StateResponseModel>(requestUrl, soapAction, xmlns, requestContent);
+                    // logging process read
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateRead", $"State Read process started"));
                 }
-                
-
-                // logging process read
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateRead", $"State Read process started"));
+                catch (Exception ex)
+                {
+                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                    //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                    throw;
+                }
             }
-            catch (Exception ex)
-            {
-                var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
-                throw;
-            }
-
             // Write process logs
             //LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
-            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
+            // LogETLException.Error(...)
+            Console.Error.WriteLine($"State() unhandled exception: {ex}");
             throw;
         }
-
-        //New table last jalan bila dan masa jalan tu ada error tak
-        //Obj console app proses n see if success or has any error
     }
 
-    static async void City(string sourceConn)
+    static async Task City(string sourceConn)
     {
         var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        // Log process start
         logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"CityStart", $"City process started"));
 
         try
         {
-            string sqlPath = Path.Combine(
-                             Directory.GetCurrentDirectory(),
-                             "Model", "SQL", "City.sql");
-
+            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "Model", "SQL", "City.sql");
             string sql = File.ReadAllText(sqlPath);
 
             using var source = new SqlConnection(sourceConn);
-            source.Open();
+            await source.OpenAsync().ConfigureAwait(false);
 
-            using var multi = source.QueryMultiple(sql);
+            using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
+            List<CityModel> cityList = multi.Read<CityModel>().ToList();
 
-            List<CityModel> cityList;
+            // Prepare request settings (could be moved to config)
+            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+            string soapActionBase = "http://tos.org";
+            string xmlns = "http://tos.org/";
 
-            // Read
-            try
+            if (string.IsNullOrEmpty(url))
+                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+
+            Uri requestUrl = new Uri(url);
+            string soapAction = soapActionBase + ApiUrlKey.CityInsert;
+
+            foreach (var city in cityList)
             {
-                // Prepare connection.
-                #region Get value 
-                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
-                string SoapAction = "http://tos.org";
-                string xmlns = "http://tos.org/";
-                #endregion
-
-                if (string.IsNullOrEmpty(url))
+                CityRequestModel requestContent = new CityRequestModel
                 {
-                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-                }
-                Uri requestUrl = new Uri(url);
-                string soapAction = SoapAction + ApiUrlKey.CityInsert;
+                    CityCode = city.CityCode,
+                    CityName = city.CityName,
+                    StateCode = city.StateCode
+                };
 
-                cityList = multi.Read<CityModel>().ToList();
-
-                foreach (var city in cityList)
+                // CancellationToken per-call (optionally pass a global token).
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+                try
                 {
-                    CityRequestModel requestContent = new CityRequestModel
-                    {
-                        CityCode = city.CityCode,
-                        CityName = city.CityName,
-                        StateCode = city.StateCode
-                    };
+                    CityResponseModel response = await WebServicePostAsync<CityResponseModel>(
+                        requestUrl,
+                        soapAction,
+                        xmlns,
+                        requestContent,
+                        cts.Token).ConfigureAwait(false);
 
-                    // Call API
-                    CityResponseModel response = await WebServicePostAsync<CityResponseModel>(requestUrl, soapAction, xmlns, requestContent);
-
+                    // logging process read
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateRead", $"State Read process started"));
                 }
-
-                // logging process read
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"CityRead", $"City Read process started"));
-            }
-            catch (Exception ex)
-            {
-                var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
-                throw;
+                catch (Exception ex)
+                {
+                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                    //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                    throw;
+                }
             }
 
             // Write process logs
@@ -217,330 +205,303 @@ class Program
         }
         catch (Exception ex)
         {
-            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
+            // LogETLException.Error(...)
+            Console.Error.WriteLine($"City() unhandled exception: {ex}");
             throw;
         }
-
-        //New table last jalan bila dan masa jalan tu ada error tak
-        //Obj console app proses n see if success or has any error
     }
 
-    static async void BusOperator(string sourceConn)
+
+    //static async Task BusOperator(string sourceConn)
+    //{
+    //    var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+    //    var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+    //    // Log process start
+    //    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorStart", $"BusOperator process started"));
+
+    //    try
+    //    {
+    //        string sqlPath = Path.Combine(
+    //                         Directory.GetCurrentDirectory(),
+    //                         "Model", "SQL", "BusOperator.sql");
+
+    //        string sql = File.ReadAllText(sqlPath);
+
+    //        using var source = new SqlConnection(sourceConn);
+    //        source.Open();
+
+    //        using var multi = source.QueryMultiple(sql);
+
+    //        List<BusOperatorModel> busOperatorList;
+
+    //        // Read
+    //        try
+    //        {
+    //            // Prepare connection.
+    //            #region Get value 
+    //            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+    //            string SoapAction = "http://tos.org";
+    //            string xmlns = "http://tos.org/";
+    //            #endregion
+
+    //            if (string.IsNullOrEmpty(url))
+    //            {
+    //                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+    //            }
+    //            Uri requestUrl = new Uri(url);
+    //            string soapAction = SoapAction + ApiUrlKey.BusOperatorInsert;
+
+    //            busOperatorList = multi.Read<BusOperatorModel>().ToList();
+
+    //            foreach (var bo in busOperatorList)
+    //            {
+    //                if (bo.OperatorLogo != null)
+    //                {
+    //                    bo.HexLogo = BitConverter.ToString(bo.OperatorLogo).Replace("-", "");
+    //                }
+
+    //                BusOperatorRequestModel requestContent = new BusOperatorRequestModel
+    //                {
+    //                    OperatorCode = bo.OperatorCode,
+    //                    OperatorName = bo.OperatorName,
+    //                    OperatorLogo = bo.HexLogo,
+    //                    ContactPerson = bo.ContactPerson,
+    //                    Address1 = bo.Address1,
+    //                    Address2 = bo.Address2,
+    //                    Address3 = bo.Address3,
+    //                    ContactNumber1 = bo.ContactNumber1,
+    //                    ContactNumber2 = bo.ContactNumber2,
+    //                    FaxNumber = bo.FaxNumber,
+    //                    EmailId = bo.EmailId,
+    //                    Website = bo.Website,
+    //                    Description = bo.Description,
+    //                    RegisterNo = bo.RegisterNo,
+    //                };
+
+    //                // Call API
+    //                BusOperatorResponseModel response = await WebServicePostAsync<BusOperatorResponseModel>(requestUrl, soapAction, xmlns, requestContent);
+    //            }
+
+    //            // logging process read
+    //            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorRead", $"BusOperator Read process started"));
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+    //            //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+    //            throw;
+    //        }
+
+    //        // Write process logs
+    //        //LogETLProcess.WriteAll(logs);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+    //        //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
+    //        throw;
+    //    }
+
+    //    //New table last jalan bila dan masa jalan tu ada error tak
+    //    //Obj console app proses n see if success or has any error
+    //}
+
+    //static async Task Vehicle(string sourceConn)
+    //{
+    //    var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+    //    var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+    //    // Log process start
+    //    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleStart", $"Vehicle process started"));
+
+    //    try
+    //    {
+    //        string sqlPath = Path.Combine(
+    //                         Directory.GetCurrentDirectory(),
+    //                         "Model", "SQL", "Vehicle.sql");
+
+    //        string sql = File.ReadAllText(sqlPath);
+
+    //        using var source = new SqlConnection(sourceConn);
+    //        source.Open();
+
+    //        using var multi = source.QueryMultiple(sql);
+
+    //        List<VehicleModel> vehicleList;
+
+    //        // Read
+    //        try
+    //        {
+    //            // Prepare connection.
+    //            #region Get value 
+    //            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+    //            string SoapAction = "http://tos.org";
+    //            string xmlns = "http://tos.org/";
+    //            #endregion
+
+    //            if (string.IsNullOrEmpty(url))
+    //            {
+    //                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+    //            }
+    //            Uri requestUrl = new Uri(url);
+    //            string soapAction = SoapAction + ApiUrlKey.VehicleInsert;
+
+    //            vehicleList = multi.Read<VehicleModel>().ToList();
+
+    //            foreach (var vehicle in vehicleList)
+    //            {
+    //                VehicleRequestModel requestContent = new VehicleRequestModel
+    //                {
+    //                    PlateNo = vehicle.PlateNo,
+    //                    OperatorCode = vehicle.OperatorCode
+    //                };
+
+    //                // Call API
+    //                VehicleResponseModel response = await WebServicePostAsync<VehicleResponseModel>(requestUrl, soapAction, xmlns, requestContent);
+
+    //            }
+
+    //            // logging process read
+    //            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleRead", $"Vehicle Read process started"));
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+    //            //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+    //            throw;
+    //        }
+
+    //        // Write process logs
+    //        //LogETLProcess.WriteAll(logs);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+    //        //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
+    //        throw;
+    //    }
+
+    //    //New table last jalan bila dan masa jalan tu ada error tak
+    //    //Obj console app proses n see if success or has any error
+    //}
+
+    //static async Task Route(string sourceConn)
+    //{
+    //    var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+    //    var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+    //    // Log process start
+    //    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteStart", $"Route process started"));
+
+    //    try
+    //    {
+    //        string sqlPath = Path.Combine(
+    //                         Directory.GetCurrentDirectory(),
+    //                         "Model", "SQL", "Route.sql");
+
+    //        string sql = File.ReadAllText(sqlPath);
+
+    //        using var source = new SqlConnection(sourceConn);
+    //        source.Open();
+
+    //        using var multi = source.QueryMultiple(sql);
+
+    //        List<RouteModel> routeList;
+    //        List<RouteDetailModel> routeDetailList;
+
+    //        // Read
+    //        try
+    //        {
+    //            // Prepare connection.
+    //            #region Get value 
+    //            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+    //            string SoapAction = "http://tos.org";
+    //            string xmlns = "http://tos.org/";
+    //            #endregion
+
+    //            if (string.IsNullOrEmpty(url))
+    //            {
+    //                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+    //            }
+    //            Uri requestUrl = new Uri(url);
+    //            string soapAction = SoapAction + ApiUrlKey.RouteInsert;
+
+    //            routeList = multi.Read<RouteModel>().ToList();
+    //            routeDetailList = multi.Read<RouteDetailModel>().ToList();
+
+    //            foreach (var route in routeList)
+    //            {
+    //                route.RouteDetails = routeDetailList
+    //                    .Where(d => d.RouteNo == route.RouteNo)
+    //                    .ToList();
+
+    //                RouteRequestModel requestContent = new RouteRequestModel
+    //                {
+    //                    OperatorCode = route.OperatorCode,
+    //                    RouteNo = route.RouteNo,
+    //                    RouteName = route.RouteName,
+    //                    OriginCity = route.OriginCity,
+    //                    DestinationCity = route.DestinationCity,
+    //                    RouteDetails = route.RouteDetails.Select(d => new RouteDetail
+    //                    {
+    //                        OperatorCode = d.OperatorCode,
+    //                        RouteNo = d.RouteNo,
+    //                        Display = d.Display,
+    //                        ViaCity = d.ViaCity,
+    //                        StageNo = d.StageNo
+    //                    }).ToList()
+    //                };
+
+    //                // Call API
+    //                RouteResponseModel response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent);
+    //            }
+
+    //            // logging process read
+    //            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteRead", $"Route Read process started"));
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+    //            //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+    //            throw;
+    //        }
+
+    //        // Write process logs
+    //        //LogETLProcess.WriteAll(logs);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+    //        //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
+    //        throw;
+    //    }
+
+    //    //New table last jalan bila dan masa jalan tu ada error tak
+    //    //Obj console app proses n see if success or has any error
+    //}
+
+    static async Task<T> WebServicePostAsync<T>(
+        Uri requestUri,
+        string soapAction,
+        string xmlns,
+        object requestContent,
+        CancellationToken cancellationToken = default) where T : class
     {
-        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
-        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+        if (requestContent == null) throw new ArgumentNullException(nameof(requestContent));
 
-        // Log process start
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorStart", $"BusOperator process started"));
-
-        try
-        {
-            string sqlPath = Path.Combine(
-                             Directory.GetCurrentDirectory(),
-                             "Model", "SQL", "BusOperator.sql");
-
-            string sql = File.ReadAllText(sqlPath);
-
-            using var source = new SqlConnection(sourceConn);
-            source.Open();
-
-            using var multi = source.QueryMultiple(sql);
-
-            List<BusOperatorModel> busOperatorList;
-
-            // Read
-            try
-            {
-                // Prepare connection.
-                #region Get value 
-                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
-                string SoapAction = "http://tos.org";
-                string xmlns = "http://tos.org/";
-                #endregion
-
-                if (string.IsNullOrEmpty(url))
-                {
-                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-                }
-                Uri requestUrl = new Uri(url);
-                string soapAction = SoapAction + ApiUrlKey.BusOperatorInsert;
-
-                busOperatorList = multi.Read<BusOperatorModel>().ToList();
-
-                foreach (var bo in busOperatorList)
-                {
-                    if (bo.OperatorLogo != null)
-                    {
-                        bo.HexLogo = BitConverter.ToString(bo.OperatorLogo).Replace("-", "");
-                    }
-
-                    BusOperatorRequestModel requestContent = new BusOperatorRequestModel
-                    {
-                        OperatorCode = bo.OperatorCode,
-                        OperatorName = bo.OperatorName,
-                        OperatorLogo = bo.HexLogo,
-                        ContactPerson = bo.ContactPerson,
-                        Address1 = bo.Address1,
-                        Address2 = bo.Address2,
-                        Address3 = bo.Address3,
-                        ContactNumber1 = bo.ContactNumber1,
-                        ContactNumber2 = bo.ContactNumber2,
-                        FaxNumber = bo.FaxNumber,
-                        EmailId = bo.EmailId,
-                        Website = bo.Website,
-                        Description = bo.Description,
-                        RegisterNo = bo.RegisterNo,
-                    };
-
-                    // Call API
-                    BusOperatorResponseModel response = await WebServicePostAsync<BusOperatorResponseModel>(requestUrl, soapAction, xmlns, requestContent);
-                }
-
-                // logging process read
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorRead", $"BusOperator Read process started"));
-            }
-            catch (Exception ex)
-            {
-                var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
-                throw;
-            }
-
-            // Write process logs
-            //LogETLProcess.WriteAll(logs);
-        }
-        catch (Exception ex)
-        {
-            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
-            throw;
-        }
-
-        //New table last jalan bila dan masa jalan tu ada error tak
-        //Obj console app proses n see if success or has any error
-    }
-
-    static async void Vehicle(string sourceConn)
-    {
-        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
-        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
-
-        // Log process start
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleStart", $"Vehicle process started"));
-
-        try
-        {
-            string sqlPath = Path.Combine(
-                             Directory.GetCurrentDirectory(),
-                             "Model", "SQL", "Vehicle.sql");
-
-            string sql = File.ReadAllText(sqlPath);
-
-            using var source = new SqlConnection(sourceConn);
-            source.Open();
-
-            using var multi = source.QueryMultiple(sql);
-
-            List<VehicleModel> vehicleList;
-
-            // Read
-            try
-            {
-                // Prepare connection.
-                #region Get value 
-                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
-                string SoapAction = "http://tos.org";
-                string xmlns = "http://tos.org/";
-                #endregion
-
-                if (string.IsNullOrEmpty(url))
-                {
-                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-                }
-                Uri requestUrl = new Uri(url);
-                string soapAction = SoapAction + ApiUrlKey.VehicleInsert;
-
-                vehicleList = multi.Read<VehicleModel>().ToList();
-
-                foreach (var vehicle in vehicleList)
-                {
-                    VehicleRequestModel requestContent = new VehicleRequestModel
-                    {
-                        PlateNo = vehicle.PlateNo,
-                        OperatorCode = vehicle.OperatorCode
-                    };
-
-                    // Call API
-                    VehicleResponseModel response = await WebServicePostAsync<VehicleResponseModel>(requestUrl, soapAction, xmlns, requestContent);
-
-                }
-
-                // logging process read
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleRead", $"Vehicle Read process started"));
-            }
-            catch (Exception ex)
-            {
-                var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
-                throw;
-            }
-
-            // Write process logs
-            //LogETLProcess.WriteAll(logs);
-        }
-        catch (Exception ex)
-        {
-            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
-            throw;
-        }
-
-        //New table last jalan bila dan masa jalan tu ada error tak
-        //Obj console app proses n see if success or has any error
-    }
-
-    static async void Route(string sourceConn)
-    {
-        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
-        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
-
-        // Log process start
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteStart", $"Route process started"));
-
-        try
-        {
-            string sqlPath = Path.Combine(
-                             Directory.GetCurrentDirectory(),
-                             "Model", "SQL", "Route.sql");
-
-            string sql = File.ReadAllText(sqlPath);
-
-            using var source = new SqlConnection(sourceConn);
-            source.Open();
-
-            using var multi = source.QueryMultiple(sql);
-
-            List<RouteModel> routeList;
-            List<RouteDetailModel> routeDetailList;
-
-            // Read
-            try
-            {
-                // Prepare connection.
-                #region Get value 
-                string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
-                string SoapAction = "http://tos.org";
-                string xmlns = "http://tos.org/";
-                #endregion
-
-                if (string.IsNullOrEmpty(url))
-                {
-                    throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-                }
-                Uri requestUrl = new Uri(url);
-                string soapAction = SoapAction + ApiUrlKey.RouteInsert;
-
-                routeList = multi.Read<RouteModel>().ToList();
-                routeDetailList = multi.Read<RouteDetailModel>().ToList();
-
-                foreach (var route in routeList)
-                {
-                    route.RouteDetails = routeDetailList
-                        .Where(d => d.RouteNo == route.RouteNo)
-                        .ToList();
-
-                    RouteRequestModel requestContent = new RouteRequestModel
-                    {
-                        OperatorCode = route.OperatorCode,
-                        RouteNo = route.RouteNo,
-                        RouteName = route.RouteName,
-                        OriginCity = route.OriginCity,
-                        DestinationCity = route.DestinationCity,
-                        RouteDetails = route.RouteDetails.Select(d => new RouteDetail
-                        {
-                            OperatorCode = d.OperatorCode,
-                            RouteNo = d.RouteNo,
-                            Display = d.Display,
-                            ViaCity = d.ViaCity,
-                            StageNo = d.StageNo
-                        }).ToList()
-                    };
-
-                    // Call API
-                    RouteResponseModel response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent);
-                }
-
-                // logging process read
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteRead", $"Route Read process started"));
-            }
-            catch (Exception ex)
-            {
-                var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
-                throw;
-            }
-
-            // Write process logs
-            //LogETLProcess.WriteAll(logs);
-        }
-        catch (Exception ex)
-        {
-            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
-            throw;
-        }
-
-        //New table last jalan bila dan masa jalan tu ada error tak
-        //Obj console app proses n see if success or has any error
-    }
-
-    static string GetXmlRootElementName<T>()
-    {
-        return GetXmlRootElementName(typeof(T));
-    }
-
-    static string GetXmlRootElementName(object obj)
-    {
-        return GetXmlRootElementName(obj.GetType());
-    }
-
-    static string GetXmlRootElementName(Type type)
-    {
-        var attributes = type.GetCustomAttributes(false);
-        string elementName = string.Empty;
-        foreach (object attribute in attributes)
-        {
-            XmlRootAttribute xmlRootAttribute = attribute as XmlRootAttribute;
-            if (xmlRootAttribute != null)
-            {
-                elementName = xmlRootAttribute.ElementName;
-                break;
-            }
-        }
-        return elementName;
-    }
-
-    static async Task<T> WebServicePostAsync<T>(Uri requestUri, string soapAction, string xmlns, object requestContent) where T : class
-    {
+        // Build SOAP envelope with the requestContent assigned into the Body.
         XmlAttributeOverrides requestXmlAttributeOverrides = new XmlAttributeOverrides();
-
-        // Envelope.
         XmlRequestEnvelope envelope = new XmlRequestEnvelope();
-
-        // Body.
         envelope.Body.Element = requestContent;
 
-        // Override body element name to follow content class root name.
         XmlAttributes requestBodyXmlAttributes = new XmlAttributes();
-        requestBodyXmlAttributes.XmlElements.Add(new XmlElementAttribute(GetXmlRootElementName(requestContent), requestContent.GetType()) { Namespace = "http://tos.org/" }); // Empty namespace
+        requestBodyXmlAttributes.XmlElements.Add(
+            new XmlElementAttribute(GetXmlRootElementName(requestContent), requestContent.GetType()) { Namespace = xmlns });
         requestXmlAttributeOverrides.Add(typeof(XmlRequestEnvelope.Body_), nameof(XmlRequestEnvelope.Body_.Element), requestBodyXmlAttributes);
 
-        // Serialize.
-        XmlWriterSettings settings = new XmlWriterSettings();
-        settings.OmitXmlDeclaration = true;
+        XmlWriterSettings settings = new XmlWriterSettings { OmitXmlDeclaration = true, Encoding = Encoding.UTF8 };
 
-        // Define the namespaces
         XmlSerializerNamespaces nss = new XmlSerializerNamespaces();
         nss.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
         nss.Add("xsd", "http://www.w3.org/2001/XMLSchema");
@@ -550,104 +511,154 @@ class Program
         using (StringWriter stringWriter = new StringWriter())
         using (XmlWriter xmlWriter = XmlWriter.Create(stringWriter, settings))
         {
-            XmlSerializer requestSerializer = new XmlSerializer(envelope.GetType(), requestXmlAttributeOverrides);
+            var requestSerializer = new XmlSerializer(envelope.GetType(), requestXmlAttributeOverrides);
             requestSerializer.Serialize(xmlWriter, envelope, nss);
             contentString = stringWriter.ToString();
         }
 
-        HttpContent httpContent = new StringContent(contentString, Encoding.UTF8, "text/xml");
+        // Retry policy (simple exponential backoff)
+        const int maxAttempts = 3;
+        int attempt = 0;
+        TimeSpan delay = TimeSpan.FromSeconds(1);
 
-        // Post.
-        DateTime beforePost = DateTime.Now, afterPost = beforePost;
-        HttpResponseMessage? response = null;
-
-        // Use an HttpClient instance. If you have an IHttpClientFactory available in your app,
-        // prefer that (inject and use it). For a quick fix here we create a new HttpClient.
-        using (var httpClient = new HttpClient())
+        while (true)
         {
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
-            httpClient.DefaultRequestHeaders.Add("SOAPAction", soapAction);
+            attempt++;
+            // create new HttpRequestMessage each attempt
+            using var httpRequest = new HttpRequestMessage(HttpMethod.Post, requestUri)
+            {
+                Content = new StringContent(contentString, Encoding.UTF8, "text/xml")
+            };
 
+            // SOAPAction is a header that many legacy services require exactly; set per-request.
+            httpRequest.Headers.Remove("SOAPAction");
+            httpRequest.Headers.Add("SOAPAction", soapAction);
+
+            DateTime beforePost = DateTime.UtcNow;
+            HttpResponseMessage response = null;
             try
             {
-                beforePost = DateTime.Now;
-                response = await httpClient.PostAsync(requestUri, httpContent).ConfigureAwait(false);
-                afterPost = DateTime.Now;
+                // Use the shared HttpClient
+                response = await SharedHttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseContentRead, cancellationToken)
+                                               .ConfigureAwait(false);
+            }
+            catch (OperationCanceledException oce) when (!cancellationToken.IsCancellationRequested)
+            {
+                // HttpClient timeout happened (TaskCanceled) — treat as transient
+                Console.Error.WriteLine($"OperationCanceledException (likely timeout) on attempt {attempt}: {oce.Message}");
             }
             catch (Exception ex)
             {
-                afterPost = DateTime.Now;
-                //Plugin.Logging.LogIntegrationInventory.Information(logInformation.BatchId, logInformation.JobId, logInformation.VendorCode, logInformation.OperatorCode, logInformation.VendorAccountCode,
-                //    logInformation.Type, requestUri.ToString(), string.Empty, contentString, "text/xml", string.Empty, string.Empty,
-                //    beforePost, afterPost, (float)(afterPost - beforePost).TotalMilliseconds, ex.Message, logInformation.BookingId, logInformation.BookingOperatorId);
-                throw;
+                Console.Error.WriteLine($"HttpClient SendAsync exception on attempt {attempt}: {ex.GetType().Name} - {ex.Message}");
             }
-        }
 
-        if (response == null)
-            throw new InvalidOperationException("No HTTP response received.");
-
-        // Check response.
-        string responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-        //Plugin.Logging.LogIntegrationInventory.Information(logInformation.BatchId, logInformation.JobId, logInformation.VendorCode, logInformation.OperatorCode, logInformation.VendorAccountCode,
-        //    logInformation.Type, requestUri.ToString(), ((int)response.StatusCode).ToString(), contentString, "text/xml", responseString, "text/xml",
-        //    beforePost, afterPost, (float)(afterPost - beforePost).TotalMilliseconds, logInformation.MessageTemplate, logInformation.BookingId, logInformation.BookingOperatorId);
-
-        response.EnsureSuccessStatusCode();
-
-        if (string.IsNullOrWhiteSpace(responseString))
-            throw new XmlException("Response content is empty.");
-
-        // Parse XML.
-        XDocument xDocument = XDocument.Parse(responseString);
-        if (xDocument == null)
-            throw new XmlException("XDocument is null.");
-
-        // Check for SOAP Fault
-        XNamespace soapNs = "http://schemas.xmlsoap.org/soap/envelope/";
-        var faultElement = xDocument.Descendants(soapNs + "Fault").FirstOrDefault();
-        if (faultElement != null)
-        {
-            string faultCode = faultElement.Element("faultcode")?.Value;
-            string faultString = faultElement.Element("faultstring")?.Value;
-            throw new InvalidOperationException($"SOAP Fault: {faultCode} - {faultString}");
-        }
-
-        // Get result.
-        bool isResponseElementXmlns = false;
-        string responseElementName = GetXmlRootElementName<T>();
-        IEnumerable<XElement> responseElements = xDocument.Descendants(responseElementName);
-        if (!responseElements.Any())
-        {
-            responseElements = xDocument.Descendants(XNamespace.Get(xmlns) + responseElementName);
-            isResponseElementXmlns = true;
-        }
-
-        XElement? responseElement = responseElements.FirstOrDefault();
-        if (responseElement == null)
-            throw new XmlException("Element " + responseElementName + " not found.");
-
-        // Deserialize result to object.
-        T? responseContent;
-        try
-        {
-            XmlSerializer responseSerializer;
-            if (!isResponseElementXmlns)
+            if (response == null)
             {
-                responseSerializer = new XmlSerializer(typeof(T));
+                if (attempt >= maxAttempts)
+                    throw new HttpRequestException($"No HTTP response after {attempt} attempts.");
+                await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
+                delay = TimeSpan.FromSeconds(delay.TotalSeconds * 2);
+                continue;
             }
-            else
-            {
-                responseSerializer = new XmlSerializer(typeof(T), xmlns);
-            }
-            responseContent = responseSerializer.Deserialize(responseElement.CreateReader()) as T;
-        }
-        catch (Exception ex)
-        {
-            throw new InvalidOperationException($"Failed to deserialize response to {typeof(T).Name}.", ex);
-        }
 
-        return responseContent!;
+            string responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            // If non-success, include body in exception to help debugging
+            if (!response.IsSuccessStatusCode)
+            {
+                string msg = $"HTTP {(int)response.StatusCode} {response.ReasonPhrase}. Body: {Truncate(responseString, 2000)}";
+                // Optionally treat some status codes as transient (429, 5xx)
+                if ((int)response.StatusCode >= 500 && attempt < maxAttempts)
+                {
+                    Console.Error.WriteLine($"Server error (attempt {attempt}): {msg}");
+                    await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
+                    delay = TimeSpan.FromSeconds(delay.TotalSeconds * 2);
+                    continue;
+                }
+                throw new HttpRequestException(msg);
+            }
+
+            if (string.IsNullOrWhiteSpace(responseString))
+                throw new XmlException("Response content is empty.");
+
+            // Parse XML
+            XDocument xDocument;
+            try
+            {
+                xDocument = XDocument.Parse(responseString);
+            }
+            catch (Exception px)
+            {
+                throw new XmlException("Failed parsing response XML.", px);
+            }
+
+            // Detect SOAP Faults
+            XNamespace soapNs = "http://schemas.xmlsoap.org/soap/envelope/";
+            var fault = xDocument.Descendants(soapNs + "Fault").FirstOrDefault();
+            if (fault != null)
+            {
+                string faultCode = fault.Element("faultcode")?.Value;
+                string faultString = fault.Element("faultstring")?.Value;
+                throw new InvalidOperationException($"SOAP Fault: {faultCode} - {faultString}");
+            }
+
+            // Determine expected response element name
+            string expectedResponseName = GetXmlRootElementName<T>();
+            // Try to locate an element whose local-name matches expectedResponseName (namespace-agnostic).
+            var responseElement = xDocument.Descendants().FirstOrDefault(e => string.Equals(e.Name.LocalName, expectedResponseName, StringComparison.OrdinalIgnoreCase));
+
+            // If not found, also try with common suffixes like "Response" or "Result"
+            if (responseElement == null)
+            {
+                responseElement = xDocument.Descendants()
+                    .FirstOrDefault(e =>
+                        string.Equals(e.Name.LocalName, expectedResponseName + "Response", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(e.Name.LocalName, expectedResponseName + "Result", StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (responseElement == null)
+            {
+                // If this was transient / unexpected response content, consider retrying (but usually not)
+                string snippet = Truncate(responseString, 2000);
+                throw new XmlException($"Response element '{expectedResponseName}' not found in SOAP response. Response snippet: {snippet}");
+            }
+
+            // Deserialize using XmlSerializer from that XElement
+            try
+            {
+                var serializer = new XmlSerializer(typeof(T), xmlns);
+                using var reader = responseElement.CreateReader();
+                var obj = serializer.Deserialize(reader) as T;
+
+                if (obj == null)
+                    throw new InvalidOperationException($"Deserialized object is null for type {typeof(T).Name}");
+
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                // Provide the response snippet to ease debugging
+                string snippet = Truncate(responseElement.ToString(), 2000);
+                throw new InvalidOperationException($"Failed to deserialize element '{responseElement.Name.LocalName}' to {typeof(T).Name}. Element snippet: {snippet}", ex);
+            }
+        } // end while
+    }
+
+    static string Truncate(string s, int max) => string.IsNullOrEmpty(s) ? s : (s.Length <= max ? s : s.Substring(0, max) + "...");
+
+    static string GetXmlRootElementName<T>() => GetXmlRootElementName(typeof(T));
+    static string GetXmlRootElementName(object obj) => GetXmlRootElementName(obj.GetType());
+    static string GetXmlRootElementName(Type type)
+    {
+        var attributes = type.GetCustomAttributes(false);
+        foreach (object attribute in attributes)
+        {
+            if (attribute is XmlRootAttribute xmlRootAttribute)
+            {
+                return string.IsNullOrWhiteSpace(xmlRootAttribute.ElementName) ? type.Name : xmlRootAttribute.ElementName;
+            }
+        }
+        // fallback to class name if no XmlRoot attribute
+        return type.Name;
     }
 }
