@@ -23,6 +23,6 @@ namespace PushMasterTOS.Model.BusOperator
         public string Website { get; set; }
         public string Description { get; set; }
         public string RegisterNo { get; set; }
-        public string Base64Logo { get; set; }
+        public string HexLogo { get; set; }
     }
 }

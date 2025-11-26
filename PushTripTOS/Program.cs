@@ -272,14 +272,14 @@ class Program
                 {
                     if (bo.OperatorLogo != null)
                     {
-                        bo.Base64Logo = Convert.ToBase64String(bo.OperatorLogo);
+                        bo.HexLogo = BitConverter.ToString(bo.OperatorLogo).Replace("-", "");
                     }
 
                     BusOperatorRequestModel requestContent = new BusOperatorRequestModel
                     {
                         OperatorCode = bo.OperatorCode,
                         OperatorName = bo.OperatorName,
-                        OperatorLogo = bo.Base64Logo,
+                        OperatorLogo = bo.HexLogo,
                         ContactPerson = bo.ContactPerson,
                         Address1 = bo.Address1,
                         Address2 = bo.Address2,
