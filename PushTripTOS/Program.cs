@@ -56,6 +56,9 @@ class Program
             // await the async worker
             await State(sourceConn).ConfigureAwait(false);
             await City(sourceConn).ConfigureAwait(false);
+            await BusOperator(sourceConn).ConfigureAwait(false);
+            await Vehicle(sourceConn).ConfigureAwait(false);
+            await Route(sourceConn).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -190,7 +193,7 @@ class Program
                         cts.Token).ConfigureAwait(false);
 
                     // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateRead", $"State Read process started"));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"CityRead", $"City Read process started"));
                 }
                 catch (Exception ex)
                 {
@@ -211,275 +214,248 @@ class Program
         }
     }
 
+    static async Task BusOperator(string sourceConn)
+    {
+        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-    //static async Task BusOperator(string sourceConn)
-    //{
-    //    var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
-    //    var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorStart", $"BusOperator process started"));
 
-    //    // Log process start
-    //    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorStart", $"BusOperator process started"));
+        try
+        {
+            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "Model", "SQL", "BusOperator.sql");
+            string sql = File.ReadAllText(sqlPath);
 
-    //    try
-    //    {
-    //        string sqlPath = Path.Combine(
-    //                         Directory.GetCurrentDirectory(),
-    //                         "Model", "SQL", "BusOperator.sql");
+            using var source = new SqlConnection(sourceConn);
+            await source.OpenAsync().ConfigureAwait(false);
 
-    //        string sql = File.ReadAllText(sqlPath);
+            using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
+            List<BusOperatorModel> busOperatorList = multi.Read<BusOperatorModel>().ToList();
 
-    //        using var source = new SqlConnection(sourceConn);
-    //        source.Open();
+            // Prepare request settings (could be moved to config)
+            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+            string soapActionBase = "http://tos.org";
+            string xmlns = "http://tos.org/";
 
-    //        using var multi = source.QueryMultiple(sql);
+            if (string.IsNullOrEmpty(url))
+                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
 
-    //        List<BusOperatorModel> busOperatorList;
+            Uri requestUrl = new Uri(url);
+            string soapAction = soapActionBase + ApiUrlKey.BusOperatorInsert;
 
-    //        // Read
-    //        try
-    //        {
-    //            // Prepare connection.
-    //            #region Get value 
-    //            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
-    //            string SoapAction = "http://tos.org";
-    //            string xmlns = "http://tos.org/";
-    //            #endregion
+            foreach (var bo in busOperatorList)
+            {
+                if (bo.OperatorLogo != null)
+                {
+                    bo.HexLogo = BitConverter.ToString(bo.OperatorLogo).Replace("-", "");
+                }
 
-    //            if (string.IsNullOrEmpty(url))
-    //            {
-    //                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-    //            }
-    //            Uri requestUrl = new Uri(url);
-    //            string soapAction = SoapAction + ApiUrlKey.BusOperatorInsert;
+                BusOperatorRequestModel requestContent = new BusOperatorRequestModel
+                {
+                    OperatorCode = bo.OperatorCode,
+                    OperatorName = bo.OperatorName,
+                    OperatorLogo = bo.HexLogo,
+                    ContactPerson = bo.ContactPerson,
+                    Address1 = bo.Address1,
+                    Address2 = bo.Address2,
+                    Address3 = bo.Address3,
+                    ContactNumber1 = bo.ContactNumber1,
+                    ContactNumber2 = bo.ContactNumber2,
+                    FaxNumber = bo.FaxNumber,
+                    EmailId = bo.EmailId,
+                    Website = bo.Website,
+                    Description = bo.Description,
+                    RegisterNo = bo.RegisterNo,
+                };
 
-    //            busOperatorList = multi.Read<BusOperatorModel>().ToList();
+                // CancellationToken per-call (optionally pass a global token).
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+                try
+                {
+                    BusOperatorResponseModel response = await WebServicePostAsync<BusOperatorResponseModel>(
+                        requestUrl,
+                        soapAction,
+                        xmlns,
+                        requestContent,
+                        cts.Token).ConfigureAwait(false);
 
-    //            foreach (var bo in busOperatorList)
-    //            {
-    //                if (bo.OperatorLogo != null)
-    //                {
-    //                    bo.HexLogo = BitConverter.ToString(bo.OperatorLogo).Replace("-", "");
-    //                }
+                    // logging process read
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorRead", $"Bus Operator Read process started"));
+                }
+                catch (Exception ex)
+                {
+                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                    //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                    throw;
+                }
+            }
 
-    //                BusOperatorRequestModel requestContent = new BusOperatorRequestModel
-    //                {
-    //                    OperatorCode = bo.OperatorCode,
-    //                    OperatorName = bo.OperatorName,
-    //                    OperatorLogo = bo.HexLogo,
-    //                    ContactPerson = bo.ContactPerson,
-    //                    Address1 = bo.Address1,
-    //                    Address2 = bo.Address2,
-    //                    Address3 = bo.Address3,
-    //                    ContactNumber1 = bo.ContactNumber1,
-    //                    ContactNumber2 = bo.ContactNumber2,
-    //                    FaxNumber = bo.FaxNumber,
-    //                    EmailId = bo.EmailId,
-    //                    Website = bo.Website,
-    //                    Description = bo.Description,
-    //                    RegisterNo = bo.RegisterNo,
-    //                };
+            // Write process logs
+            //LogETLProcess.WriteAll(logs);
+        }
+        catch (Exception ex)
+        {
+            // LogETLException.Error(...)
+            Console.Error.WriteLine($"BusOperator() unhandled exception: {ex}");
+            throw;
+        }
+    }
 
-    //                // Call API
-    //                BusOperatorResponseModel response = await WebServicePostAsync<BusOperatorResponseModel>(requestUrl, soapAction, xmlns, requestContent);
-    //            }
+    static async Task Vehicle(string sourceConn)
+    {
+        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-    //            // logging process read
-    //            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorRead", $"BusOperator Read process started"));
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-    //            //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
-    //            throw;
-    //        }
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleStart", $"Vehicle process started"));
 
-    //        // Write process logs
-    //        //LogETLProcess.WriteAll(logs);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-    //        //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
-    //        throw;
-    //    }
+        try
+        {
+            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "Model", "SQL", "Vehicle.sql");
+            string sql = File.ReadAllText(sqlPath);
 
-    //    //New table last jalan bila dan masa jalan tu ada error tak
-    //    //Obj console app proses n see if success or has any error
-    //}
+            using var source = new SqlConnection(sourceConn);
+            await source.OpenAsync().ConfigureAwait(false);
 
-    //static async Task Vehicle(string sourceConn)
-    //{
-    //    var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
-    //    var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+            using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
+            List<VehicleModel> vehicleList = multi.Read<VehicleModel>().ToList();
 
-    //    // Log process start
-    //    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleStart", $"Vehicle process started"));
+            // Prepare request settings (could be moved to config)
+            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+            string soapActionBase = "http://tos.org";
+            string xmlns = "http://tos.org/";
 
-    //    try
-    //    {
-    //        string sqlPath = Path.Combine(
-    //                         Directory.GetCurrentDirectory(),
-    //                         "Model", "SQL", "Vehicle.sql");
+            if (string.IsNullOrEmpty(url))
+                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
 
-    //        string sql = File.ReadAllText(sqlPath);
+            Uri requestUrl = new Uri(url);
+            string soapAction = soapActionBase + ApiUrlKey.VehicleInsert;
 
-    //        using var source = new SqlConnection(sourceConn);
-    //        source.Open();
+            foreach (var vehicle in vehicleList)
+            {
+                VehicleRequestModel requestContent = new VehicleRequestModel
+                {
+                    PlateNo = vehicle.PlateNo,
+                    OperatorCode = vehicle.OperatorCode
+                };
 
-    //        using var multi = source.QueryMultiple(sql);
+                // CancellationToken per-call (optionally pass a global token).
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+                try
+                {
+                    VehicleResponseModel response = await WebServicePostAsync<VehicleResponseModel>(
+                        requestUrl,
+                        soapAction,
+                        xmlns,
+                        requestContent,
+                        cts.Token).ConfigureAwait(false);
 
-    //        List<VehicleModel> vehicleList;
+                    // logging process read
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleRead", $"Vehicle Read process started"));
+                }
+                catch (Exception ex)
+                {
+                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                    //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                    throw;
+                }
+            }
 
-    //        // Read
-    //        try
-    //        {
-    //            // Prepare connection.
-    //            #region Get value 
-    //            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
-    //            string SoapAction = "http://tos.org";
-    //            string xmlns = "http://tos.org/";
-    //            #endregion
+            // Write process logs
+            //LogETLProcess.WriteAll(logs);
+        }
+        catch (Exception ex)
+        {
+            // LogETLException.Error(...)
+            Console.Error.WriteLine($"Vehicle() unhandled exception: {ex}");
+            throw;
+        }
+    }
 
-    //            if (string.IsNullOrEmpty(url))
-    //            {
-    //                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-    //            }
-    //            Uri requestUrl = new Uri(url);
-    //            string soapAction = SoapAction + ApiUrlKey.VehicleInsert;
+    static async Task Route(string sourceConn)
+    {
+        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-    //            vehicleList = multi.Read<VehicleModel>().ToList();
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteStart", $"Route process started"));
 
-    //            foreach (var vehicle in vehicleList)
-    //            {
-    //                VehicleRequestModel requestContent = new VehicleRequestModel
-    //                {
-    //                    PlateNo = vehicle.PlateNo,
-    //                    OperatorCode = vehicle.OperatorCode
-    //                };
+        try
+        {
+            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "Model", "SQL", "Route.sql");
+            string sql = File.ReadAllText(sqlPath);
 
-    //                // Call API
-    //                VehicleResponseModel response = await WebServicePostAsync<VehicleResponseModel>(requestUrl, soapAction, xmlns, requestContent);
+            using var source = new SqlConnection(sourceConn);
+            await source.OpenAsync().ConfigureAwait(false);
 
-    //            }
+            using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
+            List<RouteModel> routeList = multi.Read<RouteModel>().ToList();
+            List<RouteDetailModel> routeDetailList = multi.Read<RouteDetailModel>().ToList();
 
-    //            // logging process read
-    //            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleRead", $"Vehicle Read process started"));
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-    //            //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
-    //            throw;
-    //        }
+            // Prepare request settings (could be moved to config)
+            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
+            string soapActionBase = "http://tos.org";
+            string xmlns = "http://tos.org/";
 
-    //        // Write process logs
-    //        //LogETLProcess.WriteAll(logs);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-    //        //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
-    //        throw;
-    //    }
+            if (string.IsNullOrEmpty(url))
+                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
 
-    //    //New table last jalan bila dan masa jalan tu ada error tak
-    //    //Obj console app proses n see if success or has any error
-    //}
+            Uri requestUrl = new Uri(url);
+            string soapAction = soapActionBase + ApiUrlKey.RouteInsert;
 
-    //static async Task Route(string sourceConn)
-    //{
-    //    var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
-    //    var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+            foreach (var route in routeList)
+            {
+                route.RouteDetails = routeDetailList
+                    .Where(d => d.RouteNo == route.RouteNo)
+                    .ToList();
 
-    //    // Log process start
-    //    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteStart", $"Route process started"));
+                RouteRequestModel requestContent = new RouteRequestModel
+                {
+                    OperatorCode = route.OperatorCode,
+                    RouteNo = route.RouteNo,
+                    RouteName = route.RouteName,
+                    OriginCity = route.OriginCity,
+                    DestinationCity = route.DestinationCity,
+                    RouteDetails = route.RouteDetails.Select(d => new RouteDetail
+                    {
+                        OperatorCode = d.OperatorCode,
+                        RouteNo = d.RouteNo,
+                        Display = d.Display,
+                        ViaCity = d.ViaCity,
+                        StageNo = d.StageNo
+                    }).ToList()
+                };
 
-    //    try
-    //    {
-    //        string sqlPath = Path.Combine(
-    //                         Directory.GetCurrentDirectory(),
-    //                         "Model", "SQL", "Route.sql");
+                // CancellationToken per-call (optionally pass a global token).
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+                try
+                {
+                    RouteResponseModel response = await WebServicePostAsync<RouteResponseModel>(
+                        requestUrl,
+                        soapAction,
+                        xmlns,
+                        requestContent,
+                        cts.Token).ConfigureAwait(false);
 
-    //        string sql = File.ReadAllText(sqlPath);
+                    // logging process read
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteRead", $"Route Read process started"));
+                }
+                catch (Exception ex)
+                {
+                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                    //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                    throw;
+                }
+            }
 
-    //        using var source = new SqlConnection(sourceConn);
-    //        source.Open();
-
-    //        using var multi = source.QueryMultiple(sql);
-
-    //        List<RouteModel> routeList;
-    //        List<RouteDetailModel> routeDetailList;
-
-    //        // Read
-    //        try
-    //        {
-    //            // Prepare connection.
-    //            #region Get value 
-    //            string url = "http://10.238.1.4/toswebservice_Test/toswebservice.asmx";
-    //            string SoapAction = "http://tos.org";
-    //            string xmlns = "http://tos.org/";
-    //            #endregion
-
-    //            if (string.IsNullOrEmpty(url))
-    //            {
-    //                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-    //            }
-    //            Uri requestUrl = new Uri(url);
-    //            string soapAction = SoapAction + ApiUrlKey.RouteInsert;
-
-    //            routeList = multi.Read<RouteModel>().ToList();
-    //            routeDetailList = multi.Read<RouteDetailModel>().ToList();
-
-    //            foreach (var route in routeList)
-    //            {
-    //                route.RouteDetails = routeDetailList
-    //                    .Where(d => d.RouteNo == route.RouteNo)
-    //                    .ToList();
-
-    //                RouteRequestModel requestContent = new RouteRequestModel
-    //                {
-    //                    OperatorCode = route.OperatorCode,
-    //                    RouteNo = route.RouteNo,
-    //                    RouteName = route.RouteName,
-    //                    OriginCity = route.OriginCity,
-    //                    DestinationCity = route.DestinationCity,
-    //                    RouteDetails = route.RouteDetails.Select(d => new RouteDetail
-    //                    {
-    //                        OperatorCode = d.OperatorCode,
-    //                        RouteNo = d.RouteNo,
-    //                        Display = d.Display,
-    //                        ViaCity = d.ViaCity,
-    //                        StageNo = d.StageNo
-    //                    }).ToList()
-    //                };
-
-    //                // Call API
-    //                RouteResponseModel response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent);
-    //            }
-
-    //            // logging process read
-    //            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteRead", $"Route Read process started"));
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-    //            //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
-    //            throw;
-    //        }
-
-    //        // Write process logs
-    //        //LogETLProcess.WriteAll(logs);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-    //        //LogETLException.Error(ts, $"{cts}FactTicketOverall", "Unhandled exception in FactTicket() overall", ex);
-    //        throw;
-    //    }
-
-    //    //New table last jalan bila dan masa jalan tu ada error tak
-    //    //Obj console app proses n see if success or has any error
-    //}
+            // Write process logs
+            //LogETLProcess.WriteAll(logs);
+        }
+        catch (Exception ex)
+        {
+            // LogETLException.Error(...)
+            Console.Error.WriteLine($"Route() unhandled exception: {ex}");
+            throw;
+        }
+    }
 
     static async Task<T> WebServicePostAsync<T>(
         Uri requestUri,
