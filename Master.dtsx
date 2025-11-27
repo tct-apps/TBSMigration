@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Master"
   DTS:PackageType="5"
-  DTS:VersionBuild="121"
-  DTS:VersionGUID="{3313EBB5-14DE-4949-8248-4F991F8756E1}">
+  DTS:VersionBuild="162"
+  DTS:VersionGUID="{7A9B589F-9D03-4861-81D3-5ADB7FFB9505}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABnZfWEwGTATZNz2I2GMI593THfvRFTmf+P6qMtBhXN7gAAAAAOgAAAAAIAACAAAAC6K7qjG0UkzX4eqr7Yk9X4a63LKomhWGmXPAck7ODQnCAAAAD9lzCGbLd/fjERuG6iXmVdhD0ljt3QZMA4jUrcfmaM3kAAAABFYAuvoY8PvN5J0mq/PjW3w8HySzS4SoNik+ahUcujAhziuCpOmb/DPIaUIE91niY0nQigp3kjg76IX0Ctpnmd</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADGqGWqFphthDqD65ht9jlwOCfKPXXoz76/2mFdLbWVfgAAAAAOgAAAAAIAACAAAACqAzjtgzsY3Pn6efiWLhqXJuaoOB8kL9a+q4IpvwkF1SAAAAAa4YaM8ndeNHDLNvkbLYwyJBX1/nU4BwzfMr6kNGAzT0AAAACDNT8QmtqLGjBy+TYliLNvZdMLE151AWXACZS39CBHYoQJSA1Vqu0N46PGdnDFlDkXVaIhi2YY70mQCKS0kQfv</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,8 +46,20 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACd/sEaZnUX3mr8DR/sFvglN13E0OAc0VcnhCQDeVgdkgAAAAAOgAAAAAIAACAAAAAvDmxxNtZvpqPz0SAn4ItppQN7MvuCg1hrG9QeKtZuNSAAAACMnzo6b1IalGdKQa3UV2NnpUCbI9DBS+T69+JV44iOI0AAAABOf/BbBs2u7DdKYolGQy4onp4qDy5cf5MYzLy//PLryQb3p3mvoSA2Xzh4Guw2pmKS6lTdD2i0pILaqYbOjanz</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAAkvLxsKA+DtSMxlqnQPgl+qVFjk/m4+8T83ojGngH7QAAAAAOgAAAAAIAACAAAAD0zk09MdeIJ0ixxFW005kbEh4iehMac4ByFle4IablJCAAAACXdkHUvfYljNXF0HUfz5/qv4L+kccKQ8TkBkhT0U0tBEAAAAAtJizZ0wZc8l+IZLaLsG+dzHtihtFHps9wb16eHJnyu2b3ea++tDZYE3TCUlQNaSSsXgRxc4flldzcFvmIM9ae</DTS:Password>
         </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{f8a66520-7277-43ac-a0ab-14f4b1e28504}"
+      DTS:ObjectName="eTicketing_tbs_old_fs">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-CKMEJ54\MSSQLSERVER01;Initial Catalog=eTicketing_tbs_fs;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-MasterData-{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}eTicketing_tbs_old;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -667,8 +679,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\BusInfo\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -1631,8 +1643,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\BusServeCate\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -2181,8 +2193,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\BusType\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -2763,8 +2775,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\BusTypeSeat\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -3099,8 +3111,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\MImage\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -3969,8 +3981,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysComp\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -5165,8 +5177,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysCurr\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -5665,8 +5677,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysDistrict\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -6445,8 +6457,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysFacilityOnlineChrg\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -7336,8 +7348,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysInsu\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -7893,8 +7905,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysMachine\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -8395,8 +8407,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysMarkGrpD\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -8797,8 +8809,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysMarkGrpH\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -9266,8 +9278,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysMsg\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -9587,8 +9599,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysOnPara\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -10002,8 +10014,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysOnRate\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -10492,8 +10504,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysOTA\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -10952,8 +10964,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysOTAD\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -11562,8 +11574,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysOTAPara\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -12401,8 +12413,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysPGroup\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -13099,8 +13111,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysUser\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -13900,8 +13912,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\SysUserGrp\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -14490,8 +14502,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TCounter\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -15085,8 +15097,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TCounterMergeD\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -15473,8 +15485,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TCounterMergeH\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -16098,8 +16110,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TRoute\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -16789,8 +16801,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TRouteCout\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -17245,8 +17257,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TRouteExtra\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -17957,8 +17969,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TRoutePrice\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -18820,8 +18832,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TRouteTimerD\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -19335,8 +19347,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\TRouteTimerH\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -19915,8 +19927,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\Ulevel\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -20371,8 +20383,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\UlevelD\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -20830,8 +20842,8 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                   <connections>
                     <connection
                       refId="Package\Sequence Container\UlevelP\OLE DB Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
-                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old_fs]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -21112,18 +21124,10 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
           DTS:CreationName=""
-          DTS:DTSID="{FA9A0549-9903-4F34-A2E5-EBCB34639070}"
+          DTS:DTSID="{E17D0519-9796-4EAE-807E-AE7D9EA6D06E}"
           DTS:From="Package\Sequence Container\SysOTA"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 16"
-          DTS:To="Package\Sequence Container\SysOTAD" />
-        <DTS:PrecedenceConstraint
-          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 17]"
-          DTS:CreationName=""
-          DTS:DTSID="{481E1B3D-FF19-4022-A7D3-E362FAC875D0}"
-          DTS:From="Package\Sequence Container\SysOTAD"
-          DTS:LogicalAnd="True"
-          DTS:ObjectName="Constraint 17"
           DTS:To="Package\Sequence Container\SysOTAPara" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 18]"
@@ -21733,50 +21737,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
-          TopLeft="562.978559944921,391.533329904145">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,32.9333328150357"
-              Start="0,0"
-              End="0,25.4333328150357">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.4333328150357" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 17]"
-          TopLeft="625.428564794007,444.671424274826">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="91.8666548285225,0"
-              Start="0,0"
-              End="84.3666548285225,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="84.3666548285225,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 18]"
           TopLeft="785.728552910331,423.27618583047">
           <EdgeLayout.Curve>
@@ -22282,11 +22242,45 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
+          TopLeft="562.928555095835,391.533329904145">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="202.099997860027,31.742855926325"
+              Start="0,0"
+              End="202.099997860027,24.242855926325">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.829284992661" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.829284992661"
+                    Point2="0,18.829284992661"
+                    Point3="4,18.829284992661" />
+                  <mssgle:LineSegment
+                    End="198.099997860027,18.829284992661" />
+                  <mssgle:CubicBezierSegment
+                    Point1="198.099997860027,18.829284992661"
+                    Point2="202.099997860027,18.829284992661"
+                    Point3="202.099997860027,22.829284992661" />
+                  <mssgle:LineSegment
+                    End="202.099997860027,24.242855926325" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="1340,509.6"
-          Size="1340,552.8"
+          PanelSize="1340,524.8"
+          Size="1340,568"
           Id="Package\Sequence Container"
           TopLeft="86.4285667063222,133.714284784453" />
         <NodeLayout
@@ -22339,18 +22333,18 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="755.714264639787,686.514284784453">
+          TopLeft="755.714264639787,701.714284784453">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,47.5523767776062"
+              EndConnector="0,32.3523767776061"
               Start="0,0"
-              End="0,40.0523767776062">
+              End="0,24.8523767776061">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,40.0523767776062" />
+                    End="0,24.8523767776061" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -22442,7 +22436,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\BusServeCate">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\BusServeCate\OLE DB Source"
@@ -22470,9 +22464,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22508,7 +22500,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\BusType">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\BusType\OLE DB Source"
@@ -22536,9 +22528,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22574,7 +22564,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\BusTypeSeat">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\BusTypeSeat\OLE DB Source"
@@ -22602,9 +22592,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22640,7 +22628,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\MImage">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\MImage\OLE DB Source"
@@ -22668,9 +22656,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22796,7 +22782,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysCurr">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\SysCurr\OLE DB Destination"
@@ -22824,9 +22810,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22862,7 +22846,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysDistrict">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\SysDistrict\OLE DB Destination"
@@ -22890,9 +22874,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22928,7 +22910,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysFacilityOnlineChrg">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysFacilityOnlineChrg\OLE DB Source"
@@ -22956,9 +22938,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -22994,7 +22974,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysInsu">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysInsu\OLE DB Source"
@@ -23022,9 +23002,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23060,7 +23038,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysMachine">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysMachine\OLE DB Source"
@@ -23088,9 +23066,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23126,7 +23102,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysMarkGrpD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysMarkGrpD\OLE DB Source"
@@ -23154,9 +23130,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23192,37 +23166,35 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysMarkGrpH">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysMarkGrpH\OLE DB Source"
-          TopLeft="432.999979920686,218.033332272636" />
+          TopLeft="431.999979935587,219.033332257735" />
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\SysMarkGrpH\OLE DB Destination"
           TopLeft="422.99998210619,359.833331495192" />
         <EdgeLayout
           Id="Package\Sequence Container\SysMarkGrpH.Paths[OLE DB Source Output]"
-          TopLeft="508.799981013438,259.633332272636">
+          TopLeft="508.299981020889,260.633332257735">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,100.199999222557"
+              EndConnector="0,99.1999992374572"
               Start="0,0"
-              End="0,92.6999992225568">
+              End="0,91.6999992374572">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,92.6999992225568" />
+                    End="0,91.6999992374572" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23258,7 +23230,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysMsg">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysMsg\OLE DB Source"
@@ -23286,9 +23258,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23324,7 +23294,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysOnPara">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\SysOnPara\OLE DB Destination"
@@ -23352,9 +23322,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23480,7 +23448,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysOTA">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysOTA\OLE DB Source"
@@ -23508,9 +23476,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23546,7 +23512,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysOTAD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysOTAD\OLE DB Source"
@@ -23574,9 +23540,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23612,7 +23576,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysOTAPara">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysOTAPara\OLE DB Source"
@@ -23640,9 +23604,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23678,7 +23640,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysPGroup">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\SysPGroup\OLE DB Source"
@@ -23706,9 +23668,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23808,7 +23768,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\SysUserGrp">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\SysUserGrp\OLE DB Destination"
@@ -23836,9 +23796,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23874,7 +23832,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\TCounter">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\TCounter\OLE DB Destination"
@@ -23902,9 +23860,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -23940,7 +23896,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\TCounterMergeD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\TCounterMergeD\OLE DB Source"
@@ -23968,9 +23924,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24006,7 +23960,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\TCounterMergeH">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\TCounterMergeH\OLE DB Destination"
@@ -24034,9 +23988,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24072,7 +24024,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\TRoute">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\TRoute\OLE DB Source"
@@ -24100,9 +24052,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24138,7 +24088,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\TRouteCout">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\TRouteCout\OLE DB Source"
@@ -24166,9 +24116,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24204,7 +24152,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\TRouteExtra">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\TRouteExtra\OLE DB Source"
@@ -24232,9 +24180,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24270,7 +24216,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\TRoutePrice">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\TRoutePrice\OLE DB Source"
@@ -24298,9 +24244,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24336,7 +24280,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\TRouteTimerD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\TRouteTimerD\OLE DB Source"
@@ -24364,9 +24308,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24466,7 +24408,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\Ulevel">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\Ulevel\OLE DB Source"
@@ -24494,9 +24436,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24532,7 +24472,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\UlevelD">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\UlevelD\OLE DB Source"
@@ -24560,9 +24500,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -24598,7 +24536,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\UlevelP">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\UlevelP\OLE DB Source"
@@ -24626,9 +24564,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
