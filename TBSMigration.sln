@@ -5,11 +5,15 @@ VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "TBSMigration", "TBSMigration.dtproj", "{B61072B4-E913-5374-374D-AA66EF273E9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushMasterTOS", "PushTripTOS\PushMasterTOS.csproj", "{DB435DAC-EB05-4932-B858-CFFC389B6F58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushStateCityMasterTOS", "PushTripTOS\PushStateCityMasterTOS.csproj", "{DB435DAC-EB05-4932-B858-CFFC389B6F58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushTripTOS", "..\PushTripTOS\PushTripTOS.csproj", "{89EB0CF8-531C-4160-9F3B-268741DE1669}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Plugin", "01. Plugin", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Logging", "Plugin.Logging\Plugin.Logging.csproj", "{2A6A4DD5-A080-4EDA-A232-AA028862B2BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.SqlTool", "Plugin.SqlTool\Plugin.SqlTool.csproj", "{01AB7211-D791-4561-92BC-CFA4A185C7AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,9 +40,25 @@ Global
 		{89EB0CF8-531C-4160-9F3B-268741DE1669}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{89EB0CF8-531C-4160-9F3B-268741DE1669}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89EB0CF8-531C-4160-9F3B-268741DE1669}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A6A4DD5-A080-4EDA-A232-AA028862B2BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A6A4DD5-A080-4EDA-A232-AA028862B2BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A6A4DD5-A080-4EDA-A232-AA028862B2BB}.Development|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6A4DD5-A080-4EDA-A232-AA028862B2BB}.Development|Any CPU.Build.0 = Release|Any CPU
+		{2A6A4DD5-A080-4EDA-A232-AA028862B2BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6A4DD5-A080-4EDA-A232-AA028862B2BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01AB7211-D791-4561-92BC-CFA4A185C7AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01AB7211-D791-4561-92BC-CFA4A185C7AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01AB7211-D791-4561-92BC-CFA4A185C7AA}.Development|Any CPU.ActiveCfg = Release|Any CPU
+		{01AB7211-D791-4561-92BC-CFA4A185C7AA}.Development|Any CPU.Build.0 = Release|Any CPU
+		{01AB7211-D791-4561-92BC-CFA4A185C7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01AB7211-D791-4561-92BC-CFA4A185C7AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A6A4DD5-A080-4EDA-A232-AA028862B2BB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{01AB7211-D791-4561-92BC-CFA4A185C7AA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBC48448-C330-4BD8-8AD4-B9A44708DE18}

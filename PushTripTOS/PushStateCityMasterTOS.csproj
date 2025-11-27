@@ -49,4 +49,9 @@
     <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="8.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Plugin.Logging\Plugin.Logging.csproj" />
+    <ProjectReference Include="..\Plugin.SqlTool\Plugin.SqlTool.csproj" />
+  </ItemGroup>
+
 </Project>

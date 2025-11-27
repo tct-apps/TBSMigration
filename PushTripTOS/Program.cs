@@ -14,6 +14,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using static Dapper.SqlMapper;
+using Plugin.Logging;
+using Serilog;
 
 class Program
 {
@@ -44,12 +46,12 @@ class Program
                 .Build();
 
             // Initialize Serilog logger(s) from configuration
-            //LogETLProcess.Logger = new LoggerConfiguration()
-            //    .ReadFrom.Configuration(config, sectionName: "Serilog_ETLProcess")
-            //    .CreateLogger();
-            //LogETLException.Logger = new LoggerConfiguration()
-            //    .ReadFrom.Configuration(config, sectionName: "Serilog_ETLException")
-            //    .CreateLogger();
+            LogETLProcess.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(config, sectionName: "Serilog_ETLProcess")
+                .CreateLogger();
+            LogETLException.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(config, sectionName: "Serilog_ETLException")
+                .CreateLogger();
 
             string sourceConn = config.GetConnectionString("Source");
 
@@ -64,13 +66,13 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            //LogETLException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogETLException.Error(ts, "Main", "Unhandled exception in Main()", ex);
         }
         finally
         {
             // Ensure logs are flushed before exit
-            //(LogETLProcess.Logger as IDisposable)?.Dispose();
-            //(LogETLException.Logger as IDisposable)?.Dispose();
+            (LogETLProcess.Logger as IDisposable)?.Dispose();
+            (LogETLException.Logger as IDisposable)?.Dispose();
         }
     }
 
@@ -128,17 +130,17 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, $"StateRead", "Exception during Read phase", ex);
                     throw;
                 }
             }
             // Write process logs
-            //LogETLProcess.WriteAll(logs);
+            LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
-            // LogETLException.Error(...)
-            Console.Error.WriteLine($"State() unhandled exception: {ex}");
+            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+            LogETLException.Error(ts, $"StateOverall", "Unhandled exception in FactTicket() overall", ex);
             throw;
         }
     }
@@ -198,18 +200,18 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    //LogETLException.Error(ts, $"{cts}FactTicketRead", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, $"CityRead", "Exception during Read phase", ex);
                     throw;
                 }
             }
 
             // Write process logs
-            //LogETLProcess.WriteAll(logs);
+            LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
-            // LogETLException.Error(...)
-            Console.Error.WriteLine($"City() unhandled exception: {ex}");
+            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+            LogETLException.Error(ts, $"CityOverall", "Unhandled exception in City() overall", ex);
             throw;
         }
     }
@@ -451,8 +453,8 @@ class Program
         }
         catch (Exception ex)
         {
-            // LogETLException.Error(...)
-            Console.Error.WriteLine($"Route() unhandled exception: {ex}");
+            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+            LogETLException.Error(ts, $"RouteOverall", "Unhandled exception in FactTicket() overall", ex);
             throw;
         }
     }
