@@ -47,10 +47,10 @@ class Program
 
             // Initialize Serilog logger(s) from configuration
             LogETLProcess.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(config, sectionName: "Serilog_ETLProcess")
+                .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationProcess")
                 .CreateLogger();
             LogETLException.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(config, sectionName: "Serilog_ETLException")
+                .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationException")
                 .CreateLogger();
 
             string sourceConn = config.GetConnectionString("Source");
