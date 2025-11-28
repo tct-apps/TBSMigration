@@ -11,5 +11,7 @@ namespace Constant
         public const string BusOperatorInsert = "/busOperatorInsert";
         public const string VehicleInsert = "/vehicleInsert";
         public const string RouteInsert = "/routeInsert";
+
+        public const string AdhocSchedule = "/adhocScheduleInsert";
     }
 }
