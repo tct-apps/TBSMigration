@@ -1,8 +1,6 @@
-﻿DECLARE
-    @DateFrom VARCHAR(10) = '01/08/2025',
-    @DateTo   VARCHAR(10) = '01/12/2025'
-
-SET NOCOUNT ON;
+﻿
+DECLARE @DateFrom VARCHAR(10);
+DECLARE @DateTo VARCHAR(10);
 
 DECLARE @AdhocArr INT = 0;
 SELECT @AdhocArr = ISNULL(CAST(30 AS INT), 0) FROM sysPara;
@@ -17,36 +15,66 @@ DECLARE @CurrentYM INT = @YearMonthFrom;
 DECLARE @SQL NVARCHAR(MAX) = N'';
 DECLARE @PartSQL NVARCHAR(MAX);
 
+SELECT @DateFrom = FromDate, @DateTo = ToDate
+FROM (
+    SELECT  
+        CONVERT(VARCHAR(10), DATEADD(DAY, a.adhocd + 1, b.DayendTOSDate), 103) AS FromDate,
+        DATEADD(DAY, a.adhocd + 1, b.DayendTOSDate) AS Fdt,
+        CONVERT(
+            VARCHAR(10),
+            DATEADD(
+                DAY,
+                (a.adhocd - 1) + DATEDIFF(DAY, b.DayendTOSDate, GETDATE()),
+                b.DayendTOSDate
+            ),
+            103
+        ) AS ToDate,
+        DATEADD(
+            DAY,
+            (a.adhocd - 1) + DATEDIFF(DAY, b.DayendTOSDate, GETDATE()),
+            b.DayendTOSDate
+        ) AS Tdt
+    FROM SysPara a
+    CROSS JOIN DeTempDate b
+) a
+WHERE a.Fdt <= a.Tdt;
+
+SET @DateFromSQL = CONVERT(DATE, @DateFrom, 103);
+SET @DateToSQL = CONVERT(DATE, @DateTo, 103);
+
+SET @YearMonthFrom = YEAR(@DateFromSQL) * 100 + MONTH(@DateFromSQL);
+SET @YearMonthTo = YEAR(@DateToSQL) * 100 + MONTH(@DateToSQL);
+SET @CurrentYM = @YearMonthFrom;
+
 WHILE @CurrentYM <= @YearMonthTo
 BEGIN
-    SET @PartSQL = '
+    SET @PartSQL = N'
     SELECT 
-        c.SComp      AS OperatorCode,
-        b.RID        AS RouteNo,
-        a.TripN      AS TripNo,
+        c.SComp AS OperatorCode,
+        b.RID AS RouteNo,
+        a.TripN AS TripNo,
         CASE
-            WHEN ISNULL(c.CoutN, 0) <> ISNULL(d.Posi, 0) THEN ''DEP''                  
-            WHEN ISNULL(d.Posi, 0) <> 0 THEN ''ARR''                                    
+            WHEN c.CoutN <> d.Posi THEN ''DEP''
+            WHEN d.Posi <> 0 THEN ''ARR''
             ELSE NULL
         END AS [Type],
         CONVERT(VARCHAR(10), a.DDate, 120) AS TripDate,
         CONVERT(VARCHAR(10), b.SDate, 120) AS [Date],
         b.TTime AS [Time],
-        REPLACE(a.BusN, ''.'', '''') AS PlateNo,
+        a.BusN AS PlateNo,
         d.Posi AS Position,
         b.Remk AS Remark,
-		CAST(' + CAST(@AdhocArr AS VARCHAR(10)) + ' AS INT) AS AdhocArr
-
+        @AdhocArr AS AdhocArr
     FROM DerInfo_' + CAST(@CurrentYM AS VARCHAR(6)) + ' a
     INNER JOIN DerTimer_' + CAST(@CurrentYM AS VARCHAR(6)) + ' b ON a.TID = b.TID
     INNER JOIN TRoute c ON a.RID = c.RID
     INNER JOIN DerCout_' + CAST(@CurrentYM AS VARCHAR(6)) + ' d ON b.TID = d.TID AND b.Cout = d.Cout
-    WHERE a.DDate BETWEEN ''' + CONVERT(VARCHAR(10), @DateFromSQL, 120) + ''' AND ''' + CONVERT(VARCHAR(10), @DateToSQL, 120) + '''
-      AND b.Cout = ''' + 'TBS' + '''
+    WHERE a.DDate BETWEEN @DateFromSQL AND @DateToSQL
+      AND b.Cout = ''TBS''
       AND b.TTime <> ''''
       AND b.sflg = ''1''
       AND a.stat = ''1''
-    ';
+	';
 
     SET @SQL = CASE WHEN @SQL = '' THEN @PartSQL ELSE @SQL + ' UNION ALL ' + @PartSQL END;
 
@@ -57,4 +85,9 @@ END
 IF @SQL = '' 
     SET @SQL = 'SELECT * FROM sysPara WHERE dcout = ''ZZZZ''';
 
-EXEC sp_executesql @SQL;
+EXEC sp_executesql 
+    @SQL,
+    N'@AdhocArr INT, @DateFromSQL DATE, @DateToSQL DATE',
+    @AdhocArr = @AdhocArr,
+    @DateFromSQL = @DateFromSQL,
+    @DateToSQL = @DateToSQL;
