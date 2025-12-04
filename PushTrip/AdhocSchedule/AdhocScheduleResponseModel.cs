@@ -7,13 +7,8 @@ using System.Xml.Serialization;
 
 namespace PushTrip.AdhocSchedule
 {
+    [XmlRoot(ElementName = "adhocScheduleInsertResponse", Namespace = "http://tos.org/")]
     public class AdhocScheduleResponseModel
-    {
-        [XmlElement(ElementName = "adhocScheduleInsertResponse", Namespace = "http://tos.org/")]
-        public AdhocScheduleInsertResponse AdhocScheduleInsertResponse { get; set; }
-    }
-
-    public class AdhocScheduleInsertResponse
     {
         [XmlElement(ElementName = "adhocScheduleInsertResult", Namespace = "http://tos.org/")]
         public AdhocScheduleInsertResult AdhocScheduleInsertResult { get; set; }
