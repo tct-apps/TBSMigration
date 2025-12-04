@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SQL\AdhocDetailUpdate.sql" />
     <None Remove="SQL\AdhocSchedule.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="SQL\AdhocDetailUpdate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SQL\AdhocSchedule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -131,7 +131,7 @@ class Program
                     cts.Token).ConfigureAwait(false);
 
                 #region Update Adhoc detail
-                string sqlAdhocDetailUpdatePath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocSchedule.sql");
+                string sqlAdhocDetailUpdatePath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocDetailUpdate.sql");
                 string sqlAdhocDetailUpdate = File.ReadAllText(sqlPath);
 
                 using var conn = new SqlConnection(sourceConn);
