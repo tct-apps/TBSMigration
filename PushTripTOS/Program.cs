@@ -130,6 +130,33 @@ class Program
                     requestContent,
                     cts.Token).ConfigureAwait(false);
 
+                #region Update Adhoc detail
+                string sqlAdhocDetailUpdatePath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocSchedule.sql");
+                string sqlAdhocDetailUpdate = File.ReadAllText(sqlPath);
+
+                using var conn = new SqlConnection(sourceConn);
+                await conn.OpenAsync().ConfigureAwait(false);
+
+                if (response != null || response.AdhocScheduleInsertResult.InsertStatus.AdhocList.Count() > 0)
+                {
+                    foreach (var adhoc in response.AdhocScheduleInsertResult.InsertStatus.AdhocList)
+                    {
+                        var param = new AdhocDetailUpdateModel.Request()
+                        {
+                            TripNo = adhoc.TripNo,
+                            GateNo = adhoc.Bay,
+                            GateNo2 = adhoc.Gate,
+                            TripDate = adhoc.TripDate,
+                            AdhocId = adhoc.ScheduleId,
+                            Position = adhoc.Position,
+                            CompanyCode = adhoc.OperatorCode
+                        };
+
+                        await conn.ExecuteAsync(sqlAdhocDetailUpdate, param);
+                    }
+                }
+                #endregion
+
                 // logging process read
                 logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateRead", $"State Read process started"));
             }
@@ -139,7 +166,7 @@ class Program
                 LogETLException.Error(ts, $"StateRead", "Exception during Read phase", ex);
                 throw;
             }
-            
+
             // Write process logs
             LogETLProcess.WriteAll(logs);
         }
