@@ -267,5 +267,6 @@ obj/
 
 # SSIS
 .vs/*/config/applicationhost.config
+*.dtproj.user
 **/.dtbcache.v2
 **/.vsidx
