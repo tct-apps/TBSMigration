@@ -132,7 +132,7 @@ class Program
 
                 #region Update Adhoc detail
                 string sqlAdhocDetailUpdatePath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocDetailUpdate.sql");
-                string sqlAdhocDetailUpdate = File.ReadAllText(sqlPath);
+                string sqlAdhocDetailUpdate = File.ReadAllText(sqlAdhocDetailUpdatePath);
 
                 using var conn = new SqlConnection(sourceConn);
                 await conn.OpenAsync().ConfigureAwait(false);
