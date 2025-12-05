@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Plugin.Logging\Plugin.Logging.csproj" />
     <ProjectReference Include="..\Plugin.SqlTool\Plugin.SqlTool.csproj" />
     <ProjectReference Include="..\PushMasterTOS\PushMaster.csproj" />
+    <ProjectReference Include="..\Setting.Configuration\Setting.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

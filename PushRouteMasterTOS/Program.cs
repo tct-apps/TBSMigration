@@ -15,6 +15,7 @@ using System.Xml.Serialization;
 using static Dapper.SqlMapper;
 using Plugin.Logging;
 using Serilog;
+using Setting.Configuration.Application;
 
 class Program
 {
@@ -54,6 +55,11 @@ class Program
 
             string sourceConn = config.GetConnectionString("Source");
 
+            // Load your URL section
+            Application.URL.TOSWebService = config["URL:TOSWebService"];
+            Application.URL.SoapActionBase = config["URL:SoapActionBase"];
+            Application.URL.Xmlns = config["URL:Xmlns"];
+
             // await the async worker
             await Route(sourceConn).ConfigureAwait(false);
         }
@@ -90,10 +96,9 @@ class Program
             List<RouteModel> routeList = multi.Read<RouteModel>().ToList();
             List<RouteDetailModel> routeDetailList = multi.Read<RouteDetailModel>().ToList();
 
-            // Prepare request settings (could be moved to config)
-            string url = "http://10.238.1.4/TOSWebService_MigrationTest/toswebservice.asmx";
-            string soapActionBase = "http://tos.org";
-            string xmlns = "http://tos.org/";
+            var url = Application.URL.TOSWebService;
+            var soapActionBase = Application.URL.SoapActionBase;
+            var xmlns = Application.URL.Xmlns;
 
             if (string.IsNullOrEmpty(url))
                 throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));

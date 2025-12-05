@@ -15,6 +15,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using Setting.Configuration.Application;
 using static Dapper.SqlMapper;
 
 class Program
@@ -55,6 +56,11 @@ class Program
 
             string sourceConn = config.GetConnectionString("Source");
 
+            // Load your URL section
+            Application.URL.TOSWebService = config["URL:TOSWebService"];
+            Application.URL.SoapActionBase = config["URL:SoapActionBase"];
+            Application.URL.Xmlns = config["URL:Xmlns"];
+
             // await the async worker
             await BusOperator(sourceConn).ConfigureAwait(false);
         }
@@ -90,10 +96,9 @@ class Program
             using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
             List<BusOperatorModel> busOperatorList = multi.Read<BusOperatorModel>().ToList();
 
-            // Prepare request settings (could be moved to config)
-            string url = "http://10.238.1.4/TOSWebService_MigrationTest/toswebservice.asmx";
-            string soapActionBase = "http://tos.org";
-            string xmlns = "http://tos.org/";
+            var url = Application.URL.TOSWebService;
+            var soapActionBase = Application.URL.SoapActionBase;
+            var xmlns = Application.URL.Xmlns;
 
             if (string.IsNullOrEmpty(url))
                 throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
