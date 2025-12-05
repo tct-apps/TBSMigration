@@ -105,19 +105,22 @@ class Program
             Uri requestUrl = new Uri(url);
             string soapAction = soapActionBase + Constant.ApiUrlKey.VehicleInsert;
 
-            foreach (var vehicle in vehicleList)
-            {
-                VehicleRequestModel requestContent = new VehicleRequestModel
-                {
-                    PlateNo = vehicle.PlateNo,
-                    OperatorCode = vehicle.OperatorCode
-                };
+            int batchSize = 100;
 
+            await ProcessInBatches(vehicleList, batchSize, async vehicle =>
+            {
                 // CancellationToken per-call (optionally pass a global token).
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+
                 try
                 {
-                    VehicleResponseModel response = await WebServicePostAsync<VehicleResponseModel>(
+                    var requestContent = new VehicleRequestModel
+                    {
+                        PlateNo = vehicle.PlateNo,
+                        OperatorCode = vehicle.OperatorCode
+                    };
+
+                    var response = await WebServicePostAsync<VehicleResponseModel>(
                         requestUrl,
                         soapAction,
                         xmlns,
@@ -125,24 +128,35 @@ class Program
                         cts.Token).ConfigureAwait(false);
 
                     // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"VehicleRead", $"Vehicle Read process started"));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "VehicleRead", 
+                        $"Vehicle {vehicle.PlateNo} processed"));
                 }
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"VehicleRead", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, "VehicleRead",
+                        $"Error for {vehicle.PlateNo}", ex);
                     throw;
                 }
-            }
-
+            });
+            
             // Write process logs
             LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, $"VehicleOverall", "Unhandled exception in Vehicle() overall", ex);
+            LogETLException.Error(ts, $"VehicleOverall", 
+                "Unhandled exception in Vehicle() overall", ex);
             throw;
+        }
+    }
+
+    public static async Task ProcessInBatches<T>(IEnumerable<T> items, int batchSize, Func<T, Task> action)
+    {
+        foreach (var batch in items.Chunk(batchSize))
+        {
+            await Task.WhenAll(batch.Select(action));
         }
     }
 
