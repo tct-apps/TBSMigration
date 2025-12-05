@@ -1,6 +1,6 @@
 ﻿
-DECLARE @DateFrom VARCHAR(10);
-DECLARE @DateTo VARCHAR(10);
+DECLARE @DateFrom VARCHAR(10) = '20251229';
+DECLARE @DateTo VARCHAR(10) = '20260227';
 
 DECLARE @AdhocArr INT = 0;
 SELECT @AdhocArr = ISNULL(CAST(30 AS INT), 0) FROM sysPara;
@@ -14,30 +14,6 @@ DECLARE @CurrentYM INT = @YearMonthFrom;
 
 DECLARE @SQL NVARCHAR(MAX) = N'';
 DECLARE @PartSQL NVARCHAR(MAX);
-
-SELECT @DateFrom = FromDate, @DateTo = ToDate
-FROM (
-    SELECT  
-        CONVERT(VARCHAR(10), DATEADD(DAY, a.adhocd + 1, b.DayendTOSDate), 103) AS FromDate,
-        DATEADD(DAY, a.adhocd + 1, b.DayendTOSDate) AS Fdt,
-        CONVERT(
-            VARCHAR(10),
-            DATEADD(
-                DAY,
-                (a.adhocd - 1) + DATEDIFF(DAY, b.DayendTOSDate, GETDATE()),
-                b.DayendTOSDate
-            ),
-            103
-        ) AS ToDate,
-        DATEADD(
-            DAY,
-            (a.adhocd - 1) + DATEDIFF(DAY, b.DayendTOSDate, GETDATE()),
-            b.DayendTOSDate
-        ) AS Tdt
-    FROM SysPara a
-    CROSS JOIN DeTempDate b
-) a
-WHERE a.Fdt <= a.Tdt;
 
 SET @DateFromSQL = CONVERT(DATE, @DateFrom, 103);
 SET @DateToSQL = CONVERT(DATE, @DateTo, 103);

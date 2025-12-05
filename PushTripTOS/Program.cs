@@ -1,17 +1,18 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
+using Plugin.Logging;
 using PushTrip.AdhocSchedule;
+using PushTrip.Common;
+using Serilog;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using static Dapper.SqlMapper;
-using Plugin.Logging;
-using Serilog;
-using PushTrip.Common;
 using Setting.Configuration.Application;
+using static Dapper.SqlMapper;
 
 class Program
 {
@@ -140,9 +141,9 @@ class Program
                 string sqlAdhocDetailUpdate = File.ReadAllText(sqlAdhocDetailUpdatePath);
 
                 using var conn = new SqlConnection(sourceConn);
-                await conn.OpenAsync().ConfigureAwait(false);
+                await conn.OpenAsync();
 
-                if (response != null || response.AdhocScheduleInsertResult.InsertStatus.AdhocList.Count() > 0)
+                if (response != null && response.AdhocScheduleInsertResult.InsertStatus.AdhocList.Count() > 0)
                 {
                     foreach (var adhoc in response.AdhocScheduleInsertResult.InsertStatus.AdhocList)
                     {
@@ -151,7 +152,7 @@ class Program
                             TripNo = adhoc.TripNo,
                             GateNo = adhoc.Bay,
                             GateNo2 = adhoc.Gate,
-                            TripDate = adhoc.TripDate,
+                            TripDate = DateTime.Parse(adhoc.TripDate),
                             AdhocId = adhoc.ScheduleId,
                             Position = adhoc.Position,
                             CompanyCode = adhoc.OperatorCode
@@ -163,12 +164,12 @@ class Program
                 #endregion
 
                 // logging process read
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateRead", $"State Read process started"));
+                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"ScheduleRead", $"Schedule Read process started"));
             }
             catch (Exception ex)
             {
                 var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                LogETLException.Error(ts, $"StateRead", "Exception during Read phase", ex);
+                LogETLException.Error(ts, $"ScheduleRead", "Exception during Read phase", ex);
                 throw;
             }
 
@@ -178,7 +179,7 @@ class Program
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, $"StateOverall", "Unhandled exception in FactTicket() overall", ex);
+            LogETLException.Error(ts, $"ScheduleOverall", "Unhandled exception in Schedule() overall", ex);
             throw;
         }
     }
