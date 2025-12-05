@@ -106,13 +106,17 @@ class Program
             Uri requestUrl = new Uri(url);
             string soapAction = soapActionBase + Constant.ApiUrlKey.RouteInsert;
 
-            foreach (var route in routeList)
+            int batchSize = 100;
+
+            await ProcessInBatches(routeList, batchSize, async route =>
             {
-                route.RouteDetails = routeDetailList
+                var routeDetails = routeDetailList
                     .Where(d => d.RouteNo == route.RouteNo)
                     .ToList();
+                
+                route.RouteDetails = routeDetails;
 
-                RouteRequestModel requestContent = new RouteRequestModel
+                var requestContent = new RouteRequestModel
                 {
                     OperatorCode = route.OperatorCode,
                     RouteNo = route.RouteNo,
@@ -131,9 +135,10 @@ class Program
 
                 // CancellationToken per-call (optionally pass a global token).
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+
                 try
                 {
-                    RouteResponseModel response = await WebServicePostAsync<RouteResponseModel>(
+                    await WebServicePostAsync<RouteResponseModel>(
                         requestUrl,
                         soapAction,
                         xmlns,
@@ -141,24 +146,35 @@ class Program
                         cts.Token).ConfigureAwait(false);
 
                     // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteRead", $"Route Read process started"));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),"RouteRead",
+                        $"Route {route.RouteNo} processed"));
                 }
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"RouteRead", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, "RouteRead",
+                        $"Error sending Route {route.RouteNo}", ex);
                     throw;
                 }
-            }
+            });
 
             // Write process logs
-            LogETLProcess.WriteAll(logs);
+            LogETLProcess.WriteAll(logs);           
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, $"RouteOverall", "Unhandled exception in Route() overall", ex);
+            LogETLException.Error(ts, "RouteOverall",
+                "Unhandled exception in Route() overall", ex);
             throw;
+        }
+    }
+
+    public static async Task ProcessInBatches<T>(IEnumerable<T> items, int batchSize, Func<T, Task> action)
+    {
+        foreach (var batch in items.Chunk(batchSize))
+        {
+            await Task.WhenAll(batch.Select(action));
         }
     }
 
