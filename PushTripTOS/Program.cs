@@ -92,6 +92,10 @@ class Program
             using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
             List<AdhocScheduleModel> adhocModels = multi.Read<AdhocScheduleModel>().ToList();
 
+            var groupedByTripDate = adhocModels
+                .GroupBy(a => a.TripDate.Date)
+                .OrderBy(g => g.Key);
+
             var url = Application.URL.TOSWebService;
             var soapActionBase = Application.URL.SoapActionBase;
             var xmlns = Application.URL.Xmlns;
@@ -102,75 +106,101 @@ class Program
             Uri requestUrl = new Uri(url);
             string soapAction = soapActionBase + Constant.ApiUrlKey.AdhocSchedule;
 
-            var requestContent = new AdhocScheduleRequestModel
+            foreach (var group in groupedByTripDate)
             {
-                InsertList = new InsertList
+                DateTime tripDate = group.Key;
+                List<AdhocScheduleModel> batch = group.ToList();
+
+                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                    "BatchStart",
+                    $"Processing TripDate {tripDate:yyyy-MM-dd} with {batch.Count} records"));
+
+                // Build batch request per TripDate
+                var requestContent = new AdhocScheduleRequestModel
                 {
-                    Schedule = new Schedule
+                    InsertList = new InsertList
                     {
-                        AdhocList = adhocModels.Select(a => new Adhoc
+                        Schedule = new Schedule
                         {
-                            OperatorCode = a.OperatorCode,
-                            RouteNo = a.RouteNo,
-                            TripNo = a.TripNo,
-                            Type = a.Type,
-                            TripDate = a.TripDate.ToString("yyyy-MM-dd"),
-                            Date = a.Date.ToString("yyyy-MM-dd"),
-                            Time = FormatTime(a.Time),
-                            PlateNo = a.PlateNo,
-                            Position = a.Position,
-                            Remark = a.Remark
-                        }).ToList()
+                            AdhocList = batch.Select(a => new Adhoc
+                            {
+                                OperatorCode = a.OperatorCode,
+                                RouteNo = a.RouteNo,
+                                TripNo = a.TripNo,
+                                Type = a.Type,
+                                TripDate = a.TripDate.ToString("yyyy-MM-dd"),
+                                Date = a.Date.ToString("yyyy-MM-dd"),
+                                Time = FormatTime(a.Time),
+                                PlateNo = a.PlateNo,
+                                Position = a.Position,
+                                Remark = a.Remark
+                            }).ToList()
+                        }
                     }
-                }
-            };
+                };
 
-            // CancellationToken per-call (optionally pass a global token).
-            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
-            try
-            {
-                AdhocScheduleResponseModel response = await WebServicePostAsync<AdhocScheduleResponseModel>(
-                    requestUrl,
-                    soapAction,
-                    xmlns,
-                    requestContent,
-                    cts.Token).ConfigureAwait(false);
+                AdhocScheduleResponseModel response;
 
-                #region Update Adhoc detail
-                string sqlAdhocDetailUpdatePath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocDetailUpdate.sql");
-                string sqlAdhocDetailUpdate = File.ReadAllText(sqlAdhocDetailUpdatePath);
+                // CancellationToken per-call (optionally pass a global token).
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
 
-                using var conn = new SqlConnection(sourceConn);
-                await conn.OpenAsync();
-
-                if (response != null && response.AdhocScheduleInsertResult.InsertStatus.AdhocList.Count() > 0)
+                try
                 {
-                    foreach (var adhoc in response.AdhocScheduleInsertResult.InsertStatus.AdhocList)
-                    {
-                        var param = new AdhocDetailUpdateModel.Request()
-                        {
-                            TripNo = adhoc.TripNo,
-                            GateNo = adhoc.Bay,
-                            GateNo2 = adhoc.Gate,
-                            TripDate = DateTime.Parse(adhoc.TripDate),
-                            AdhocId = adhoc.ScheduleId,
-                            Position = adhoc.Position,
-                            CompanyCode = adhoc.OperatorCode
-                        };
+                    response = await WebServicePostAsync<AdhocScheduleResponseModel>(
+                        requestUrl, soapAction, xmlns, requestContent, cts.Token);
 
-                        await conn.ExecuteAsync(sqlAdhocDetailUpdate, param);
-                    }
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                        "ScheduleRead",
+                        $"Success TripDate {tripDate:yyyy-MM-dd}"));
                 }
-                #endregion
+                catch (Exception ex)
+                {
+                    LogETLException.Error(
+                        TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                        "ScheduleRead",
+                        $"SOAP failed for TripDate {tripDate:yyyy-MM-dd}", ex);
+                    continue;
+                }
 
-                // logging process read
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"ScheduleRead", $"Schedule Read process started"));
-            }
-            catch (Exception ex)
-            {
-                var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                LogETLException.Error(ts, $"ScheduleRead", "Exception during Read phase", ex);
-                throw;
+                try
+                {
+                    string updateSqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocDetailUpdate.sql");
+                    string updateSql = File.ReadAllText(updateSqlPath);
+
+                    using var conn = new SqlConnection(sourceConn);
+                    await conn.OpenAsync();
+
+                    if (response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList != null)
+                    {
+                        foreach (var adhoc in response.AdhocScheduleInsertResult.InsertStatus.AdhocList)
+                        {
+                            var param = new AdhocDetailUpdateModel.Request()
+                            {
+                                TripNo = adhoc.TripNo,
+                                GateNo = adhoc.Bay,
+                                GateNo2 = adhoc.Gate,
+                                TripDate = DateTime.Parse(adhoc.TripDate),
+                                AdhocId = adhoc.ScheduleId,
+                                Position = adhoc.Position,
+                                CompanyCode = adhoc.OperatorCode
+                            };
+
+                            await conn.ExecuteAsync(updateSql, param);
+                        }
+                    }
+
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                        "ScheduleUpdate",
+                        $"DB update complete for {tripDate:yyyy-MM-dd}"));
+                }
+                catch (Exception ex)
+                {
+                    LogETLException.Error(
+                        TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                        "ScheduleUpdate",
+                        $"DB update failed for TripDate {tripDate:yyyy-MM-dd}",
+                        ex);
+                }
             }
 
             // Write process logs
