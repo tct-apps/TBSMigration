@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Master"
   DTS:PackageType="5"
-  DTS:VersionBuild="167"
-  DTS:VersionGUID="{D7A85D58-1EDA-41BE-AEF3-BCC823DB9698}">
+  DTS:VersionBuild="168"
+  DTS:VersionGUID="{4F2FDC65-F52A-4A81-9CB2-CC9DA86823BC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,11 +25,11 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Auto Translate=False;Application Name=SSIS-MasterData-{3B183B8B-3E62-4E5F-B341-811E93F21315}eTicketing_tbs_new;">
+          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-MasterData-{3B183B8B-3E62-4E5F-B341-811E93F21315}eTicketing_tbs_new;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB/wU84eKaMQs3u8I5e00eQ7DFJBf1OBVh2trrDbLA/NQAAAAAOgAAAAAIAACAAAAD2nrYmWBVst2VaDx7tljO6ShFqxFbzZCEocSyth7U86CAAAAAwHZXbLvm6dJyCfesxxCbIRZl5njUoTb1dskZJdLexR0AAAAC0dX1FurAmGlHuH1P3ZLTbAJGNCHRuoULk7uEapVqazC6ui/o4gto3CaQl/a7f7tqzLogQevOZkeOEhMLyG348</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACNWQEdhsXNwkzQF0Bxw+iHS/QCpcC/uGNgbUdC6O521AAAAAAOgAAAAAIAACAAAAC62J/DlQwoU2uSjWaVclWYDjw4iZah/I55gMWAQGTMYyAAAADaHljM7qkCCeTt9q++ywfcI9xdQHe1HtOyvIPudttbJ0AAAACwWhTTyt5CXdsive83Q1ahJGNmtRNSADvzUxaYBVVU2tobF9kBCHOfkA7K1dsEK82jG2BquCEBcIXdYKUg5H8f</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -21728,6 +21728,50 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
+          TopLeft="562.978559944921,391.533329904145">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.933332815036"
+              Start="0,0"
+              End="0,25.433332815036">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.433332815036" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 17]"
+          TopLeft="625.428564794007,444.671424274826">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.866654828522,0"
+              Start="0,0"
+              End="84.366654828522,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="84.366654828522,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 18]"
           TopLeft="785.728552910331,423.27618583047">
           <EdgeLayout.Curve>
@@ -22225,50 +22269,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,-30.8333334839995" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
-          TopLeft="562.978559944921,391.533329904145">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,32.933332815036"
-              Start="0,0"
-              End="0,25.433332815036">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.433332815036" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 17]"
-          TopLeft="625.428564794007,444.671424274826">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="91.866654828522,0"
-              Start="0,0"
-              End="84.366654828522,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="84.366654828522,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
