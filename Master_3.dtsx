@@ -1,0 +1,1456 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/13/2025 4:38:13 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-CKMEJ54"
+  DTS:CreatorName="DESKTOP-CKMEJ54\Shafiq-TCT"
+  DTS:DTSID="{7470EF55-0EA7-43DA-AF0F-BEB0C33006A9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1008.3"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Master_3"
+  DTS:PackageType="5"
+  DTS:VersionBuild="173"
+  DTS:VersionGUID="{252B25E9-C361-46EB-B378-0AE133504197}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[eTicketing_tbs_new]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C35B079C-04CF-47F0-865A-283EF58FF9CE}"
+      DTS:ObjectName="eTicketing_tbs_new">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-MasterData-{C35B079C-04CF-47F0-865A-283EF58FF9CE}eTicketing_tbs_new;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADAjbOkhxQVxfUcL0ejVLD2j9jclWM8t6O68bMnmutWuwAAAAAOgAAAAAIAACAAAACAZpIejtkbebuYRAdtjjNJOtQnA7QqLGRnyQnjkBA+ACAAAACmMy6CzFV5A98+3o6z4XUQDZyXgeIg8lp43rmsd+OYmkAAAAC8B/aac0OwVEt1aY8DMLUMWtHFnQNpoWo02MoCVhEXSHw5t+r+cTmrApXuQmHQMnaE3w/790+ExBr5Q2v1Cmrf</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[eTicketing_tbs_old]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8B57AA3F-1F69-4886-B5E9-8792C6140315}"
+      DTS:ObjectName="eTicketing_tbs_old">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-CKMEJ54\MSSQLSERVER01;Initial Catalog=eTicketing_tbs_fs;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-MasterData-{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}eTicketing_tbs_old;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="eTicketing_tbs_new"
+      DTS:CreationName="Microsoft.LogProviderSQLServer"
+      DTS:Description="Writes log entries for events to a SQL Server database"
+      DTS:DTSID="{8785DB50-9366-4B13-9356-B901EB55038E}"
+      DTS:ObjectName="SSIS log provider for SQL Server">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1" />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Package End"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{46E3186E-B802-47E0-9EEF-78415498E59F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Package End"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"insert into dbo.ssis_log
+select '"+ @[System::PackageName] +"', 'Package End', getdate(), ''
+"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C35B079C-04CF-47F0-865A-283EF58FF9CE}"
+          SQLTask:SqlStatementSource="insert into dbo.ssis_log&#xA;select 'Master_3', 'Package End', getdate(), ''&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Package Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DB33AC34-2A99-44DF-AEF9-9BF84466F951}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Package Start"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"insert into dbo.ssis_log
+select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
+"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C35B079C-04CF-47F0-865A-283EF58FF9CE}"
+          SQLTask:SqlStatementSource="insert into dbo.ssis_log&#xA;select 'Master_3', 'Package Start', getdate(), ''&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRoutePrice"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{454beabe-5488-44ec-aec6-c417083fd525}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRoutePrice"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\TRoutePrice\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TRoutePrice]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TRoutePrice\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_new]"
+                  connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_new]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="crid"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crid]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="crdt"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crdt]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lmid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="lmid"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmid]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lmdt]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="lmdt"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmdt]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="RID"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RID]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[RID]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCout]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="SCout"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SCout]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCout]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ECout]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ECout"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ECout]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECout]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Pgrp]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Pgrp"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pgrp]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pgrp]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCurr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="SCurr"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SCurr]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCurr]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SAPric]"
+                      cachedDataType="numeric"
+                      cachedName="SAPric"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SAPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAPric]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCPric]"
+                      cachedDataType="numeric"
+                      cachedName="SCPric"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SCPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCPric]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SSPric]"
+                      cachedDataType="numeric"
+                      cachedName="SSPric"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SSPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SSPric]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SOPric]"
+                      cachedDataType="numeric"
+                      cachedName="SOPric"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SOPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOPric]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AAPric]"
+                      cachedDataType="numeric"
+                      cachedName="AAPric"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AAPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AAPric]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACPric]"
+                      cachedDataType="numeric"
+                      cachedName="ACPric"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACPric]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ASPric]"
+                      cachedDataType="numeric"
+                      cachedName="ASPric"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ASPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ASPric]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AOPric]"
+                      cachedDataType="numeric"
+                      cachedName="AOPric"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AOPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AOPric]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Stat]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Stat"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Stat]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[Stat]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AComm]"
+                      cachedDataType="numeric"
+                      cachedName="AComm"
+                      cachedPrecision="13"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AComm]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CComm]"
+                      cachedDataType="numeric"
+                      cachedName="CComm"
+                      cachedPrecision="13"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[CComm]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SComm]"
+                      cachedDataType="numeric"
+                      cachedName="SComm"
+                      cachedPrecision="13"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComm]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OComm]"
+                      cachedDataType="numeric"
+                      cachedName="OComm"
+                      cachedPrecision="13"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[OComm]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TComm]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="TComm"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[TComm]" />
+                    <inputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ExtraAmnt]"
+                      cachedDataType="numeric"
+                      cachedName="ExtraAmnt"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ExtraAmnt]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ExtraAmnt]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="crid" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crdt]"
+                      dataType="dbTimeStamp"
+                      name="crdt" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="lmid" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lmdt]"
+                      dataType="dbTimeStamp"
+                      name="lmdt" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="RID" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SCout]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SCout" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ECout]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="ECout" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pgrp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Pgrp" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SCurr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SCurr" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SAPric]"
+                      dataType="numeric"
+                      name="SAPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SCPric]"
+                      dataType="numeric"
+                      name="SCPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SSPric]"
+                      dataType="numeric"
+                      name="SSPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SOPric]"
+                      dataType="numeric"
+                      name="SOPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AAPric]"
+                      dataType="numeric"
+                      name="AAPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACPric]"
+                      dataType="numeric"
+                      name="ACPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ASPric]"
+                      dataType="numeric"
+                      name="ASPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AOPric]"
+                      dataType="numeric"
+                      name="AOPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Stat]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Stat" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AComm]"
+                      dataType="numeric"
+                      name="AComm"
+                      precision="13"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CComm]"
+                      dataType="numeric"
+                      name="CComm"
+                      precision="13"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SComm]"
+                      dataType="numeric"
+                      name="SComm"
+                      precision="13"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OComm]"
+                      dataType="numeric"
+                      name="OComm"
+                      precision="13"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TComm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="TComm" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ExtraAmnt]"
+                      dataType="numeric"
+                      name="ExtraAmnt"
+                      precision="15"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\TRoutePrice\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\TRoutePrice\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\TRoutePrice\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\TRoutePrice\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TRoutePrice]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TRoutePrice\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
+                  connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crid]"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[crid]"
+                      name="crid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crdt]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[crdt]"
+                      name="crdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmid]"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmid]"
+                      name="lmid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmdt]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[lmdt]"
+                      name="lmdt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[RID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RID]"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[RID]"
+                      name="RID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCout]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCout]"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCout]"
+                      name="SCout"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECout]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ECout]"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECout]"
+                      name="ECout"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pgrp]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pgrp]"
+                      length="10"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pgrp]"
+                      name="Pgrp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCurr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCurr]"
+                      length="10"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCurr]"
+                      name="SCurr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAPric]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SAPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAPric]"
+                      name="SAPric"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCPric]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCPric]"
+                      name="SCPric"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SSPric]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SSPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SSPric]"
+                      name="SSPric"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOPric]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SOPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SOPric]"
+                      name="SOPric"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AAPric]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AAPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AAPric]"
+                      name="AAPric"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACPric]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACPric]"
+                      name="ACPric"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ASPric]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ASPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ASPric]"
+                      name="ASPric"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AOPric]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AOPric]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AOPric]"
+                      name="AOPric"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[Stat]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Stat]"
+                      length="1"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[Stat]"
+                      name="Stat"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AComm]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[AComm]"
+                      name="AComm"
+                      precision="13"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[CComm]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[CComm]"
+                      name="CComm"
+                      precision="13"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComm]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[SComm]"
+                      name="SComm"
+                      precision="13"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[OComm]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OComm]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[OComm]"
+                      name="OComm"
+                      precision="13"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[TComm]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TComm]"
+                      length="2"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[TComm]"
+                      name="TComm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ExtraAmnt]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ExtraAmnt]"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].Columns[ExtraAmnt]"
+                      name="ExtraAmnt"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="crid" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crdt]"
+                      dataType="dbTimeStamp"
+                      name="crdt" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="lmid" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lmdt]"
+                      dataType="dbTimeStamp"
+                      name="lmdt" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="RID" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCout]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="SCout" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ECout]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="ECout" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pgrp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Pgrp" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCurr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SCurr" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SAPric]"
+                      dataType="numeric"
+                      name="SAPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCPric]"
+                      dataType="numeric"
+                      name="SCPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SSPric]"
+                      dataType="numeric"
+                      name="SSPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SOPric]"
+                      dataType="numeric"
+                      name="SOPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AAPric]"
+                      dataType="numeric"
+                      name="AAPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACPric]"
+                      dataType="numeric"
+                      name="ACPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ASPric]"
+                      dataType="numeric"
+                      name="ASPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AOPric]"
+                      dataType="numeric"
+                      name="AOPric"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Stat]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Stat" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AComm]"
+                      dataType="numeric"
+                      name="AComm"
+                      precision="13"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CComm]"
+                      dataType="numeric"
+                      name="CComm"
+                      precision="13"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SComm]"
+                      dataType="numeric"
+                      name="SComm"
+                      precision="13"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OComm]"
+                      dataType="numeric"
+                      name="OComm"
+                      precision="13"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TComm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="TComm" />
+                    <externalMetadataColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ExtraAmnt]"
+                      dataType="numeric"
+                      name="ExtraAmnt"
+                      precision="15"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crid]"
+                      name="crid" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crdt]"
+                      name="crdt" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmid]"
+                      name="lmid" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmdt]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lmdt]"
+                      name="lmdt" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RID]"
+                      name="RID" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCout]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCout]"
+                      name="SCout" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ECout]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ECout]"
+                      name="ECout" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pgrp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pgrp]"
+                      name="Pgrp" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCurr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCurr]"
+                      name="SCurr" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SAPric]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SAPric]"
+                      name="SAPric"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCPric]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCPric]"
+                      name="SCPric"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SSPric]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SSPric]"
+                      name="SSPric"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SOPric]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SOPric]"
+                      name="SOPric"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AAPric]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AAPric]"
+                      name="AAPric"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACPric]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACPric]"
+                      name="ACPric"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ASPric]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ASPric]"
+                      name="ASPric"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AOPric]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AOPric]"
+                      name="AOPric"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Stat]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Stat]"
+                      name="Stat" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AComm]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AComm]"
+                      name="AComm"
+                      precision="13"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CComm]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CComm]"
+                      name="CComm"
+                      precision="13"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SComm]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SComm]"
+                      name="SComm"
+                      precision="13"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OComm]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OComm]"
+                      name="OComm"
+                      precision="13"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TComm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TComm]"
+                      name="TComm" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ExtraAmnt]"
+                      dataType="numeric"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ExtraAmnt]"
+                      name="ExtraAmnt"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\TRoutePrice.Paths[OLE DB Source Output]"
+              endId="Package\TRoutePrice\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\TRoutePrice\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8386F360-4863-4DDE-A8EA-841912ED8732}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C35B079C-04CF-47F0-865A-283EF58FF9CE}"
+          SQLTask:SqlStatementSource="&#xA;DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;SELECT @sql = @sql +&#xA;    'IF OBJECT_ID(''dbo.' + name + ''') IS NOT NULL TRUNCATE TABLE dbo.' + QUOTENAME(name) + ';' + CHAR(10)&#xA;FROM sys.tables&#xA;WHERE name = 'TRoutePrice';&#xA;&#xA;EXEC (@sql); &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B8DF2EA2-A7D2-4FC2-A860-742C3FA74D62}"
+      DTS:From="Package\Truncate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\TRoutePrice" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{49061B3D-87DF-43BB-92E9-3C90CCDA1B1E}"
+      DTS:From="Package\Package Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Truncate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{90442D18-5537-4506-9519-F2AC9E186BAB}"
+      DTS:From="Package\TRoutePrice"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Package End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{DFD99661-D662-4592-A2B3-0F52965DFB4C}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{799C0B77-295C-4B16-BCC2-F0F17462D71A}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Package Fail"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C2625E97-FC30-47A7-B2F4-E0AB16AC0230}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Package Fail">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"insert into dbo.ssis_log
+select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[System::ErrorDescription],"'","") +"'
+"</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C35B079C-04CF-47F0-865A-283EF58FF9CE}"
+              SQLTask:SqlStatementSource="insert into dbo.ssis_log&#xA;select 'Master_3', 'Package Fail', getdate(), ''&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Package End"
+          TopLeft="1076.6666078402,207.999998553594" />
+        <NodeLayout
+          Size="143.2,41.6"
+          Id="Package\Package Start"
+          TopLeft="481.428545124474,210.914288508948" />
+        <NodeLayout
+          Size="119.2,41.6"
+          Id="Package\Truncate"
+          TopLeft="690.499962573252,207.433331929114" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="624.628545124474,229.973810219031">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="65.8714174487781,0"
+              Start="0,0"
+              End="58.3714174487781,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="58.3714174487781,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\TRoutePrice"
+          TopLeft="872.499952328704,209.733331874874" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="809.699962573252,229.383331901994">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="62.799989755452,0"
+              Start="0,0"
+              End="55.299989755452,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="55.299989755452,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="1008.4999523287,229.666665214234">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="68.1666555114923,0"
+              Start="0,0"
+              End="60.6666555114923,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="60.6666555114923,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="138.4,41.6"
+          Id="Package.EventHandlers[OnError]\Package Fail"
+          TopLeft="1013.99998578429,163.999998450279" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\TRoutePrice">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\TRoutePrice\OLE DB Destination"
+          TopLeft="422.99998210619,359.833331495192" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\TRoutePrice\OLE DB Source"
+          TopLeft="432.999979920686,218.033332272636" />
+        <EdgeLayout
+          Id="Package\TRoutePrice.Paths[OLE DB Source Output]"
+          TopLeft="508.799981013438,259.633332272636">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,100.199999222557"
+              Start="0,0"
+              End="0,92.6999992225568">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,92.6999992225568" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
