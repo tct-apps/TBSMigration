@@ -113,9 +113,7 @@ class Program
                 var routeDetails = routeDetailList
                     .Where(d => d.RouteNo == route.RouteNo)
                     .ToList();
-                
-                route.RouteDetails = routeDetails;
-
+               
                 var requestContent = new RouteRequestModel
                 {
                     OperatorCode = route.OperatorCode,
@@ -123,7 +121,7 @@ class Program
                     RouteName = route.RouteName,
                     OriginCity = route.OriginCity,
                     DestinationCity = route.DestinationCity,
-                    RouteDetails = route.RouteDetails.Select(d => new RouteDetail
+                    RouteDetails = routeDetails.Select(d => new RouteDetail
                     {
                         OperatorCode = d.OperatorCode,
                         RouteNo = d.RouteNo,
