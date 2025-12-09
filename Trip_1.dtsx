@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Trip_1"
   DTS:PackageType="5"
-  DTS:VersionBuild="80"
-  DTS:VersionGUID="{606D7874-B82D-4BE6-AEDF-A1365D78C633}">
+  DTS:VersionBuild="82"
+  DTS:VersionGUID="{9FDF4F29-87E5-4632-AD33-BD5E7FBB663F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAfvjYkpiVZ18kSz67s//oh2oeww1whyJf5ak6kq9HyQAAAAAAOgAAAAAIAACAAAAA7dr/F6y311FrjBiIXsuAQ1pLUpWup7ftluNORpcZnAyAAAABg0W23r4tFTKeUS0eDmsJ4bq7NQluMDrLaPCdKK9QVx0AAAABTQd+dBKZCaIx6C5MEN6LvxNaYrG57xclFonkz/zGT6dbsb4VQFSAU9cmdairyUFQEwoTcJ7nceF6stzej2pz7</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADWhSaNdyKiLnV10myUnNZvFxaNriqkCLsQtroZWF9U3QAAAAAOgAAAAAIAACAAAABy6zzWx1ObBNp4zrGyEJVnnSlwmqseEnBLRTfj8m0bKCAAAAD0t6NJafqFmBDWrJUKBVi+ZWCEwJgPA80v82MmMPuDUEAAAABo28uY3coZjK0GGmtIqCLsBPlkfDmBWNCTzs8tno7VRxJa+E/VMz6Cqr0THK1ct1fetjthRRDJLsq8gE6GuHLm</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -11721,11 +11721,11 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         <NodeLayout
           Size="140,41.6"
           Id="Package\Package End"
-          TopLeft="1438.30349284314,491.369044202128" />
+          TopLeft="1310.52572204683,377.739415362664" />
         <NodeLayout
           Size="143.2,41.6"
           Id="Package\Package Start"
-          TopLeft="226.755939991554,487.142856993051" />
+          TopLeft="98.9781691952459,373.513228153587" />
         <NodeLayout
           Size="162.4,41.6"
           Id="Package\Sequence Container\DERCout_202512"
@@ -12178,14 +12178,14 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           PanelSize="732.8,630.4"
           Size="732.8,673.6"
           Id="Package\Sequence Container"
-          TopLeft="636.137064790913,174.633332118955" />
+          TopLeft="508.359293994605,61.0037032794916" />
         <NodeLayout
           Size="119.2,41.6"
           Id="Package\Truncate"
-          TopLeft="442.380928210326,485.735710907969" />
+          TopLeft="314.603157414018,372.106082068505" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="561.580928210326,508.984521513462">
+          TopLeft="433.803157414018,395.354892673998">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -12207,7 +12207,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="369.955939991554,507.23928395051">
+          TopLeft="242.178169195246,393.609655111046">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -12229,7 +12229,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="1368.93706479091,511.801188160541">
+          TopLeft="1241.1592939946,398.171559321077">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
