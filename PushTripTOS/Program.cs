@@ -79,7 +79,7 @@ class Program
         var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "Start", "", "req", "res", true));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "Start", "TripStart", null, null, true));
 
         try
         {
@@ -111,7 +111,7 @@ class Program
                 DateTime tripDate = group.Key;
                 List<AdhocScheduleModel> batch = group.ToList();
 
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertStart", $"TripDate: {tripDate:yyyy-MM-dd}", "req", "res", true));
+                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertStart", $"TripDate: {tripDate:yyyy-MM-dd}", null, null, true));
 
                 // Build batch request per TripDate
                 var requestContent = new AdhocScheduleRequestModel
@@ -137,6 +137,9 @@ class Program
                     }
                 };
 
+                string requestXml = null;
+                string responseXml = null;
+
                 AdhocScheduleResponseModel response;
 
                 // CancellationToken per-call (optionally pass a global token).
@@ -144,8 +147,12 @@ class Program
 
                 try
                 {
+                    requestXml = SerializeToXml(requestContent, xmlns);
+
                     response = await WebServicePostAsync<AdhocScheduleResponseModel>(
                         requestUrl, soapAction, xmlns, requestContent, cts.Token);
+
+                    responseXml = SerializeToXml(response, xmlns);
 
                     bool isSuccess = true;
                     var adhocList = response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList;
@@ -155,7 +162,7 @@ class Program
                         isSuccess = false;
                     }
 
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertEnd", $"TripDate: {tripDate:yyyy-MM-dd} TotalRecords: {batch.Count}", "req", "res", isSuccess));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertEnd", $"TripDate: {tripDate:yyyy-MM-dd} TotalRecords: {batch.Count}", requestXml, responseXml, isSuccess));
                 }
                 catch (Exception ex)
                 {
@@ -193,7 +200,7 @@ class Program
                         }
                     }
                     
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchUpdate", $"TripDate: {tripDate:yyyy-MM-dd}", "req", "res", true));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchUpdate", $"TripDate: {tripDate:yyyy-MM-dd}", null, null, true));
                 }
                 catch (Exception ex)
                 {
@@ -216,6 +223,15 @@ class Program
             // Write process logs
             LogETLProcess.WriteAllTOS(logs);
         }
+    }
+
+    static string SerializeToXml(object obj, string xmlns)
+    {
+        if (obj == null) return null;
+        var serializer = new XmlSerializer(obj.GetType(), xmlns);
+        using var sw = new StringWriter();
+        serializer.Serialize(sw, obj);
+        return sw.ToString();
     }
 
     static async Task<T> WebServicePostAsync<T>(
