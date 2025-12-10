@@ -202,15 +202,17 @@ class Program
                         ex);
                 }
             }
-
-            // Write process logs
-            LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
             LogETLException.Error(ts, $"ScheduleOverall", "Unhandled exception in Schedule() overall", ex);
             throw;
+        }
+        finally
+        {
+            // Write process logs
+            LogETLProcess.WriteAll(logs);
         }
     }
 

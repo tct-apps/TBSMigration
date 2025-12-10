@@ -135,14 +135,17 @@ class Program
                     throw;
                 }
             }
-            // Write process logs
-            LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
             LogETLException.Error(ts, $"StateOverall", "Unhandled exception in FactTicket() overall", ex);
             throw;
+        }
+        finally
+        {
+            // Write process logs
+            LogETLProcess.WriteAll(logs);
         }
     }
 

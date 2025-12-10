@@ -154,10 +154,7 @@ class Program
                         $"Error sending Route {route.RouteNo}", ex);
                     throw;
                 }
-            });
-
-            // Write process logs
-            LogETLProcess.WriteAll(logs);           
+            });      
         }
         catch (Exception ex)
         {
@@ -165,6 +162,11 @@ class Program
             LogETLException.Error(ts, "RouteOverall",
                 "Unhandled exception in Route() overall", ex);
             throw;
+        }
+        finally
+        {
+            // Write process logs
+            LogETLProcess.WriteAll(logs);
         }
     }
 

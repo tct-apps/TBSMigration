@@ -152,15 +152,17 @@ class Program
                     throw;
                 }
             }
-
-            // Write process logs
-            LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
             LogETLException.Error(ts, $"BusOperatorOverall", "Unhandled exception in BusOperator() overall", ex);
             throw;
+        }
+        finally
+        {
+            // Write process logs
+            LogETLProcess.WriteAll(logs);
         }
     }
 

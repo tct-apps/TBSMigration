@@ -139,9 +139,6 @@ class Program
                     throw;
                 }
             });
-            
-            // Write process logs
-            LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
@@ -149,6 +146,11 @@ class Program
             LogETLException.Error(ts, $"VehicleOverall", 
                 "Unhandled exception in Vehicle() overall", ex);
             throw;
+        }
+        finally
+        {
+            // Write process logs
+            LogETLProcess.WriteAll(logs);
         }
     }
 
