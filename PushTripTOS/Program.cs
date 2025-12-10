@@ -76,10 +76,10 @@ class Program
 
     static async Task AdhocSchedule(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "AdhocScheduleStart", "Adhoc Schedule process started"));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "Start", "", true));
 
         try
         {
@@ -111,9 +111,7 @@ class Program
                 DateTime tripDate = group.Key;
                 List<AdhocScheduleModel> batch = group.ToList();
 
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                    "BatchStart",
-                    $"Processing TripDate {tripDate:yyyy-MM-dd} with {batch.Count} records"));
+                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertStart", $"TripDate: {tripDate:yyyy-MM-dd}", true));
 
                 // Build batch request per TripDate
                 var requestContent = new AdhocScheduleRequestModel
@@ -149,15 +147,21 @@ class Program
                     response = await WebServicePostAsync<AdhocScheduleResponseModel>(
                         requestUrl, soapAction, xmlns, requestContent, cts.Token);
 
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                        "ScheduleRead",
-                        $"Success TripDate {tripDate:yyyy-MM-dd}"));
+                    bool isSuccess = true;
+                    var adhocList = response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList;
+
+                    if (adhocList != null && adhocList.Any(x => x.Code == "0"))
+                    {
+                        isSuccess = false;
+                    }
+
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertEnd", $"TripDate: {tripDate:yyyy-MM-dd} TotalRecords: {batch.Count}", isSuccess));
                 }
                 catch (Exception ex)
                 {
                     LogETLException.Error(
                         TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                        "ScheduleRead",
+                        "TripInsert",
                         $"SOAP failed for TripDate {tripDate:yyyy-MM-dd}", ex);
                     continue;
                 }
@@ -188,16 +192,14 @@ class Program
                             await conn.ExecuteAsync(updateSql, param);
                         }
                     }
-
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                        "ScheduleUpdate",
-                        $"DB update complete for {tripDate:yyyy-MM-dd}"));
+                    
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchUpdate", $"TripDate: {tripDate:yyyy-MM-dd}", true));
                 }
                 catch (Exception ex)
                 {
                     LogETLException.Error(
                         TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                        "ScheduleUpdate",
+                        "TripUpdate",
                         $"DB update failed for TripDate {tripDate:yyyy-MM-dd}",
                         ex);
                 }
@@ -206,13 +208,13 @@ class Program
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, $"ScheduleOverall", "Unhandled exception in Schedule() overall", ex);
+            LogETLException.Error(ts, $"TripOverall", "Unhandled exception in AdhocSchedule() overall", ex);
             throw;
         }
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAll(logs);
+            LogETLProcess.WriteAllTOS(logs);
         }
     }
 

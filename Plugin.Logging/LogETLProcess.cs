@@ -6,11 +6,13 @@ namespace Plugin.Logging
     {
         public static Serilog.Core.Logger Logger { get; set; }
 
-        public static void Information(DateTime timestamp, string project, string message)
+        public static void Information(string type, string process, string message, bool? isSuccess)
         {
             Logger
-                .ForContext("Project", project)
-                .Information(message); // log the plain message text
+                .ForContext("Type", type)
+                .ForContext("Process", process)
+                .ForContext("IsSuccess", isSuccess)
+                .Information(message);
         }
 
         public static void WriteAll(IEnumerable<(DateTime TimeStamp, string Project, string Message)> logs)
@@ -31,9 +33,8 @@ namespace Plugin.Logging
             }
         }
 
-        public static void WriteAllTOS(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message, int? IsSuccess)> logs)
+        public static void WriteAllTOS(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message, bool? IsSuccess)> logs)
         {
-            // Create a list of log events and push to Serilog in one call
             var logEvents = logs.Select(log => new
             {
                 log.TimeStamp,
@@ -52,5 +53,6 @@ namespace Plugin.Logging
                     .Information(log.Message);
             }
         }
+
     }
 }
