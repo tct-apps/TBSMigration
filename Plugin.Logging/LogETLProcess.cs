@@ -30,5 +30,27 @@ namespace Plugin.Logging
                     .Information(log.Message);
             }
         }
+
+        public static void WriteAllTOS(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message, int? IsSuccess)> logs)
+        {
+            // Create a list of log events and push to Serilog in one call
+            var logEvents = logs.Select(log => new
+            {
+                log.TimeStamp,
+                log.Type,
+                log.Process,
+                log.IsSuccess,
+                log.Message
+            }).ToList();
+
+            foreach (var log in logEvents)
+            {
+                Logger
+                    .ForContext("Type", log.Type)
+                    .ForContext("Process", log.Process)
+                    .ForContext("IsSuccess", log.IsSuccess)
+                    .Information(log.Message);
+            }
+        }
     }
 }
