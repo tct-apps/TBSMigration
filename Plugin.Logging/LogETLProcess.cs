@@ -6,12 +6,14 @@ namespace Plugin.Logging
     {
         public static Serilog.Core.Logger Logger { get; set; }
 
-        public static void Information(string type, string process, string message, bool? isSuccess)
+        public static void Information(string type, string process, string message, string requestXml, string responseXml, bool? isSuccess)
         {
             Logger
                 .ForContext("Type", type)
                 .ForContext("Process", process)
                 .ForContext("IsSuccess", isSuccess)
+                .ForContext("RequestXml", requestXml)
+                .ForContext("ResponseXml", responseXml)
                 .Information(message);
         }
 
@@ -33,7 +35,7 @@ namespace Plugin.Logging
             }
         }
 
-        public static void WriteAllTOS(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message, bool? IsSuccess)> logs)
+        public static void WriteAllTOS(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, bool? IsSuccess)> logs)
         {
             var logEvents = logs.Select(log => new
             {
@@ -41,6 +43,8 @@ namespace Plugin.Logging
                 log.Type,
                 log.Process,
                 log.IsSuccess,
+                log.RequestXml,
+                log.ResponseXml,
                 log.Message
             }).ToList();
 
@@ -50,6 +54,8 @@ namespace Plugin.Logging
                     .ForContext("Type", log.Type)
                     .ForContext("Process", log.Process)
                     .ForContext("IsSuccess", log.IsSuccess)
+                    .ForContext("RequestXml", log.RequestXml)
+                    .ForContext("ResponseXml", log.ResponseXml)
                     .Information(log.Message);
             }
         }

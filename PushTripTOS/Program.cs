@@ -76,10 +76,10 @@ class Program
 
     static async Task AdhocSchedule(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, bool? IsSuccess)>();
+        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "Start", "", true));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "Start", "", "req", "res", true));
 
         try
         {
@@ -111,7 +111,7 @@ class Program
                 DateTime tripDate = group.Key;
                 List<AdhocScheduleModel> batch = group.ToList();
 
-                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertStart", $"TripDate: {tripDate:yyyy-MM-dd}", true));
+                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertStart", $"TripDate: {tripDate:yyyy-MM-dd}", "req", "res", true));
 
                 // Build batch request per TripDate
                 var requestContent = new AdhocScheduleRequestModel
@@ -155,7 +155,7 @@ class Program
                         isSuccess = false;
                     }
 
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertEnd", $"TripDate: {tripDate:yyyy-MM-dd} TotalRecords: {batch.Count}", isSuccess));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertEnd", $"TripDate: {tripDate:yyyy-MM-dd} TotalRecords: {batch.Count}", "req", "res", isSuccess));
                 }
                 catch (Exception ex)
                 {
@@ -193,7 +193,7 @@ class Program
                         }
                     }
                     
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchUpdate", $"TripDate: {tripDate:yyyy-MM-dd}", true));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchUpdate", $"TripDate: {tripDate:yyyy-MM-dd}", "req", "res", true));
                 }
                 catch (Exception ex)
                 {
