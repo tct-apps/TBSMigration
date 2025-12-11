@@ -16,7 +16,6 @@ using static Dapper.SqlMapper;
 using Plugin.Logging;
 using Serilog;
 using Setting.Configuration.Application;
-using Microsoft.VisualBasic;
 
 class Program
 {
@@ -81,10 +80,8 @@ class Program
 
     static async Task State(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, bool? IsSuccess)>();
+        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
-
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State","Start", "StateStart", null, null, true));
 
         try
         {
@@ -140,13 +137,13 @@ class Program
                         isSuccess = false;
                     }
                     // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "Read", $"State: {state.StateName}", requestXml, responseXml, isSuccess));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "Insert", $"State: {state.StateName}", requestXml, responseXml, $"{state.StateCode}", isSuccess));
 
                 }
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"StateInsert", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, $"StateInsert", "Exception during Insert phase", ex);
                     throw;
                 }
             }
@@ -166,10 +163,8 @@ class Program
 
     static async Task City(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, bool? IsSuccess)>();
+        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
-
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Start", "CityStart", null, null, true));
 
         try
         {
@@ -228,12 +223,12 @@ class Program
                     }
 
                     // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Read", $"City: {city.CityName}", requestXml, responseXml, isSuccess));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Insert", $"City: {city.CityName}", requestXml, responseXml, $"{city.CityCode}", isSuccess));
                 }
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"CityInsert", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, $"CityInsert", "Exception during Insert phase", ex);
                     throw;
                 }
             }
