@@ -1,17 +1,18 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Plugin.Logging;
 using PushMaster.Common;
 using PushMaster.Vehicle;
+using Serilog;
+using Setting.Configuration.Application;
+using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using static Dapper.SqlMapper;
-using Plugin.Logging;
-using Serilog;
-using Setting.Configuration.Application;
 
 class Program
 {
@@ -75,7 +76,7 @@ class Program
 
     static async Task Vehicle(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
+        var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
         try
@@ -101,71 +102,93 @@ class Program
 
             int batchSize = 100;
 
-            await ProcessInBatches(vehicleList, batchSize, async vehicle =>
+            foreach (var batch in vehicleList.Chunk(batchSize))
             {
-                string requestXml = null;
-                string responseXml = null;
-
-                // CancellationToken per-call (optionally pass a global token).
-                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
-
-                try
+                var tasks = batch.Select(async vehicle =>
                 {
+                    string requestXml = null;
+                    string responseXml = null;
+                    bool isSuccess = false;
+
                     var requestContent = new VehicleRequestModel
                     {
                         PlateNo = vehicle.PlateNo,
                         OperatorCode = vehicle.OperatorCode
                     };
 
-                    requestXml = SerializeToXml(requestContent, xmlns);
+                    using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
 
-                    var response = await WebServicePostAsync<VehicleResponseModel>(
-                        requestUrl,
-                        soapAction,
-                        xmlns,
-                        requestContent,
-                        cts.Token).ConfigureAwait(false);
-
-                    responseXml = SerializeToXml(response, xmlns);
-
-                    bool isSuccess = true;
-                    var vehicles = response.Result;
-                    if (vehicles.Code == "0")
+                    try
                     {
-                        isSuccess = false;
-                    }
+                        requestXml = SerializeToXml(requestContent, xmlns);
+                        var response = await WebServicePostAsync<VehicleResponseModel>(requestUrl, soapAction, xmlns, requestContent, cts.Token);
+                        responseXml = SerializeToXml(response, xmlns);
 
-                    // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Vehicle", "Insert", $"Vehicle: {vehicle.PlateNo}", requestXml, responseXml, $"{vehicle.PlateNo}", isSuccess));
-                }
-                catch (Exception ex)
-                {
-                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"VehicleInsert", "Exception during Insert phase", ex);
-                    throw;
-                }
-            });
+                        isSuccess = response.Result.Code != "0";
+
+                        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                                  "Vehicle", "Insert", $"Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, isSuccess));
+                    }
+                    catch (Exception ex)
+                    {
+                        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                        LogETLException.Error(ts, "VehicleRead", $"Error sending Vehicle {vehicle.PlateNo}", ex);
+
+                        // Always log failed vehicles
+                        logs.Add((ts, "Vehicle", "Insert", $"FAILED Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, false));
+                    }
+                });
+
+                await Task.WhenAll(tasks);
+            }
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
             LogETLException.Error(ts, $"VehicleOverall", "Unhandled exception in Vehicle() overall", ex);
-            throw;
         }
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAllTOS(logs);
+            LogETLProcess.WriteAllTOS(logs.ToList());
         }
     }
 
-    static string SerializeToXml(object obj, string xmlns)
+    static string SerializeToXml(object obj, string defaultNamespace)
     {
         if (obj == null) return null;
-        var serializer = new XmlSerializer(obj.GetType(), xmlns);
-        using var sw = new StringWriter();
-        serializer.Serialize(sw, obj);
-        return sw.ToString();
+
+        // namespaces for inner body only
+        var ns = new XmlSerializerNamespaces();
+        ns.Add("", defaultNamespace);
+
+        // serialize inner object
+        var settings = new XmlWriterSettings
+        {
+            Indent = true,
+            Encoding = new UTF8Encoding(false),
+            OmitXmlDeclaration = true
+        };
+
+        string innerXml;
+        var serializer = new XmlSerializer(obj.GetType(), defaultNamespace);
+
+        using (var sw = new StringWriter())
+        using (var writer = XmlWriter.Create(sw, settings))
+        {
+            serializer.Serialize(writer, obj, ns);
+            innerXml = sw.ToString();
+        }
+
+        // final SOAP envelope (exact as TOS)
+        return $@"<?xml version=""1.0"" encoding=""utf-8""?>
+                <soap:Envelope xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+                               xmlns:xsd=""http://www.w3.org/2001/XMLSchema""
+                               xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"">
+                  <soap:Body>
+                {innerXml}
+                  </soap:Body>
+                </soap:Envelope>";
     }
 
     public static async Task ProcessInBatches<T>(IEnumerable<T> items, int batchSize, Func<T, Task> action)

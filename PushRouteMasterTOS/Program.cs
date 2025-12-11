@@ -1,17 +1,19 @@
-﻿using Dapper;
+﻿using Azure;
+using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Plugin.Logging;
 using PushMaster.Common;
 using PushMaster.Route;
+using Serilog;
+using Setting.Configuration.Application;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using static Dapper.SqlMapper;
-using Plugin.Logging;
-using Serilog;
-using Setting.Configuration.Application;
+using System.Collections.Concurrent;
 
 class Program
 {
@@ -74,42 +76,44 @@ class Program
     }
 
     static async Task Route(string sourceConn)
+{
+    // Thread-safe collection
+    var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
+    var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+    try
     {
-        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
-        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+        string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "Route.sql");
+        string sql = File.ReadAllText(sqlPath);
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"RouteStart", $"Route process started"));
+        using var source = new SqlConnection(sourceConn);
+        await source.OpenAsync().ConfigureAwait(false);
 
-        try
+        using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
+        var routeList = multi.Read<RouteModel>().ToList();
+        var routeDetailList = multi.Read<RouteDetailModel>().ToList();
+
+        var url = Application.URL.TOSWebService;
+        var soapActionBase = Application.URL.SoapActionBase;
+        var xmlns = Application.URL.Xmlns;
+
+        if (string.IsNullOrEmpty(url))
+            throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+
+        Uri requestUrl = new Uri(url);
+        string soapAction = soapActionBase + Constant.ApiUrlKey.RouteInsert;
+
+        int batchSize = 100;
+
+        foreach (var batch in routeList.Chunk(batchSize))
         {
-            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "Route.sql");
-            string sql = File.ReadAllText(sqlPath);
-
-            using var source = new SqlConnection(sourceConn);
-            await source.OpenAsync().ConfigureAwait(false);
-
-            using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
-            List<RouteModel> routeList = multi.Read<RouteModel>().ToList();
-            List<RouteDetailModel> routeDetailList = multi.Read<RouteDetailModel>().ToList();
-
-            var url = Application.URL.TOSWebService;
-            var soapActionBase = Application.URL.SoapActionBase;
-            var xmlns = Application.URL.Xmlns;
-
-            if (string.IsNullOrEmpty(url))
-                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-
-            Uri requestUrl = new Uri(url);
-            string soapAction = soapActionBase + Constant.ApiUrlKey.RouteInsert;
-
-            int batchSize = 100;
-
-            await ProcessInBatches(routeList, batchSize, async route =>
+            var tasks = batch.Select(async route =>
             {
-                var routeDetails = routeDetailList
-                    .Where(d => d.RouteNo == route.RouteNo)
-                    .ToList();
-               
+                string requestXml = null;
+                string responseXml = null;
+                bool isSuccess = false;
+
+                var routeDetails = routeDetailList.Where(d => d.RouteNo == route.RouteNo).ToList();
                 var requestContent = new RouteRequestModel
                 {
                     OperatorCode = route.OperatorCode,
@@ -127,50 +131,101 @@ class Program
                     }).ToList()
                 };
 
-                // CancellationToken per-call (optionally pass a global token).
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
 
                 try
                 {
-                    await WebServicePostAsync<RouteResponseModel>(
-                        requestUrl,
-                        soapAction,
-                        xmlns,
-                        requestContent,
-                        cts.Token).ConfigureAwait(false);
+                    requestXml = SerializeToXml(requestContent, xmlns);
+                    var response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent, cts.Token);
+                    responseXml = SerializeToXml(response, xmlns);
 
-                    // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),"RouteRead",
-                        $"Route {route.RouteNo} processed"));
+                    isSuccess = response.Result.Code != "0";
+
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                              "Route", "Insert", $"Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, isSuccess));
                 }
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, "RouteRead",
-                        $"Error sending Route {route.RouteNo}", ex);
-                    throw;
+                    LogETLException.Error(ts, "RouteRead", $"Error sending Route {route.RouteNo}", ex);
+
+                    // Always log failed route
+                    logs.Add((ts, "Route", "Insert", $"FAILED Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, false));
                 }
-            });      
-        }
-        catch (Exception ex)
-        {
-            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, "RouteOverall",
-                "Unhandled exception in Route() overall", ex);
-            throw;
-        }
-        finally
-        {
-            // Write process logs
-            LogETLProcess.WriteAll(logs);
+            });
+
+            await Task.WhenAll(tasks);
         }
     }
+    catch (Exception ex)
+    {
+        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+        LogETLException.Error(ts, "RouteOverall", "Unhandled exception in Route() overall", ex);
+    }
+    finally
+    {
+        LogETLProcess.WriteAllTOS(logs.ToList());
+    }
+}
+
+
+    static string SerializeToXml(object obj, string defaultNamespace)
+    {
+        if (obj == null) return null;
+
+        // namespaces for inner body only
+        var ns = new XmlSerializerNamespaces();
+        ns.Add("", defaultNamespace);
+
+        // serialize inner object
+        var settings = new XmlWriterSettings
+        {
+            Indent = true,
+            Encoding = new UTF8Encoding(false),
+            OmitXmlDeclaration = true
+        };
+
+        string innerXml;
+        var serializer = new XmlSerializer(obj.GetType(), defaultNamespace);
+
+        using (var sw = new StringWriter())
+        using (var writer = XmlWriter.Create(sw, settings))
+        {
+            serializer.Serialize(writer, obj, ns);
+            innerXml = sw.ToString();
+        }
+
+        // final SOAP envelope (exact as TOS)
+        return $@"<?xml version=""1.0"" encoding=""utf-8""?>
+                <soap:Envelope xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+                               xmlns:xsd=""http://www.w3.org/2001/XMLSchema""
+                               xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"">
+                  <soap:Body>
+                {innerXml}
+                  </soap:Body>
+                </soap:Envelope>";
+    }
+
 
     public static async Task ProcessInBatches<T>(IEnumerable<T> items, int batchSize, Func<T, Task> action)
     {
         foreach (var batch in items.Chunk(batchSize))
         {
-            await Task.WhenAll(batch.Select(action));
+            var tasks = batch.Select(async item =>
+            {
+                try
+                {
+                    await action(item);
+                }
+                catch (Exception ex)
+                {
+                    // log but DO NOT rethrow
+                    Console.WriteLine($"Error in batch item: {ex.Message}");
+                }
+            });
+
+            await Task.WhenAll(tasks);
+
         }
     }
 
