@@ -16,6 +16,7 @@ using static Dapper.SqlMapper;
 using Plugin.Logging;
 using Serilog;
 using Setting.Configuration.Application;
+using Microsoft.VisualBasic;
 
 class Program
 {
@@ -80,10 +81,10 @@ class Program
 
     static async Task State(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "StateStart", "State process started"));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State","Start", "StateStart", null, null, true));
 
         try
         {
@@ -114,10 +115,15 @@ class Program
                     StateName = state.StateName
                 };
 
+                string requestXml = null;
+                string responseXml = null;
+
                 // CancellationToken per-call (optionally pass a global token).
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
                 try
                 {
+                    requestXml = SerializeToXml(requestContent, xmlns);
+
                     StateResponseModel response = await WebServicePostAsync<StateResponseModel>(
                         requestUrl,
                         soapAction,
@@ -125,13 +131,22 @@ class Program
                         requestContent,
                         cts.Token).ConfigureAwait(false);
 
+                    responseXml = SerializeToXml(response, xmlns);
+
+                    bool isSuccess = true;
+                    var states = response.StateInsertResult;
+                    if (states.Code.ToString() == "0")
+                    {
+                        isSuccess = false;
+                    }
                     // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"StateRead", $"State Read process started"));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "Read", $"State: {state.StateName}", requestXml, responseXml, isSuccess));
+
                 }
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"StateRead", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, $"StateInsert", "Exception during Read phase", ex);
                     throw;
                 }
             }
@@ -139,22 +154,22 @@ class Program
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, $"StateOverall", "Unhandled exception in FactTicket() overall", ex);
+            LogETLException.Error(ts, $"StateOverall", "Unhandled exception in State() overall", ex);
             throw;
         }
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAll(logs);
+            LogETLProcess.WriteAllTOS(logs);
         }
     }
 
     static async Task City(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"CityStart", $"City process started"));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Start", "CityStart", null, null, true));
 
         try
         {
@@ -187,10 +202,15 @@ class Program
                     StateCode = city.StateCode
                 };
 
+                string requestXml = null;
+                string responseXml = null;
+
                 // CancellationToken per-call (optionally pass a global token).
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
                 try
                 {
+                    requestXml = SerializeToXml(requestContent, xmlns);
+
                     CityResponseModel response = await WebServicePostAsync<CityResponseModel>(
                         requestUrl,
                         soapAction,
@@ -198,19 +218,28 @@ class Program
                         requestContent,
                         cts.Token).ConfigureAwait(false);
 
+                    responseXml = SerializeToXml(response, xmlns);
+
+                    bool isSuccess = true;
+                    var cities = response.Result;
+                    if (cities.Code == "0")
+                    {
+                        isSuccess = false;
+                    }
+
                     // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"CityRead", $"City Read process started"));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Read", $"City: {city.CityName}", requestXml, responseXml, isSuccess));
                 }
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"CityRead", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, $"CityInsert", "Exception during Read phase", ex);
                     throw;
                 }
             }
 
             // Write process logs
-            LogETLProcess.WriteAll(logs);
+            LogETLProcess.WriteAllTOS(logs);
         }
         catch (Exception ex)
         {
@@ -218,6 +247,15 @@ class Program
             LogETLException.Error(ts, $"CityOverall", "Unhandled exception in City() overall", ex);
             throw;
         }
+    }
+
+    static string SerializeToXml(object obj, string xmlns)
+    {
+        if (obj == null) return null;
+        var serializer = new XmlSerializer(obj.GetType(), xmlns);
+        using var sw = new StringWriter();
+        serializer.Serialize(sw, obj);
+        return sw.ToString();
     }
 
     static async Task<T> WebServicePostAsync<T>(
