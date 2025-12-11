@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using Microsoft.VisualBasic;
 using Plugin.Logging;
 using PushTrip.AdhocSchedule;
 using PushTrip.Common;

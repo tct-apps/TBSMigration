@@ -3,14 +3,9 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Plugin.Logging;
 using PushMaster.BusOperator;
-using PushMaster.City;
 using PushMaster.Common;
-using PushMaster.Route;
-using PushMaster.State;
-using PushMaster.Vehicle;
 using Serilog;
 using System.Net.Http.Headers;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -80,10 +75,8 @@ class Program
 
     static async Task BusOperator(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Project, string Message)>();
+        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
-
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorStart", $"BusOperator process started"));
 
         try
         {
@@ -131,10 +124,15 @@ class Program
                     RegisterNo = bo.RegisterNo,
                 };
 
+                string requestXml = null;
+                string responseXml = null;
+
                 // CancellationToken per-call (optionally pass a global token).
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
                 try
                 {
+                    requestXml = SerializeToXml(requestContent, xmlns);
+
                     BusOperatorResponseModel response = await WebServicePostAsync<BusOperatorResponseModel>(
                         requestUrl,
                         soapAction,
@@ -142,13 +140,22 @@ class Program
                         requestContent,
                         cts.Token).ConfigureAwait(false);
 
+                    responseXml = SerializeToXml(response, xmlns);
+
+                    bool isSuccess = true;
+                    var busOperator = response.Result;
+                    if (busOperator.Code == "0")
+                    {
+                        isSuccess = false;
+                    }
+
                     // logging process read
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), $"BusOperatorRead", $"Bus Operator Read process started"));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "BusOperator", "Insert", $"BusOperator: {bo.OperatorName}", requestXml, responseXml, $"{bo.OperatorCode}", isSuccess));
                 }
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"BusOperatorRead", "Exception during Read phase", ex);
+                    LogETLException.Error(ts, $"BusOperatorInsert", "Exception during Insert phase", ex);
                     throw;
                 }
             }
@@ -162,8 +169,17 @@ class Program
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAll(logs);
+            LogETLProcess.WriteAllTOS(logs);
         }
+    }
+
+    static string SerializeToXml(object obj, string xmlns)
+    {
+        if (obj == null) return null;
+        var serializer = new XmlSerializer(obj.GetType(), xmlns);
+        using var sw = new StringWriter();
+        serializer.Serialize(sw, obj);
+        return sw.ToString();
     }
 
     static async Task<T> WebServicePostAsync<T>(

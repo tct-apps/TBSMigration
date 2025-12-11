@@ -1,12 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using PushMaster.BusOperator;
-using PushMaster.City;
 using PushMaster.Common;
 using PushMaster.Route;
-using PushMaster.Vehicle;
-using PushMaster.State;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;

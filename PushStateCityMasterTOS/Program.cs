@@ -1,11 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using PushMaster.BusOperator;
 using PushMaster.City;
 using PushMaster.Common;
-using PushMaster.Route;
-using PushMaster.Vehicle;
 using PushMaster.State;
 using System.Net.Http.Headers;
 using System.Text;
@@ -136,6 +133,7 @@ class Program
                     {
                         isSuccess = false;
                     }
+
                     // logging process read
                     logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "Insert", $"State: {state.StateName}", requestXml, responseXml, $"{state.StateCode}", isSuccess));
 
