@@ -5,12 +5,13 @@ using Plugin.Logging;
 using PushMaster.BusOperator;
 using PushMaster.Common;
 using Serilog;
+using Setting.Configuration.Application;
+using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using Setting.Configuration.Application;
 using static Dapper.SqlMapper;
 
 class Program
@@ -75,7 +76,7 @@ class Program
 
     static async Task BusOperator(string sourceConn)
     {
-        var logs = new List<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
+        var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
         try
@@ -173,13 +174,41 @@ class Program
         }
     }
 
-    static string SerializeToXml(object obj, string xmlns)
+    static string SerializeToXml(object obj, string defaultNamespace)
     {
         if (obj == null) return null;
-        var serializer = new XmlSerializer(obj.GetType(), xmlns);
-        using var sw = new StringWriter();
-        serializer.Serialize(sw, obj);
-        return sw.ToString();
+
+        // namespaces for inner body only
+        var ns = new XmlSerializerNamespaces();
+        ns.Add("", defaultNamespace);
+
+        // serialize inner object
+        var settings = new XmlWriterSettings
+        {
+            Indent = true,
+            Encoding = new UTF8Encoding(false),
+            OmitXmlDeclaration = true
+        };
+
+        string innerXml;
+        var serializer = new XmlSerializer(obj.GetType(), defaultNamespace);
+
+        using (var sw = new StringWriter())
+        using (var writer = XmlWriter.Create(sw, settings))
+        {
+            serializer.Serialize(writer, obj, ns);
+            innerXml = sw.ToString();
+        }
+
+        // final SOAP envelope (exact as TOS)
+        return $@"<?xml version=""1.0"" encoding=""utf-8""?>
+                <soap:Envelope xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+                               xmlns:xsd=""http://www.w3.org/2001/XMLSchema""
+                               xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"">
+                  <soap:Body>
+                {innerXml}
+                  </soap:Body>
+                </soap:Envelope>";
     }
 
     static async Task<T> WebServicePostAsync<T>(

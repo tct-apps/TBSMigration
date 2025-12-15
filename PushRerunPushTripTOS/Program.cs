@@ -5,16 +5,15 @@ using Plugin.Logging;
 using PushTrip.AdhocSchedule;
 using PushTrip.Common;
 using Serilog;
+using Setting.Configuration.Application;
+using System.Collections.Concurrent;
 using System.Net.Http.Headers;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using Setting.Configuration.Application;
 using static Dapper.SqlMapper;
-using System.Data;
-using System.Text.Json;
-using System.Collections.Concurrent;
 
 class Program
 {
@@ -81,6 +80,8 @@ class Program
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "Start", "TripStart", null, null, true));
+
         try
         {
             string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocSchedule.sql");
@@ -110,6 +111,8 @@ class Program
             {
                 DateTime tripDate = group.Key;
                 List<AdhocScheduleModel> batch = group.ToList();
+
+                logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertStart", $"TripDate: {tripDate:yyyy-MM-dd}", null, null, true));
 
                 // Build batch request per TripDate
                 var requestContent = new AdhocScheduleRequestModel
@@ -152,34 +155,22 @@ class Program
 
                     responseXml = SerializeToXml(response, xmlns);
 
+                    bool isSuccess = true;
                     var adhocList = response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList;
 
-                    var successTripNos = adhocList?
-                        .Where(x => x.Code == "1")
-                        .Select(x => x.TripNo)
-                        .ToList() ?? new List<string>();
-
-                    var errorTripNos = adhocList?
-                        .Where(x => x.Code == "0")
-                        .Select(x => x.TripNo)
-                        .ToList() ?? new List<string>();
-
-                    var customDataObj = new
+                    if (adhocList != null && adhocList.Any(x => x.Code == "0"))
                     {
-                        success = successTripNos,
-                        error = errorTripNos
-                    };
+                        isSuccess = false;
+                    }
 
-                    string customData = JsonSerializer.Serialize(customDataObj);
-
-                    bool isSuccess = adhocList != null && !errorTripNos.Any();
-
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "Insert", $"Date: {tripDate:yyyy-MM-dd} Records: {batch.Count}", requestXml, responseXml, customData, isSuccess));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchInsertEnd", $"TripDate: {tripDate:yyyy-MM-dd} TotalRecords: {batch.Count}", requestXml, responseXml, isSuccess));
                 }
                 catch (Exception ex)
                 {
-                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, "TripInsert", $"Exception during Insert phase", ex);
+                    LogETLException.Error(
+                        TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                        "TripInsert",
+                        $"SOAP failed for TripDate {tripDate:yyyy-MM-dd}", ex);
                     continue;
                 }
 
@@ -190,8 +181,6 @@ class Program
 
                     using var conn = new SqlConnection(sourceConn);
                     await conn.OpenAsync();
-
-                    bool isSuccess = true;
 
                     if (response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList != null)
                     {
@@ -208,22 +197,19 @@ class Program
                                 CompanyCode = adhoc.OperatorCode
                             };
 
-                            int rows = await conn.ExecuteAsync(updateSql, param);
-                            
-                            if (rows == 0)
-                            {
-                                isSuccess = false;
-                            }
+                            await conn.ExecuteAsync(updateSql, param);
                         }
                     }
 
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "Update", $"Date: {tripDate:yyyy-MM-dd} Records: {batch.Count}", null, null, $"{tripDate:yyyy-MM-dd}", isSuccess));
+                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Trip", "BatchUpdate", $"TripDate: {tripDate:yyyy-MM-dd}", null, null, true));
                 }
                 catch (Exception ex)
                 {
-                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"TripUpdate", "Exception during Update phase", ex);
-                    throw;
+                    LogETLException.Error(
+                        TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                        "TripUpdate",
+                        $"DB update failed for TripDate {tripDate:yyyy-MM-dd}",
+                        ex);
                 }
             }
         }
