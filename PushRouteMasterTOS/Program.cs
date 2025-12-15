@@ -139,7 +139,15 @@ class Program
                     var response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent, cts.Token);
                     responseXml = SerializeToXml(response, xmlns);
 
-                    isSuccess = response.Result.Code != "0";
+                    if (response.Result.Code == "0")
+                    {
+                        isSuccess = false;
+                    }
+                    else
+                    {
+                        isSuccess = true;
+                    }
+
 
                     logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
                               "Route", "Insert", $"Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, isSuccess));

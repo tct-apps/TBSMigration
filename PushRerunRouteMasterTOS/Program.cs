@@ -60,7 +60,7 @@ class Program
             Application.URL.Xmlns = config["URL:Xmlns"];
 
             // await the async worker
-            await Route(sourceConn).ConfigureAwait(false);
+            await RerunRoute(sourceConn).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -76,7 +76,7 @@ class Program
         }
     }
 
-    static async Task Route(string sourceConn)
+    static async Task RerunRoute(string sourceConn)
     {
         // Thread-safe collection
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
@@ -140,10 +140,18 @@ class Program
                         var response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent, cts.Token);
                         responseXml = SerializeToXml(response, xmlns);
 
-                        isSuccess = response.Result.Code != "0";
+                        if (response.Result.Code == "0")
+                        {
+                            isSuccess = false;
+                        }
+                        else
+                        {
+                            isSuccess = true;
+                        }
+
 
                         logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                                  "Rerun Route", "Insert", $"Rerun Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, isSuccess));
+                                  "RerunRoute", "Insert", $"RerunRoute: {route.RouteNo}", requestXml, responseXml, route.RouteNo, isSuccess));
                     }
                     catch (Exception ex)
                     {
@@ -151,7 +159,7 @@ class Program
                         LogETLException.Error(ts, "RouteRead", $"Error sending Route {route.RouteNo}", ex);
 
                         // Always log failed route
-                        logs.Add((ts, "Rerun Route", "Insert", $"FAILED Rerun Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, false));
+                        logs.Add((ts, "RerunRoute", "Insert", $"FAILED RerunRoute: {route.RouteNo}", requestXml, responseXml, route.RouteNo, false));
                     }
                 });
 

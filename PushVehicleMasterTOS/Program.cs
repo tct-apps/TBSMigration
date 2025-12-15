@@ -124,7 +124,14 @@ class Program
                         var response = await WebServicePostAsync<VehicleResponseModel>(requestUrl, soapAction, xmlns, requestContent, cts.Token);
                         responseXml = SerializeToXml(response, xmlns);
 
-                        isSuccess = response.Result.Code != "0";
+                        if (response.Result.Code == "0")
+                        {
+                            isSuccess = false;
+                        }
+                        else
+                        {
+                            isSuccess = true;
+                        }
 
                         logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
                                   "Vehicle", "Insert", $"Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, isSuccess));

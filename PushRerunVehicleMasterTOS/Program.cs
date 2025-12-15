@@ -59,7 +59,7 @@ class Program
             Application.URL.Xmlns = config["URL:Xmlns"];
 
             // await the async worker
-            await Vehicle(sourceConn).ConfigureAwait(false);
+            await RerunVehicle(sourceConn).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -75,7 +75,7 @@ class Program
         }
     }
 
-    static async Task Vehicle(string sourceConn)
+    static async Task RerunVehicle(string sourceConn)
     {
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
@@ -125,18 +125,25 @@ class Program
                         var response = await WebServicePostAsync<VehicleResponseModel>(requestUrl, soapAction, xmlns, requestContent, cts.Token);
                         responseXml = SerializeToXml(response, xmlns);
 
-                        isSuccess = response.Result.Code != "0";
+                        if (response.Result.Code == "0")
+                        {
+                            isSuccess = false;
+                        }
+                        else
+                        {
+                            isSuccess = true;
+                        }
 
                         logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                                  "Rerun Vehicle", "Insert", $"Rerun Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, isSuccess));
+                                  "RerunVehicle", "Insert", $"Rerun Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, isSuccess));
                     }
                     catch (Exception ex)
                     {
                         var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                        LogETLException.Error(ts, "Rerun VehicleRead", $"Error sending Vehicle {vehicle.PlateNo}", ex);
+                        LogETLException.Error(ts, "RerunVehicleRead", $"Error sending Vehicle {vehicle.PlateNo}", ex);
 
                         // Always log failed vehicles
-                        logs.Add((ts, "Rerun Vehicle", "Insert", $"FAILED Rerun Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, false));
+                        logs.Add((ts, "RerunVehicle", "Insert", $"FAILED Rerun Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, false));
                     }
                 });
 

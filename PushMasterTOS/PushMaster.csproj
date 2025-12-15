@@ -9,6 +9,8 @@
   <ItemGroup>
     <None Remove="SQL\BusOperator.sql" />
     <None Remove="SQL\City.sql" />
+    <None Remove="SQL\RerunRoute.sql" />
+    <None Remove="SQL\RerunVehicle.sql" />
     <None Remove="SQL\Route.sql" />
     <None Remove="SQL\State.sql" />
     <None Remove="SQL\Vehicle.sql" />
@@ -19,6 +21,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SQL\City.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SQL\RerunRoute.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SQL\RerunVehicle.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SQL\Route.sql">
