@@ -176,10 +176,9 @@ class Program
             using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
             List<CityModel> cityList = multi.Read<CityModel>().ToList();
 
-            // Prepare request settings (could be moved to config)
-            string url = "http://10.238.1.4/TOSWebService_MigrationTest/toswebservice.asmx";
-            string soapActionBase = "http://tos.org";
-            string xmlns = "http://tos.org/";
+            var url = Application.URL.TOSWebService;
+            var soapActionBase = Application.URL.SoapActionBase;
+            var xmlns = Application.URL.Xmlns;
 
             if (string.IsNullOrEmpty(url))
                 throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
