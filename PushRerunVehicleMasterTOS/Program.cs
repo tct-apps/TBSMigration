@@ -44,10 +44,10 @@ class Program
                 .Build();
 
             // Initialize Serilog logger(s) from configuration
-            LogETLProcess.Logger = new LoggerConfiguration()
+            LogMigrationProcess.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationProcess")
                 .CreateLogger();
-            LogETLException.Logger = new LoggerConfiguration()
+            LogMigrationException.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationException")
                 .CreateLogger();
 
@@ -65,13 +65,13 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "Main", "Unhandled exception in Main()", ex);
         }
         finally
         {
             // Ensure logs are flushed before exit
-            (LogETLProcess.Logger as IDisposable)?.Dispose();
-            (LogETLException.Logger as IDisposable)?.Dispose();
+            (LogMigrationProcess.Logger as IDisposable)?.Dispose();
+            (LogMigrationException.Logger as IDisposable)?.Dispose();
         }
     }
 
@@ -140,7 +140,7 @@ class Program
                     catch (Exception ex)
                     {
                         var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                        LogETLException.Error(ts, "RerunVehicleRead", $"Error sending Vehicle {vehicle.PlateNo}", ex);
+                        LogMigrationException.Error(ts, "RerunVehicleRead", $"Error sending Vehicle {vehicle.PlateNo}", ex);
 
                         // Always log failed vehicles
                         logs.Add((ts, "RerunVehicle", "Insert", $"FAILED Rerun Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, false));
@@ -153,12 +153,12 @@ class Program
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, $"VehicleOverall", "Unhandled exception in Vehicle() overall", ex);
+            LogMigrationException.Error(ts, $"VehicleOverall", "Unhandled exception in Vehicle() overall", ex);
         }
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAll(logs.ToList());
+            LogMigrationProcess.WriteAll(logs.ToList());
         }
     }
 

@@ -2,7 +2,7 @@
 
 namespace Plugin.Logging
 {
-    public static class LogETLException
+    public static class LogMigrationException
     {
         public static Serilog.Core.Logger Logger { get; set; }
 

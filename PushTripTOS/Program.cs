@@ -45,10 +45,10 @@ class Program
                 .Build();
 
             // Initialize Serilog logger(s) from configuration
-            LogETLProcess.Logger = new LoggerConfiguration()
+            LogMigrationProcess.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationProcess")
                 .CreateLogger();
-            LogETLException.Logger = new LoggerConfiguration()
+            LogMigrationException.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationException")
                 .CreateLogger();
 
@@ -66,13 +66,13 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "Main", "Unhandled exception in Main()", ex);
         }
         finally
         {
             // Ensure logs are flushed before exit
-            (LogETLProcess.Logger as IDisposable)?.Dispose();
-            (LogETLException.Logger as IDisposable)?.Dispose();
+            (LogMigrationProcess.Logger as IDisposable)?.Dispose();
+            (LogMigrationException.Logger as IDisposable)?.Dispose();
         }
     }
 
@@ -179,7 +179,7 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, "TripInsert", $"Exception during Insert phase", ex);
+                    LogMigrationException.Error(ts, "TripInsert", $"Exception during Insert phase", ex);
                     continue;
                 }
 
@@ -222,7 +222,7 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogETLException.Error(ts, $"TripUpdate", "Exception during Update phase", ex);
+                    LogMigrationException.Error(ts, $"TripUpdate", "Exception during Update phase", ex);
                     throw;
                 }
             }
@@ -230,13 +230,13 @@ class Program
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogETLException.Error(ts, $"TripOverall", "Unhandled exception in AdhocSchedule() overall", ex);
+            LogMigrationException.Error(ts, $"TripOverall", "Unhandled exception in AdhocSchedule() overall", ex);
             throw;
         }
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAll(logs);
+            LogMigrationProcess.WriteAll(logs);
         }
     }
 

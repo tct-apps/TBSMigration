@@ -2,7 +2,7 @@
 
 namespace Plugin.Logging
 {
-    public static class LogETLProcess
+    public static class LogMigrationProcess
     {
         public static Serilog.Core.Logger Logger { get; set; }
 
