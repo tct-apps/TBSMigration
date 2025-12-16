@@ -1,0 +1,1206 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/18/2025 4:06:32 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-CKMEJ54"
+  DTS:CreatorName="DESKTOP-CKMEJ54\Shafiq-TCT"
+  DTS:DTSID="{5D8D0F90-6B1E-434C-AF43-5F4921F00753}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1008.3"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Running_1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="92"
+  DTS:VersionGUID="{C847D663-0B6A-4073-A71B-3DE19B1E2282}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[eTicketing_tbs_new]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7D3D317C-7A2E-4FA6-A89F-736BEB8B929A}"
+      DTS:ObjectName="eTicketing_tbs_new">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADEM6DiR3M8iP7ZhON3Jjzv7i6HJdCypt9VBs15aYG2lQAAAAAOgAAAAAIAACAAAAAHQmiSyknBKDQ4cJNYROmnTwOQzHKKAG/NQzlKevZXviAAAAC4dM8jhf3vo0VMtoE02l5vs3abXGmCHIgdtNcZ9UBmYEAAAACGZ9CWn2r3kXh2Vi1NP4Znh23v2egurHHcojm8G0PqAepnFMZLdQr5a37HHeAcouK+v8J7yswpeTv5SPLbBy6m</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[eTicketing_tbs_old]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5E6597DE-3B3C-4029-8BB1-051127E797D0}"
+      DTS:ObjectName="eTicketing_tbs_old">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-CKMEJ54\MSSQLSERVER01;Initial Catalog=eTicketing_tbs_fs;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Sale-{5E6597DE-3B3C-4029-8BB1-051127E797D0}eTicketing_tbs_old;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6D545A8B-850C-45E1-A4FD-80BF655B2701}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SDate">
+      <DTS:VariableValue
+        DTS:DataType="7">12/30/2025</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Package End"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9DCA1114-8377-4236-AD0B-8A9DB8C97DAB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Package End"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"insert into dbo.ssis_log
+select '"+ @[System::PackageName] +"', 'Package End', getdate(), ''
+"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D3D317C-7A2E-4FA6-A89F-736BEB8B929A}"
+          SQLTask:SqlStatementSource="insert into dbo.ssis_log&#xA;select 'Running_1', 'Package End', getdate(), ''&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Package Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CAB6CD18-E266-46E4-AB00-1951AD6692B1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Package Start"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"insert into dbo.ssis_log
+select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
+"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D3D317C-7A2E-4FA6-A89F-736BEB8B929A}"
+          SQLTask:SqlStatementSource="insert into dbo.ssis_log&#xA;select 'Running_1', 'Package Start', getdate(), ''&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{9C4D0401-8016-4C2C-8FD5-F2A83D974A21}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\SysRunno"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{f47bfe7f-62d0-4e7c-b755-fa1d624480ce}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SysRunno"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\SysRunno\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SysRunno]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\SysRunno\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_new]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_new]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Pref]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="Pref"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pref]"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pref]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RYear]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="RYear"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RYear]"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[RYear]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RMoth]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="RMoth"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RMoth]"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[RMoth]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Runn]"
+                          cachedDataType="numeric"
+                          cachedName="Runn"
+                          cachedPrecision="10"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Runn]"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[Runn]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pref]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Pref" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RYear]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="RYear" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RMoth]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="RMoth" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Runn]"
+                          dataType="numeric"
+                          name="Runn"
+                          precision="10" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\SysRunno\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\SysRunno\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SysRunno]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\SysRunno\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pref]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pref]"
+                          length="10"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pref]"
+                          name="Pref"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[RYear]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RYear]"
+                          length="4"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[RYear]"
+                          name="RYear"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[RMoth]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RMoth]"
+                          length="2"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[RMoth]"
+                          name="RMoth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[Runn]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Runn]"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].Columns[Runn]"
+                          name="Runn"
+                          precision="10"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pref]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Pref" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RYear]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="RYear" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RMoth]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="RMoth" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Runn]"
+                          dataType="numeric"
+                          name="Runn"
+                          precision="10" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pref]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pref]"
+                          name="Pref" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RYear]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RYear]"
+                          name="RYear" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RMoth]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RMoth]"
+                          name="RMoth" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Runn]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Runn]"
+                          name="Runn"
+                          precision="10" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\SysRunno.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\SysRunno\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\SysRunno\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\SysRunnoFixed"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{1fcf5c05-96fe-46bf-979e-83f1902c97ae}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SysRunnoFixed"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SysRunnoFixed]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_new]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_new]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Pref]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="Pref"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pref]"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pref]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RYear]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="RYear"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RYear]"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[RYear]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RMoth]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="RMoth"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RMoth]"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[RMoth]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Runn]"
+                          cachedDataType="numeric"
+                          cachedName="Runn"
+                          cachedPrecision="10"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Runn]"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[Runn]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pref]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Pref" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RYear]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="RYear" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RMoth]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="RMoth" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Runn]"
+                          dataType="numeric"
+                          name="Runn"
+                          precision="10" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SysRunnoFixed]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      connectionManagerRefId="Package.ConnectionManagers[eTicketing_tbs_old]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pref]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pref]"
+                          length="10"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pref]"
+                          name="Pref"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[RYear]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RYear]"
+                          length="4"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[RYear]"
+                          name="RYear"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[RMoth]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RMoth]"
+                          length="2"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[RMoth]"
+                          name="RMoth"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[Runn]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Runn]"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].Columns[Runn]"
+                          name="Runn"
+                          precision="10"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pref]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Pref" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RYear]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="RYear" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RMoth]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="RMoth" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Runn]"
+                          dataType="numeric"
+                          name="Runn"
+                          precision="10" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pref]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pref]"
+                          name="Pref" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RYear]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RYear]"
+                          name="RYear" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RMoth]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RMoth]"
+                          name="RMoth" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Runn]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Runn]"
+                          name="Runn"
+                          precision="10" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\SysRunnoFixed.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\SysRunnoFixed\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\SysRunnoFixed\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
+          DTS:CreationName=""
+          DTS:DTSID="{61eee173-7a12-4ea2-9348-9a72065b3c73}"
+          DTS:From="Package\Sequence Container\SysRunno"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 16"
+          DTS:To="Package\Sequence Container\SysRunnoFixed" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{130C4C74-0168-4E11-9EA1-CB968837CA77}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D3D317C-7A2E-4FA6-A89F-736BEB8B929A}"
+          SQLTask:SqlStatementSource="DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;-- Build TRUNCATE statements only for tables that exist&#xA;SELECT @sql = @sql +&#xA;    'IF OBJECT_ID(''dbo.' + name + ''') IS NOT NULL TRUNCATE TABLE dbo.' + QUOTENAME(name) + ';' + CHAR(10)&#xA;FROM sys.tables&#xA;WHERE name IN (&#xA;    'SysRunno','SysRunnoFixed'&#xA;);&#xA;&#xA;EXEC (@sql);  -- execute" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EA645B36-7292-4710-8CD0-AEA639D5BCA3}"
+      DTS:From="Package\Truncate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{5707DE1D-9B61-4235-9471-B8D5E5F28427}"
+      DTS:From="Package\Package Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Truncate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{C9C53F52-1C71-4D77-86E4-721D6269EB09}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Package End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{A7AAA9C8-B89A-4C24-9222-BCE9EEDFDBC2}"
+      DTS:EventID="-294691912"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{FD9DD949-DCF2-4DDB-83D6-80F374906BD1}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Package Fail"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D0A3D624-73D6-4DF0-A749-BAF3F4931730}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Package Fail">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"insert into dbo.ssis_log
+select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[System::ErrorDescription],"'","") +"'
+"</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7D3D317C-7A2E-4FA6-A89F-736BEB8B929A}"
+              SQLTask:SqlStatementSource="insert into dbo.ssis_log&#xA;select 'Running_1', 'Package Fail', getdate(), ''&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Package End"
+          TopLeft="916.921246197927,316.694442242191" />
+        <NodeLayout
+          Size="143.2,41.6"
+          Id="Package\Package Start"
+          TopLeft="183.333323316442,322.544442201511" />
+        <NodeLayout
+          Size="126.4,41.6"
+          Id="Package\Sequence Container\SysRunno"
+          TopLeft="71.9666414423159,39.4666655577554" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
+          TopLeft="135.899974935006,81.0666655577554">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.662962450024"
+              Start="0,0"
+              End="0,19.162962450024">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.162962450024" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Sequence Container\SysRunnoFixed"
+          TopLeft="60.633308427699,107.729628007779" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="276,200.8"
+          Size="276,244"
+          Id="Package\Sequence Container"
+          TopLeft="583.819412545957,213.342595542827" />
+        <NodeLayout
+          Size="119.2,41.6"
+          Id="Package\Truncate"
+          TopLeft="392.499978554746,319.077775558952" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="511.699978554746,337.610185550889">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.1194339912115,0"
+              Start="0,0"
+              End="64.6194339912115,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="64.6194339912115,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="326.533323316442,341.611108880232">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="65.9666552383031,0"
+              Start="0,0"
+              End="58.4666552383031,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="58.4666552383031,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="859.819412545957,336.418518892509">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="57.1018336519701,0"
+              Start="0,0"
+              End="49.6018336519701,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="49.6018336519701,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="138.4,41.6"
+          Id="Package.EventHandlers[OnError]\Package Fail"
+          TopLeft="634.166663905812,173.666664008631" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\Sequence Container\SysRunno">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\SysRunno\OLE DB Destination"
+          TopLeft="304.166650047733,298.999997920791" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Sequence Container\SysRunno\OLE DB Source"
+          TopLeft="312.166649911139,163.233332236475" />
+        <EdgeLayout
+          Id="Package\Sequence Container\SysRunno.Paths[OLE DB Source Output]"
+          TopLeft="388.966649979436,204.833332236475">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,94.1666656843159"
+              Start="0,0"
+              End="0,86.6666656843159">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,86.6666656843159" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\SysRunno\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\SysRunno\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Sequence Container\SysRunnoFixed">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\SysRunnoFixed\OLE DB Destination"
+          TopLeft="304.166650047733,298.999997920791" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Sequence Container\SysRunnoFixed\OLE DB Source"
+          TopLeft="312.166649911139,163.233332236475" />
+        <EdgeLayout
+          Id="Package\Sequence Container\SysRunnoFixed.Paths[OLE DB Source Output]"
+          TopLeft="388.966649979436,204.833332236475">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,94.1666656843159"
+              Start="0,0"
+              End="0,86.6666656843159">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,86.6666656843159" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\SysRunnoFixed\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\SysRunnoFixed\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
