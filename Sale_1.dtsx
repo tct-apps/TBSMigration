@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Sale_1"
   DTS:PackageType="5"
-  DTS:VersionBuild="100"
-  DTS:VersionGUID="{0583197B-9AE6-442E-BADC-7FFD5FBADD14}">
+  DTS:VersionBuild="102"
+  DTS:VersionGUID="{098E6C6F-91E4-4C82-B6AA-7E5D6E0619EA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADLcVQzNAA3vItuYDkydfKDBxjwi6MGzMXHABW7fUcSaAAAAAAOgAAAAAIAACAAAAC18gnCnzEqNpNboI8QvftaSq0prWKC63+n2FE7c8fXHiAAAAC6T1MvpQVKeZ5Rel/kPGHaEa6m2g9my0DXrdbt0t4H8EAAAAAc8BTO6OYwsmt+UafcL21eMQKyfzUNqjMzhIuldnXb3g5qjF0oRf0wbBdnfsU4VwE9zjPLW0WI/7S6riP20HU2</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADj0d67N6lQSBefi/ND8k8nFnDwx2dVC8N+U+cHluDz+gAAAAAOgAAAAAIAACAAAAB/shAaG91VQym/6I3GlRdPBASmjOs7KAhT4aEPyUezEyAAAAB/2w/r9A7sRcGUlsV0t1HMf0MYitfTKfT2sXHY+oU5MUAAAACA8MDFnsV7pflwAbxBVbEgjNbEBxwn7NJjcbCJasMUd1FBvlXPKfF3nnm6ml4/59/QSBC+1FhoJNCf1O9847F3</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAQn28aXbXAwGLhNExX8CyrL1eVbJLKi9XrwKPwsKpRQAAAAAAOgAAAAAIAACAAAABfbnHnVpIHwLpodd5Xk79rv0jvw6ZzuW7UwhB8ZiCVLSAAAACW0pCJ+p6QYal23nM3K0eGJEIPCMzIG1wjC2qDEQXbVEAAAAANPRuBHK8qs7kiozYDD9RXg8fonXm7iluWgsYGks/G/u8/sVqECX4n+WWoP5FkReh4QtF+qO+mcHxE9J2qlv/v</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAYoawOi5EQpTcpU2aOXp9edJYWcin02twZYedmKs1eNQAAAAAOgAAAAAIAACAAAABCZ/jOktYHDX+E/mWwlzFHA+SqYHi5XP1jgeoNZru5YiAAAAA6P2H3KovT0ENEvAEhp9w+3ysmrCK4nYqsuXRXmQEsTEAAAACzES9kTq4DQX8wVXsM3YeZsRGXL4X5J2Ajpigq1ex1Ilxry17UcNxgx+2RPXanUk3ODNdmfvjKbu3W3ehuYppj</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -33102,7 +33102,7 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                       description="The SQL command to be executed."
                       name="SqlCommand"
                       UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT *
-FROM [eTicketing].[dbo].[OnlineQR]
+FROM [dbo].[OnlineQR]
 WHERE SDate &gt;= ?</property>
                     <property
                       dataType="System.String"
@@ -34737,6 +34737,14 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           Id="Package\Sequence Container\DERPosi_202607"
           TopLeft="51.6666790056553,597.211106990861" />
         <NodeLayout
+          Size="160.8,41.6"
+          Id="Package\Sequence Container\DERPosi_202608"
+          TopLeft="282.266625324224,594.799995407661" />
+        <NodeLayout
+          Size="160.8,41.6"
+          Id="Package\Sequence Container\DERPosi_202609"
+          TopLeft="280.599958748621,516.799995950063" />
+        <NodeLayout
           Size="168.8,41.6"
           Id="Package\Sequence Container\DERTicket_202512"
           TopLeft="279.618506032817,436.759254135231" />
@@ -34768,6 +34776,14 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           Size="168.8,41.6"
           Id="Package\Sequence Container\DERTicket_202607"
           TopLeft="503.333320994344,118.049997798751" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Sequence Container\DERTicket_202608"
+          TopLeft="502.266613303955,198.733331495192" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Sequence Container\DERTicket_202609"
+          TopLeft="503.099946591757,277.59999761343" />
         <NodeLayout
           Size="124,41.6"
           Id="Package\Sequence Container\OnlineQR"
@@ -34905,6 +34921,28 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 14]"
+          TopLeft="587.083279947856,240.333331495192">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.2666661182378"
+              Start="0,0"
+              End="0,29.7666661182378">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.7666661182378" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 15]"
           TopLeft="358.792586577398,197.759256503721">
           <EdgeLayout.Curve>
@@ -34993,6 +35031,28 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 19]"
+          TopLeft="590.716626826758,319.19999761343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.0999985355138"
+              Start="0,0"
+              End="0,28.5999985355138">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5999985355138" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
           TopLeft="131.549999385327,239.492587655393">
           <EdgeLayout.Curve>
@@ -35006,6 +35066,28 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,29.9666668233608" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="212.466679005655,616.805551199261">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.7999463185692,0"
+              Start="0,0"
+              End="62.2999463185692,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="62.2999463185692,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -35080,36 +35162,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="160.8,41.6"
-          Id="Package\Sequence Container\DERPosi_202608"
-          TopLeft="282.266625324224,594.799995407661" />
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
-          TopLeft="212.466679005655,616.805551199261">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="69.7999463185692,0"
-              Start="0,0"
-              End="62.2999463185692,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="62.2999463185692,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="160.8,41.6"
-          Id="Package\Sequence Container\DERPosi_202609"
-          TopLeft="280.599958748621,516.799995950063" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
           TopLeft="361.833292036423,594.799995407661">
@@ -35154,10 +35206,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="168.8,41.6"
-          Id="Package\Sequence Container\DERTicket_202608"
-          TopLeft="502.266613303955,198.733331495192" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 9]"
           TopLeft="587.199967149149,159.649997798751">
@@ -35172,54 +35220,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,31.5833336964414" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="168.8,41.6"
-          Id="Package\Sequence Container\DERTicket_202609"
-          TopLeft="503.099946591757,277.59999761343" />
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 14]"
-          TopLeft="587.083279947856,240.333331495192">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,37.2666661182378"
-              Start="0,0"
-              End="0,29.7666661182378">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.7666661182378" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 19]"
-          TopLeft="590.716626826758,319.19999761343">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,36.0999985355138"
-              Start="0,0"
-              End="0,28.5999985355138">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28.5999985355138" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -35849,6 +35849,134 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
+    design-time-name="Package\Sequence Container\DERPosi_202608">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\DERPosi_202608\OLE DB Destination"
+          TopLeft="362.999980467062,278.499998101592" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Sequence Container\DERPosi_202608\OLE DB Source"
+          TopLeft="373.3333129353,161.199998879035" />
+        <EdgeLayout
+          Id="Package\Sequence Container\DERPosi_202608.Paths[OLE DB Source Output]"
+          TopLeft="448.966646701181,202.799998879035">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75.6999992225568"
+              Start="0,0"
+              End="0,68.1999992225568">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.1999992225568" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\DERPosi_202608\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\DERPosi_202608\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Sequence Container\DERPosi_202609">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\DERPosi_202609\OLE DB Destination"
+          TopLeft="362.999980467062,278.499998101592" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Sequence Container\DERPosi_202609\OLE DB Source"
+          TopLeft="373.3333129353,161.199998879035" />
+        <EdgeLayout
+          Id="Package\Sequence Container\DERPosi_202609.Paths[OLE DB Source Output]"
+          TopLeft="448.966646701181,202.799998879035">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75.6999992225568"
+              Start="0,0"
+              End="0,68.1999992225568">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.1999992225568" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\DERPosi_202609\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\DERPosi_202609\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\Sequence Container\DERTicket_202512">
     <LayoutInfo>
       <GraphLayout
@@ -36377,198 +36505,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\Sequence Container\OnlineQR">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Sequence Container\OnlineQR\OLE DB Destination"
-          TopLeft="362.999980467062,278.499998101592" />
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\Sequence Container\OnlineQR\OLE DB Source"
-          TopLeft="374.333312920399,162.199998864134" />
-        <EdgeLayout
-          Id="Package\Sequence Container\OnlineQR.Paths[OLE DB Source Output]"
-          TopLeft="449.46664669373,203.799998864134">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,74.6999992374581"
-              Start="0,0"
-              End="0,67.1999992374581">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,67.1999992374581" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container\OnlineQR\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container\OnlineQR\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Sequence Container\DERPosi_202608">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Sequence Container\DERPosi_202608\OLE DB Destination"
-          TopLeft="362.999980467062,278.499998101592" />
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\Sequence Container\DERPosi_202608\OLE DB Source"
-          TopLeft="373.3333129353,161.199998879035" />
-        <EdgeLayout
-          Id="Package\Sequence Container\DERPosi_202608.Paths[OLE DB Source Output]"
-          TopLeft="448.966646701181,202.799998879035">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,75.6999992225568"
-              Start="0,0"
-              End="0,68.1999992225568">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,68.1999992225568" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container\DERPosi_202608\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container\DERPosi_202608\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Sequence Container\DERPosi_202609">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Sequence Container\DERPosi_202609\OLE DB Destination"
-          TopLeft="362.999980467062,278.499998101592" />
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\Sequence Container\DERPosi_202609\OLE DB Source"
-          TopLeft="373.3333129353,161.199998879035" />
-        <EdgeLayout
-          Id="Package\Sequence Container\DERPosi_202609.Paths[OLE DB Source Output]"
-          TopLeft="448.966646701181,202.799998879035">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,75.6999992225568"
-              Start="0,0"
-              End="0,68.1999992225568">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,68.1999992225568" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container\DERPosi_202609\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container\DERPosi_202609\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\Sequence Container\DERTicket_202608">
     <LayoutInfo>
       <GraphLayout
@@ -36685,6 +36621,70 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Sequence Container\DERTicket_202609\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Sequence Container\OnlineQR">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\OnlineQR\OLE DB Destination"
+          TopLeft="362.999980467062,278.499998101592" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Sequence Container\OnlineQR\OLE DB Source"
+          TopLeft="374.333312920399,162.199998864134" />
+        <EdgeLayout
+          Id="Package\Sequence Container\OnlineQR.Paths[OLE DB Source Output]"
+          TopLeft="449.46664669373,203.799998864134">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74.6999992374581"
+              Start="0,0"
+              End="0,67.1999992374581">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.1999992374581" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\OnlineQR\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\OnlineQR\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
