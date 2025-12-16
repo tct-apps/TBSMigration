@@ -158,7 +158,7 @@ class Program
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAllTOS(logs.ToList());
+            LogETLProcess.WriteAll(logs.ToList());
         }
     }
 

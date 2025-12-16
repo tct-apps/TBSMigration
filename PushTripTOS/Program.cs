@@ -236,7 +236,7 @@ class Program
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAllTOS(logs);
+            LogETLProcess.WriteAll(logs);
         }
     }
 

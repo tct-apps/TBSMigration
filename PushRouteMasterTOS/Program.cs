@@ -172,7 +172,7 @@ class Program
     }
     finally
     {
-        LogETLProcess.WriteAllTOS(logs.ToList());
+        LogETLProcess.WriteAll(logs.ToList());
     }
 }
 

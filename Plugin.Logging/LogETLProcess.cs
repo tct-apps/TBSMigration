@@ -18,25 +18,7 @@ namespace Plugin.Logging
                 .Information(message);
         }
 
-        public static void WriteAll(IEnumerable<(DateTime TimeStamp, string Project, string Message)> logs)
-        {
-            // Create a list of log events and push to Serilog in one call
-            var logEvents = logs.Select(log => new
-            {
-                log.TimeStamp,
-                log.Project,
-                log.Message
-            }).ToList();
-
-            foreach (var log in logEvents)
-            {
-                Logger
-                    .ForContext("Project", log.Project)
-                    .Information(log.Message);
-            }
-        }
-
-        public static void WriteAllTOS(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)> logs)
+        public static void WriteAll(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)> logs)
         {
             var logEvents = logs.Select(log => new
             {

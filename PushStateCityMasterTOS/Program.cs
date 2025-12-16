@@ -156,7 +156,7 @@ class Program
         finally
         {
             // Write process logs
-            LogETLProcess.WriteAllTOS(logs);
+            LogETLProcess.WriteAll(logs);
         }
     }
 
@@ -233,7 +233,7 @@ class Program
             }
 
             // Write process logs
-            LogETLProcess.WriteAllTOS(logs);
+            LogETLProcess.WriteAll(logs);
         }
         catch (Exception ex)
         {
