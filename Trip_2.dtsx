@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Trip_2"
   DTS:PackageType="5"
-  DTS:VersionBuild="77"
-  DTS:VersionGUID="{114A54EE-2512-4C83-AFA3-CFBB9B7FE683}">
+  DTS:VersionBuild="91"
+  DTS:VersionGUID="{138A21CB-4760-489C-87C5-20742FC54234}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC/AvKqLF00NV7HyVLvEZkpMYZmNxgIZKtUNhRRkgpkcwAAAAAOgAAAAAIAACAAAABdygZMuKWnA0iZsw+qPAS40D54mf2+mPPVyLSNDt6ChyAAAAB3bGn30fMM3FHQT5LTpfGoi3fRXdYkaXNx0ZICf3vyM0AAAAAqkDkdJQytZyw3J1yuTb1wND8cxhMwf8u5QwyQFoza9sEpDFSgMhRP9NuVNynye4ABTvDrR/QNU604ZRNAnUI0</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABrMy96R0Q/PneTmiZ84ys6zhuKfLcIaNTZjAkX7zrUqAAAAAAOgAAAAAIAACAAAABU36BgP51MtE4hI/rwI2pS8rKMrgUzUM9CN7ijL1uyWCAAAAA5por4H4bTbN91cxlDmWnGMI7Woueje847WD2rbOjalEAAAADLA3mgc8/goQMtmRXMTWUVwsw7FgmrdsvFPZ358LJ8gZ7BXo+E2gPwXBXVBvQ6MtcpIc6s8ffmaTtZH4/pDNU+</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -6161,6 +6161,90 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               version="1">
               <components>
                 <component
+                  refId="Package\Sequence Container\DERWaybill_202512\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DERWaybill_202512\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202512\Derived Column.Inputs[Derived Column Input].Columns[GateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="GateN"
+                          lineageId="Package\Sequence Container\DERWaybill_202512\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202512\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          name="CopyGateN"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,10,1252)#{Package\Sequence Container\DERWaybill_202512\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,10,1252)GateN</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202512\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -6411,14 +6495,6 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRate]"
                           lineageId="Package\Sequence Container\DERWaybill_202512\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRate]" />
                         <inputColumn
-                          refId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="B1"
-                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
-                          lineageId="Package\Sequence Container\DERWaybill_202512\OLE DB Source.Outputs[OLE DB Source Output].Columns[B1]" />
-                        <inputColumn
                           refId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -6442,6 +6518,14 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           cachedName="GateN"
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GateN]"
                           lineageId="Package\Sequence Container\DERWaybill_202512\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopyGateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CopyGateN"
+                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
+                          lineageId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -7362,8 +7446,13 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\DERWaybill_202512.Paths[OLE DB Source Output]"
+                  refId="Package\Sequence Container\DERWaybill_202512.Paths[Derived Column Output]"
                   endId="Package\Sequence Container\DERWaybill_202512\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\DERWaybill_202512\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\DERWaybill_202512.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DERWaybill_202512\Derived Column.Inputs[Derived Column Input]"
                   name="OLE DB Source Output"
                   startId="Package\Sequence Container\DERWaybill_202512\OLE DB Source.Outputs[OLE DB Source Output]" />
               </paths>
@@ -7384,6 +7473,90 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
             <pipeline
               version="1">
               <components>
+                <component
+                  refId="Package\Sequence Container\DERWaybill_202601\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DERWaybill_202601\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202601\Derived Column.Inputs[Derived Column Input].Columns[GateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="GateN"
+                          lineageId="Package\Sequence Container\DERWaybill_202601\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202601\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          name="CopyGateN"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,10,1252)#{Package\Sequence Container\DERWaybill_202601\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,10,1252)GateN</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202601\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
                 <component
                   refId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
@@ -7635,14 +7808,6 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRate]"
                           lineageId="Package\Sequence Container\DERWaybill_202601\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRate]" />
                         <inputColumn
-                          refId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="B1"
-                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
-                          lineageId="Package\Sequence Container\DERWaybill_202601\OLE DB Source.Outputs[OLE DB Source Output].Columns[B1]" />
-                        <inputColumn
                           refId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -7666,6 +7831,14 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           cachedName="GateN"
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GateN]"
                           lineageId="Package\Sequence Container\DERWaybill_202601\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopyGateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CopyGateN"
+                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
+                          lineageId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -8586,8 +8759,13 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\DERWaybill_202601.Paths[OLE DB Source Output]"
+                  refId="Package\Sequence Container\DERWaybill_202601.Paths[Derived Column Output]"
                   endId="Package\Sequence Container\DERWaybill_202601\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\DERWaybill_202601\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\DERWaybill_202601.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DERWaybill_202601\Derived Column.Inputs[Derived Column Input]"
                   name="OLE DB Source Output"
                   startId="Package\Sequence Container\DERWaybill_202601\OLE DB Source.Outputs[OLE DB Source Output]" />
               </paths>
@@ -8608,6 +8786,90 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
             <pipeline
               version="1">
               <components>
+                <component
+                  refId="Package\Sequence Container\DERWaybill_202602\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DERWaybill_202602\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202602\Derived Column.Inputs[Derived Column Input].Columns[GateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="GateN"
+                          lineageId="Package\Sequence Container\DERWaybill_202602\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202602\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          name="CopyGateN"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,10,1252)#{Package\Sequence Container\DERWaybill_202602\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,10,1252)GateN</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202602\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
                 <component
                   refId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
@@ -8859,14 +9121,6 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRate]"
                           lineageId="Package\Sequence Container\DERWaybill_202602\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRate]" />
                         <inputColumn
-                          refId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="B1"
-                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
-                          lineageId="Package\Sequence Container\DERWaybill_202602\OLE DB Source.Outputs[OLE DB Source Output].Columns[B1]" />
-                        <inputColumn
                           refId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -8890,6 +9144,14 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           cachedName="GateN"
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GateN]"
                           lineageId="Package\Sequence Container\DERWaybill_202602\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopyGateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CopyGateN"
+                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
+                          lineageId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -9810,8 +10072,13 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\DERWaybill_202602.Paths[OLE DB Source Output]"
+                  refId="Package\Sequence Container\DERWaybill_202602.Paths[Derived Column Output]"
                   endId="Package\Sequence Container\DERWaybill_202602\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\DERWaybill_202602\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\DERWaybill_202602.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DERWaybill_202602\Derived Column.Inputs[Derived Column Input]"
                   name="OLE DB Source Output"
                   startId="Package\Sequence Container\DERWaybill_202602\OLE DB Source.Outputs[OLE DB Source Output]" />
               </paths>
@@ -9832,6 +10099,90 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
             <pipeline
               version="1">
               <components>
+                <component
+                  refId="Package\Sequence Container\DERWaybill_202603\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DERWaybill_202603\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202603\Derived Column.Inputs[Derived Column Input].Columns[GateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="GateN"
+                          lineageId="Package\Sequence Container\DERWaybill_202603\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202603\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          name="CopyGateN"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,10,1252)#{Package\Sequence Container\DERWaybill_202603\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,10,1252)GateN</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202603\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
                 <component
                   refId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
@@ -10083,14 +10434,6 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRate]"
                           lineageId="Package\Sequence Container\DERWaybill_202603\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRate]" />
                         <inputColumn
-                          refId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="B1"
-                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
-                          lineageId="Package\Sequence Container\DERWaybill_202603\OLE DB Source.Outputs[OLE DB Source Output].Columns[B1]" />
-                        <inputColumn
                           refId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -10114,6 +10457,14 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           cachedName="GateN"
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GateN]"
                           lineageId="Package\Sequence Container\DERWaybill_202603\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopyGateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CopyGateN"
+                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
+                          lineageId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -11034,8 +11385,13 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\DERWaybill_202603.Paths[OLE DB Source Output]"
+                  refId="Package\Sequence Container\DERWaybill_202603.Paths[Derived Column Output]"
                   endId="Package\Sequence Container\DERWaybill_202603\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\DERWaybill_202603\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\DERWaybill_202603.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DERWaybill_202603\Derived Column.Inputs[Derived Column Input]"
                   name="OLE DB Source Output"
                   startId="Package\Sequence Container\DERWaybill_202603\OLE DB Source.Outputs[OLE DB Source Output]" />
               </paths>
@@ -11056,6 +11412,90 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
             <pipeline
               version="1">
               <components>
+                <component
+                  refId="Package\Sequence Container\DERWaybill_202604\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DERWaybill_202604\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202604\Derived Column.Inputs[Derived Column Input].Columns[GateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="GateN"
+                          lineageId="Package\Sequence Container\DERWaybill_202604\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202604\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          name="CopyGateN"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,10,1252)#{Package\Sequence Container\DERWaybill_202604\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,10,1252)GateN</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202604\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
                 <component
                   refId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
@@ -11307,14 +11747,6 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRate]"
                           lineageId="Package\Sequence Container\DERWaybill_202604\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRate]" />
                         <inputColumn
-                          refId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="B1"
-                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
-                          lineageId="Package\Sequence Container\DERWaybill_202604\OLE DB Source.Outputs[OLE DB Source Output].Columns[B1]" />
-                        <inputColumn
                           refId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -11338,6 +11770,14 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           cachedName="GateN"
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GateN]"
                           lineageId="Package\Sequence Container\DERWaybill_202604\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopyGateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CopyGateN"
+                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
+                          lineageId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -12258,8 +12698,13 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\DERWaybill_202604.Paths[OLE DB Source Output]"
+                  refId="Package\Sequence Container\DERWaybill_202604.Paths[Derived Column Output]"
                   endId="Package\Sequence Container\DERWaybill_202604\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\DERWaybill_202604\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\DERWaybill_202604.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DERWaybill_202604\Derived Column.Inputs[Derived Column Input]"
                   name="OLE DB Source Output"
                   startId="Package\Sequence Container\DERWaybill_202604\OLE DB Source.Outputs[OLE DB Source Output]" />
               </paths>
@@ -12280,6 +12725,90 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
             <pipeline
               version="1">
               <components>
+                <component
+                  refId="Package\Sequence Container\DERWaybill_202605\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DERWaybill_202605\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202605\Derived Column.Inputs[Derived Column Input].Columns[GateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="GateN"
+                          lineageId="Package\Sequence Container\DERWaybill_202605\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202605\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          name="CopyGateN"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,10,1252)#{Package\Sequence Container\DERWaybill_202605\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,10,1252)GateN</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202605\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
                 <component
                   refId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
@@ -12531,14 +13060,6 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRate]"
                           lineageId="Package\Sequence Container\DERWaybill_202605\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRate]" />
                         <inputColumn
-                          refId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="B1"
-                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
-                          lineageId="Package\Sequence Container\DERWaybill_202605\OLE DB Source.Outputs[OLE DB Source Output].Columns[B1]" />
-                        <inputColumn
                           refId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -12562,6 +13083,14 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           cachedName="GateN"
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GateN]"
                           lineageId="Package\Sequence Container\DERWaybill_202605\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopyGateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CopyGateN"
+                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
+                          lineageId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -13482,8 +14011,13 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\DERWaybill_202605.Paths[OLE DB Source Output]"
+                  refId="Package\Sequence Container\DERWaybill_202605.Paths[Derived Column Output]"
                   endId="Package\Sequence Container\DERWaybill_202605\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\DERWaybill_202605\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\DERWaybill_202605.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DERWaybill_202605\Derived Column.Inputs[Derived Column Input]"
                   name="OLE DB Source Output"
                   startId="Package\Sequence Container\DERWaybill_202605\OLE DB Source.Outputs[OLE DB Source Output]" />
               </paths>
@@ -13504,6 +14038,90 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
             <pipeline
               version="1">
               <components>
+                <component
+                  refId="Package\Sequence Container\DERWaybill_202606\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DERWaybill_202606\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202606\Derived Column.Inputs[Derived Column Input].Columns[GateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="GateN"
+                          lineageId="Package\Sequence Container\DERWaybill_202606\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202606\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          name="CopyGateN"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,10,1252)#{Package\Sequence Container\DERWaybill_202606\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,10,1252)GateN</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202606\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
                 <component
                   refId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
@@ -13755,14 +14373,6 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRate]"
                           lineageId="Package\Sequence Container\DERWaybill_202606\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRate]" />
                         <inputColumn
-                          refId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="B1"
-                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
-                          lineageId="Package\Sequence Container\DERWaybill_202606\OLE DB Source.Outputs[OLE DB Source Output].Columns[B1]" />
-                        <inputColumn
                           refId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -13786,6 +14396,14 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           cachedName="GateN"
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GateN]"
                           lineageId="Package\Sequence Container\DERWaybill_202606\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopyGateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CopyGateN"
+                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
+                          lineageId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -14706,8 +15324,13 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\DERWaybill_202606.Paths[OLE DB Source Output]"
+                  refId="Package\Sequence Container\DERWaybill_202606.Paths[Derived Column Output]"
                   endId="Package\Sequence Container\DERWaybill_202606\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\DERWaybill_202606\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\DERWaybill_202606.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DERWaybill_202606\Derived Column.Inputs[Derived Column Input]"
                   name="OLE DB Source Output"
                   startId="Package\Sequence Container\DERWaybill_202606\OLE DB Source.Outputs[OLE DB Source Output]" />
               </paths>
@@ -14728,6 +15351,90 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
             <pipeline
               version="1">
               <components>
+                <component
+                  refId="Package\Sequence Container\DERWaybill_202607\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\DERWaybill_202607\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202607\Derived Column.Inputs[Derived Column Input].Columns[GateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="GateN"
+                          lineageId="Package\Sequence Container\DERWaybill_202607\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202607\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]"
+                          name="CopyGateN"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,10,1252)#{Package\Sequence Container\DERWaybill_202607\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,10,1252)GateN</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\DERWaybill_202607\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
                 <component
                   refId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
@@ -14979,14 +15686,6 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRate]"
                           lineageId="Package\Sequence Container\DERWaybill_202607\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRate]" />
                         <inputColumn
-                          refId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B1]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="B1"
-                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
-                          lineageId="Package\Sequence Container\DERWaybill_202607\OLE DB Source.Outputs[OLE DB Source Output].Columns[B1]" />
-                        <inputColumn
                           refId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[B2]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -15010,6 +15709,14 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
                           cachedName="GateN"
                           externalMetadataColumnId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GateN]"
                           lineageId="Package\Sequence Container\DERWaybill_202607\OLE DB Source.Outputs[OLE DB Source Output].Columns[GateN]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopyGateN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CopyGateN"
+                          externalMetadataColumnId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[B1]"
+                          lineageId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Output].Columns[CopyGateN]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -15930,8 +16637,13 @@ select '"+ @[System::PackageName] +"', 'Package Start', getdate(), ''
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container\DERWaybill_202607.Paths[OLE DB Source Output]"
+                  refId="Package\Sequence Container\DERWaybill_202607.Paths[Derived Column Output]"
                   endId="Package\Sequence Container\DERWaybill_202607\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\DERWaybill_202607\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\DERWaybill_202607.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\DERWaybill_202607\Derived Column.Inputs[Derived Column Input]"
                   name="OLE DB Source Output"
                   startId="Package\Sequence Container\DERWaybill_202607\OLE DB Source.Outputs[OLE DB Source Output]" />
               </paths>
@@ -17178,7 +17890,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\DERWaybill_202512">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\DERWaybill_202512\OLE DB Source"
@@ -17186,29 +17898,53 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\DERWaybill_202512\OLE DB Destination"
-          TopLeft="304.166650047733,298.999997920791" />
+          TopLeft="305.833316623337,391.733330609268" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Sequence Container\DERWaybill_202512\Derived Column"
+          TopLeft="314.999982789159,277.333331404792" />
         <EdgeLayout
           Id="Package\Sequence Container\DERWaybill_202512.Paths[OLE DB Source Output]"
-          TopLeft="388.966649979436,204.833332236475">
+          TopLeft="389.783316350149,204.833332236475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,94.1666656843159"
+              EndConnector="0,72.499999168317"
               Start="0,0"
-              End="0,86.6666656843159">
+              End="0,64.999999168317">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,86.6666656843159" />
+                    End="0,64.999999168317" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DERWaybill_202512.Paths[Derived Column Output]"
+          TopLeft="391.416649706248,318.933331404792">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72.7999992044763"
+              Start="0,0"
+              End="0,65.2999992044763">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.2999992044763" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -17244,7 +17980,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\DERWaybill_202601">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\DERWaybill_202601\OLE DB Source"
@@ -17252,29 +17988,53 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\DERWaybill_202601\OLE DB Destination"
-          TopLeft="304.166650047733,298.999997920791" />
+          TopLeft="308.166649988128,417.999996147553" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Sequence Container\DERWaybill_202601\Derived Column"
+          TopLeft="313.999995321035,290.999995663762" />
         <EdgeLayout
           Id="Package\Sequence Container\DERWaybill_202601.Paths[OLE DB Source Output]"
-          TopLeft="388.966649979436,204.833332236475">
+          TopLeft="389.283322616087,204.833332236475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,94.1666656843159"
+              EndConnector="0,86.1666634272871"
               Start="0,0"
-              End="0,86.6666656843159">
+              End="0,78.6666634272871">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,86.6666656843159" />
+                    End="0,78.6666634272871" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DERWaybill_202601.Paths[Derived Column Output]"
+          TopLeft="392.083322654582,332.599995663762">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,85.4000004837906"
+              Start="0,0"
+              End="0,77.9000004837906">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,77.9000004837906" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -17310,7 +18070,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\DERWaybill_202602">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\DERWaybill_202602\OLE DB Source"
@@ -17318,29 +18078,53 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\DERWaybill_202602\OLE DB Destination"
-          TopLeft="304.166650047733,298.999997920791" />
+          TopLeft="304.166650047733,427.999995998541" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Sequence Container\DERWaybill_202602\Derived Column"
+          TopLeft="308.999995395541,294.999995604158" />
         <EdgeLayout
           Id="Package\Sequence Container\DERWaybill_202602.Paths[OLE DB Source Output]"
-          TopLeft="388.966649979436,204.833332236475">
+          TopLeft="386.78332265334,204.833332236475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,94.1666656843159"
+              EndConnector="0,90.1666633676825"
               Start="0,0"
-              End="0,86.6666656843159">
+              End="0,82.6666633676825">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,86.6666656843159" />
+                    End="0,82.6666633676825" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DERWaybill_202602.Paths[Derived Column Output]"
+          TopLeft="387.583322721637,336.599995604158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,91.4000003943837"
+              Start="0,0"
+              End="0,83.9000003943837">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,83.9000003943837" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -17376,7 +18160,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\DERWaybill_202603">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\DERWaybill_202603\OLE DB Source"
@@ -17384,29 +18168,53 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Sequence Container\DERWaybill_202603\OLE DB Destination"
-          TopLeft="306.166650017931,297.999997935692" />
+          TopLeft="303.166650062634,416.999996162454" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Sequence Container\DERWaybill_202603\Derived Column"
+          TopLeft="311.999995350838,291.999995648861" />
         <EdgeLayout
           Id="Package\Sequence Container\DERWaybill_202603.Paths[OLE DB Source Output]"
-          TopLeft="389.966649964535,204.833332236475">
+          TopLeft="388.283322630988,204.833332236475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,93.1666656992171"
+              EndConnector="0,87.1666634123859"
               Start="0,0"
-              End="0,85.6666656992171">
+              End="0,79.6666634123859">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,85.6666656992171" />
+                    End="0,79.6666634123859" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DERWaybill_202603.Paths[Derived Column Output]"
+          TopLeft="388.583322706736,333.599995648861">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83.4000005135929"
+              Start="0,0"
+              End="0,75.9000005135929">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.9000005135929" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -17442,29 +18250,55 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\DERWaybill_202604">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Sequence Container\DERWaybill_202604\OLE DB Destination"
-          TopLeft="304.166650047733,298.999997920791" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\DERWaybill_202604\OLE DB Source"
           TopLeft="312.166649911139,163.233332236475" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\DERWaybill_202604\OLE DB Destination"
+          TopLeft="300.166650107338,430.999995953838" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Sequence Container\DERWaybill_202604\Derived Column"
+          TopLeft="308.999995395541,296.999995574355" />
         <EdgeLayout
           Id="Package\Sequence Container\DERWaybill_202604.Paths[OLE DB Source Output]"
-          TopLeft="388.966649979436,204.833332236475">
+          TopLeft="386.78332265334,204.833332236475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,94.1666656843159"
+              EndConnector="0,92.1666633378801"
               Start="0,0"
-              End="0,86.6666656843159">
+              End="0,84.6666633378801">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,86.6666656843159" />
+                    End="0,84.6666633378801" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DERWaybill_202604.Paths[Derived Column Output]"
+          TopLeft="385.583322751439,338.599995574355">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,92.4000003794826"
+              Start="0,0"
+              End="0,84.9000003794826">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,84.9000003794826" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -17506,29 +18340,55 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\DERWaybill_202605">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Sequence Container\DERWaybill_202605\OLE DB Destination"
-          TopLeft="304.166650047733,298.999997920791" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\DERWaybill_202605\OLE DB Source"
           TopLeft="312.166649911139,163.233332236475" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\DERWaybill_202605\OLE DB Destination"
+          TopLeft="299.166650122239,426.999996013442" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Sequence Container\DERWaybill_202605\Derived Column"
+          TopLeft="309.99999538064,297.999995559454" />
         <EdgeLayout
           Id="Package\Sequence Container\DERWaybill_202605.Paths[OLE DB Source Output]"
-          TopLeft="388.966649979436,204.833332236475">
+          TopLeft="387.28332264589,204.833332236475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,94.1666656843159"
+              EndConnector="0,93.166663322979"
               Start="0,0"
-              End="0,86.6666656843159">
+              End="0,85.666663322979">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,86.6666656843159" />
+                    End="0,85.666663322979" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DERWaybill_202605.Paths[Derived Column Output]"
+          TopLeft="385.583322751439,339.599995559454">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,87.4000004539882"
+              Start="0,0"
+              End="0,79.9000004539882">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.9000004539882" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -17570,29 +18430,55 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\DERWaybill_202606">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Sequence Container\DERWaybill_202606\OLE DB Destination"
-          TopLeft="304.166650047733,298.999997920791" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\DERWaybill_202606\OLE DB Source"
           TopLeft="312.166649911139,163.233332236475" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\DERWaybill_202606\OLE DB Destination"
+          TopLeft="301.166650092436,431.999995938936" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Sequence Container\DERWaybill_202606\Derived Column"
+          TopLeft="310.999995365739,296.999995574355" />
         <EdgeLayout
           Id="Package\Sequence Container\DERWaybill_202606.Paths[OLE DB Source Output]"
-          TopLeft="388.966649979436,204.833332236475">
+          TopLeft="387.783322638439,204.833332236475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,94.1666656843159"
+              EndConnector="0,92.1666633378802"
               Start="0,0"
-              End="0,86.6666656843159">
+              End="0,84.6666633378802">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,86.6666656843159" />
+                    End="0,84.6666633378802" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DERWaybill_202606.Paths[Derived Column Output]"
+          TopLeft="387.083322729088,338.599995574355">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,93.4000003645812"
+              Start="0,0"
+              End="0,85.9000003645812">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,85.9000003645812" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -17634,29 +18520,55 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
     design-time-name="Package\Sequence Container\DERWaybill_202607">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Sequence Container\DERWaybill_202607\OLE DB Destination"
-          TopLeft="306.166650017931,297.999997935692" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Sequence Container\DERWaybill_202607\OLE DB Source"
           TopLeft="312.166649911139,163.233332236475" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Sequence Container\DERWaybill_202607\OLE DB Destination"
+          TopLeft="304.166650047733,422.999996073047" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Sequence Container\DERWaybill_202607\Derived Column"
+          TopLeft="309.99999538064,294.999995604158" />
         <EdgeLayout
           Id="Package\Sequence Container\DERWaybill_202607.Paths[OLE DB Source Output]"
-          TopLeft="389.966649964535,204.833332236475">
+          TopLeft="387.28332264589,204.833332236475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,93.1666656992171"
+              EndConnector="0,90.1666633676825"
               Start="0,0"
-              End="0,85.6666656992171">
+              End="0,82.6666633676825">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,85.6666656992171" />
+                    End="0,82.6666633676825" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\DERWaybill_202607.Paths[Derived Column Output]"
+          TopLeft="388.083322714187,336.599995604158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,86.4000004688893"
+              Start="0,0"
+              End="0,78.9000004688893">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,78.9000004688893" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
