@@ -159,7 +159,7 @@ class Program
                         .Select(x => x.TripNo)
                         .ToList() ?? new List<string>();
 
-                    var errorTripNos = adhocList?
+                    var errorTripNos = adhocList? 
                         .Where(x => x.Code == "0")
                         .Select(x => x.TripNo)
                         .ToList() ?? new List<string>();
