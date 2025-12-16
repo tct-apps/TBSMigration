@@ -66,7 +66,7 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "StateCity", "Main", null, null, null, "Unhandled exception in Main()", ex);
         }
         finally
         {
@@ -142,16 +142,14 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogMigrationException.Error(ts, $"StateInsert", "Exception during Insert phase", ex);
-                    throw;
+                    LogMigrationException.Error(ts, "State", "Insert", requestXml, responseXml, $"{state.StateCode}", "Exception during Insert phase", ex);
                 }
             }
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, $"StateOverall", "Unhandled exception in State() overall", ex);
-            throw;
+            LogMigrationException.Error(ts, "State", "Overall", null, null, null, "Unhandled exception in State() overall", ex);
         }
         finally
         {
@@ -226,8 +224,7 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogMigrationException.Error(ts, $"CityInsert", "Exception during Insert phase", ex);
-                    throw;
+                    LogMigrationException.Error(ts, "City", "Insert", requestXml, responseXml, $"{city.CityCode}", "Exception during Insert phase", ex);
                 }
             }
 
@@ -237,8 +234,7 @@ class Program
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, $"CityOverall", "Unhandled exception in City() overall", ex);
-            throw;
+            LogMigrationException.Error(ts, "City", "Overall", null, null, null, "Unhandled exception in City() overall", ex);
         }
     }
 

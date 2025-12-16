@@ -65,7 +65,7 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "Route", "Main", null, null, null, "Unhandled exception in Main()", ex);
         }
         finally
         {
@@ -76,105 +76,105 @@ class Program
     }
 
     static async Task Route(string sourceConn)
-{
-    // Thread-safe collection
-    var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
-    var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
-
-    try
     {
-        string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "Route.sql");
-        string sql = File.ReadAllText(sqlPath);
+        // Thread-safe collection
+        var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
+        var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        using var source = new SqlConnection(sourceConn);
-        await source.OpenAsync().ConfigureAwait(false);
-
-        using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
-        var routeList = multi.Read<RouteModel>().ToList();
-        var routeDetailList = multi.Read<RouteDetailModel>().ToList();
-
-        var url = Application.URL.TOSWebService;
-        var soapActionBase = Application.URL.SoapActionBase;
-        var xmlns = Application.URL.Xmlns;
-
-        if (string.IsNullOrEmpty(url))
-            throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
-
-        Uri requestUrl = new Uri(url);
-        string soapAction = soapActionBase + Constant.ApiUrlKey.RouteInsert;
-
-        int batchSize = 100;
-
-        foreach (var batch in routeList.Chunk(batchSize))
+        try
         {
-            var tasks = batch.Select(async route =>
+            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "Route.sql");
+            string sql = File.ReadAllText(sqlPath);
+
+            using var source = new SqlConnection(sourceConn);
+            await source.OpenAsync().ConfigureAwait(false);
+
+            using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
+            var routeList = multi.Read<RouteModel>().ToList();
+            var routeDetailList = multi.Read<RouteDetailModel>().ToList();
+
+            var url = Application.URL.TOSWebService;
+            var soapActionBase = Application.URL.SoapActionBase;
+            var xmlns = Application.URL.Xmlns;
+
+            if (string.IsNullOrEmpty(url))
+                throw new FurtherActionRequiredException(string.Format(ErrorMessage.MissingIntegrationInfo, "ApiUrl"));
+
+            Uri requestUrl = new Uri(url);
+            string soapAction = soapActionBase + Constant.ApiUrlKey.RouteInsert;
+
+            int batchSize = 100;
+
+            foreach (var batch in routeList.Chunk(batchSize))
             {
-                string requestXml = null;
-                string responseXml = null;
-                bool isSuccess = false;
-
-                var routeDetails = routeDetailList.Where(d => d.RouteNo == route.RouteNo).ToList();
-                var requestContent = new RouteRequestModel
+                var tasks = batch.Select(async route =>
                 {
-                    OperatorCode = route.OperatorCode,
-                    RouteNo = route.RouteNo,
-                    RouteName = route.RouteName,
-                    OriginCity = route.OriginCity,
-                    DestinationCity = route.DestinationCity,
-                    RouteDetails = routeDetails.Select(d => new RouteDetail
+                    string requestXml = null;
+                    string responseXml = null;
+                    bool isSuccess = false;
+
+                    var routeDetails = routeDetailList.Where(d => d.RouteNo == route.RouteNo).ToList();
+                    var requestContent = new RouteRequestModel
                     {
-                        OperatorCode = d.OperatorCode,
-                        RouteNo = d.RouteNo,
-                        Display = d.Display,
-                        ViaCity = d.ViaCity,
-                        StageNo = d.StageNo
-                    }).ToList()
-                };
+                        OperatorCode = route.OperatorCode,
+                        RouteNo = route.RouteNo,
+                        RouteName = route.RouteName,
+                        OriginCity = route.OriginCity,
+                        DestinationCity = route.DestinationCity,
+                        RouteDetails = routeDetails.Select(d => new RouteDetail
+                        {
+                            OperatorCode = d.OperatorCode,
+                            RouteNo = d.RouteNo,
+                            Display = d.Display,
+                            ViaCity = d.ViaCity,
+                            StageNo = d.StageNo
+                        }).ToList()
+                    };
 
-                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+                    using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
 
-                try
-                {
-                    requestXml = SerializeToXml(requestContent, xmlns);
-                    var response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent, cts.Token);
-                    responseXml = SerializeToXml(response, xmlns);
-
-                    if (response.Result.Code == "0")
+                    try
                     {
-                        isSuccess = false;
+                        requestXml = SerializeToXml(requestContent, xmlns);
+                        var response = await WebServicePostAsync<RouteResponseModel>(requestUrl, soapAction, xmlns, requestContent, cts.Token);
+                        responseXml = SerializeToXml(response, xmlns);
+
+                        if (response.Result.Code == "0")
+                        {
+                            isSuccess = false;
+                        }
+                        else
+                        {
+                            isSuccess = true;
+                        }
+
+
+                        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                                  "Route", "Insert", $"Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, isSuccess));
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        isSuccess = true;
+                        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                        LogMigrationException.Error(ts, "Route", "Insert", requestXml, responseXml, $"{route.RouteNo}", "Exception during Insert phase", ex);
+
+                        // Always log failed route
+                        logs.Add((ts, "Route", "Insert", $"FAILED Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, false));
                     }
+                });
 
-
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                              "Route", "Insert", $"Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, isSuccess));
-                }
-                catch (Exception ex)
-                {
-                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogMigrationException.Error(ts, "RouteRead", $"Error sending Route {route.RouteNo}", ex);
-
-                    // Always log failed route
-                    logs.Add((ts, "Route", "Insert", $"FAILED Route: {route.RouteNo}", requestXml, responseXml, route.RouteNo, false));
-                }
-            });
-
-            await Task.WhenAll(tasks);
+                await Task.WhenAll(tasks);
+            }
+        }
+        catch (Exception ex)
+        {
+            var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+            LogMigrationException.Error(ts, "Route", "Overall", null, null, null, "Unhandled exception in Route() overall", ex);
+        }
+        finally
+        {
+            LogMigrationProcess.WriteAll(logs.ToList());
         }
     }
-    catch (Exception ex)
-    {
-        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-        LogMigrationException.Error(ts, "RouteOverall", "Unhandled exception in Route() overall", ex);
-    }
-    finally
-    {
-        LogMigrationProcess.WriteAll(logs.ToList());
-    }
-}
 
 
     static string SerializeToXml(object obj, string defaultNamespace)

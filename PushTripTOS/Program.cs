@@ -66,7 +66,7 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "AdhocSchedule", "Main", null, null, null, "Unhandled exception in Main()", ex);
         }
         finally
         {
@@ -179,7 +179,7 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogMigrationException.Error(ts, "TripInsert", $"Exception during Insert phase", ex);
+                    LogMigrationException.Error(ts, "Trip", "Insert", requestXml, responseXml, $"{tripDate:yyyy-MM-dd}", "Exception during Insert phase", ex);
                     continue;
                 }
 
@@ -222,16 +222,14 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogMigrationException.Error(ts, $"TripUpdate", "Exception during Update phase", ex);
-                    throw;
+                    LogMigrationException.Error(ts, "Trip", "Update", requestXml, responseXml, $"{tripDate:yyyy-MM-dd}", "Exception during Update phase", ex);
                 }
             }
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, $"TripOverall", "Unhandled exception in AdhocSchedule() overall", ex);
-            throw;
+            LogMigrationException.Error(ts, "Trip", "Overall", null, null, null, "Unhandled exception in AdhocSchedule() overall", ex);
         }
         finally
         {

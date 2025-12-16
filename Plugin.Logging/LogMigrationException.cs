@@ -1,21 +1,24 @@
-﻿using System.Reflection.Metadata;
-
+﻿
 namespace Plugin.Logging
 {
     public static class LogMigrationException
     {
         public static Serilog.Core.Logger Logger { get; set; }
 
-        public static void Error(DateTime timestamp, string project, string message, Exception exception)
+        public static void Error(DateTime timestamp, string type, string process, string requestXml, string responseXml, string customData, string message, Exception exception)
         {
             Logger
-                .ForContext("Project", project)
+                .ForContext("Type", type)
+                .ForContext("Process", process)
+                .ForContext("RequestXml", requestXml)
+                .ForContext("ResponseXml", responseXml)
+                .ForContext("CustomData", customData)
                 .Error(exception, message);
         }
 
-        public static void Error(DateTime timestamp, string project, Exception exception)
+        public static void Error(DateTime timestamp, string type, string process, string requestXml, string responseXml, string customData, Exception exception)
         {
-            Error(timestamp, project, exception.Message, exception);
+            Error(timestamp, type, process, requestXml, responseXml, customData, exception.Message, exception);
         }
     }
 }

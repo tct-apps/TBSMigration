@@ -64,7 +64,7 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "BusOperator", "Main", null, null, null, "Unhandled exception in Main()", ex);
         }
         finally
         {
@@ -156,16 +156,14 @@ class Program
                 catch (Exception ex)
                 {
                     var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogMigrationException.Error(ts, $"BusOperatorInsert", "Exception during Insert phase", ex);
-                    throw;
+                    LogMigrationException.Error(ts, "BusOperator", "Insert", requestXml, responseXml, $"{bo.OperatorCode}", "Exception during Insert phase", ex);
                 }
             }
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, $"BusOperatorOverall", "Unhandled exception in BusOperator() overall", ex);
-            throw;
+            LogMigrationException.Error(ts, "BusOperator", "Overall", null, null, null, "Unhandled exception in BusOperator() overall", ex);
         }
         finally
         {

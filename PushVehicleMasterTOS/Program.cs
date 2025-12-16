@@ -64,7 +64,7 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "Vehicle", "Main", null, null, null, "Unhandled exception in Main()", ex);
         }
         finally
         {
@@ -139,7 +139,7 @@ class Program
                     catch (Exception ex)
                     {
                         var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                        LogMigrationException.Error(ts, "VehicleRead", $"Error sending Vehicle {vehicle.PlateNo}", ex);
+                        LogMigrationException.Error(ts, "Vehicle", "Insert", requestXml, responseXml, $"{vehicle.PlateNo}", "Exception during Insert phase", ex);
 
                         // Always log failed vehicles
                         logs.Add((ts, "Vehicle", "Insert", $"FAILED Vehicle: {vehicle.PlateNo}", requestXml, responseXml, vehicle.PlateNo, false));
@@ -152,7 +152,7 @@ class Program
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, $"VehicleOverall", "Unhandled exception in Vehicle() overall", ex);
+            LogMigrationException.Error(ts, "Vehicle", "Overall", null, null, null, "Unhandled exception in Vehicle() overall", ex);
         }
         finally
         {

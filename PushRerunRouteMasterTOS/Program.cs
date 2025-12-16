@@ -66,7 +66,7 @@ class Program
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "Main", "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "RerunRoute", "Main", null, null, null, "Unhandled exception in Main()", ex);
         }
         finally
         {
@@ -156,7 +156,7 @@ class Program
                     catch (Exception ex)
                     {
                         var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                        LogMigrationException.Error(ts, "RouteRead", $"Error sending Route {route.RouteNo}", ex);
+                        LogMigrationException.Error(ts, "RerunRoute", "Insert", requestXml, responseXml, $"{route.RouteNo}", "Exception during Insert phase", ex);
 
                         // Always log failed route
                         logs.Add((ts, "RerunRoute", "Insert", $"FAILED RerunRoute: {route.RouteNo}", requestXml, responseXml, route.RouteNo, false));
@@ -169,7 +169,7 @@ class Program
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "RerunRouteOverall", "Unhandled exception in Route() overall", ex);
+            LogMigrationException.Error(ts, "RerunRoute", "Overall", null, null, null, "Unhandled exception in RerunRoute() overall", ex);
         }
         finally
         {
