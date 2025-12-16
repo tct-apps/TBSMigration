@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Master_1"
   DTS:PackageType="5"
-  DTS:VersionBuild="177"
-  DTS:VersionGUID="{8A696070-7FED-4222-A4E6-FC574CF48D9A}">
+  DTS:VersionBuild="178"
+  DTS:VersionGUID="{E2346C37-BB4F-4247-9826-8B9E01D5AC62}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAPlM0ivOn+yIG1ILvPSMhW1O9vWOYi+vVA+EqZFzIAKwAAAAAOgAAAAAIAACAAAAAq7G1wBhBMeevDLKJpaYw+bnHy/haJFMR/pWG/LsCphyAAAABMrhuzlThZ16gQtLfmXGP/JP3W79XK5hMAdRRi/v4s/kAAAADnWMtHH48qRAcXtKvJ3Gkts3nS4ezNCSdLwWMZ3HFFwHmoy0oE3qe8jtF6JLh2saXlx1lilvi9kTexi+ZfKgqu</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAA0mqYZfwrAHmcM9TF30HGeiNRsHA3zbIoYfCESiFSeuQAAAAAOgAAAAAIAACAAAAC/1gyXs4drmvGJ7ggi66H9+tHXBDkFF7oXFbohJioluCAAAAAZxVQiZqkfUpTwzNTycocagFA0VaMd/Ho0sm1BiDECN0AAAADACqAG58l3rHh+rOwAQFahyr4T6g7wbee5u3i8DKZDCSts4IIS8nSBZgjolwqwlBfZeYpm0+QzLKj1RIeO4Tqb</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,12 +42,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=10.20.40.111;User ID=kiosk;Initial Catalog=eTicketing;Provider=MSOLEDBSQL.1;Auto Translate=False;Application Name=SSIS-MasterData-{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}eTicketing_tbs_old;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABZKYnI/cxWixQ9o3VXVcbNDZQ5b56p/PltJTJb0nlD3QAAAAAOgAAAAAIAACAAAACe73/bo5VHP8EfsfPzR7FrR36blgzEHDxeW+wkoOvPuiAAAACp8HSIZ2gI5pK0AQ5EUgHzd9D8HTmlnUlO0zKXSTbqcEAAAADz1LpWG3vKkIN3Mieyee0Kkc+pTgTNqCSTMEjtaz4oCH9lv8ojJRmH2h4w4qk+VVlrhUhk1cURUS+E+IGR1awq</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=DESKTOP-CKMEJ54\MSSQLSERVER01;Initial Catalog=eTicketing_tbs_fs;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-MasterData-{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}eTicketing_tbs_old;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
