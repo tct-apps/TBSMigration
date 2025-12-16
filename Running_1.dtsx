@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Running_1"
   DTS:PackageType="5"
-  DTS:VersionBuild="92"
-  DTS:VersionGUID="{C847D663-0B6A-4073-A71B-3DE19B1E2282}">
+  DTS:VersionBuild="93"
+  DTS:VersionGUID="{5226276E-2AE6-42A3-ACEA-919B1DE02AEF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,11 +25,11 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=tctapps-development.database.windows.net;User ID=tctdev;Initial Catalog=eTicketing_tbs;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Running_1-{7D3D317C-7A2E-4FA6-A89F-736BEB8B929A}eTicketing_tbs_new;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADEM6DiR3M8iP7ZhON3Jjzv7i6HJdCypt9VBs15aYG2lQAAAAAOgAAAAAIAACAAAAAHQmiSyknBKDQ4cJNYROmnTwOQzHKKAG/NQzlKevZXviAAAAC4dM8jhf3vo0VMtoE02l5vs3abXGmCHIgdtNcZ9UBmYEAAAACGZ9CWn2r3kXh2Vi1NP4Znh23v2egurHHcojm8G0PqAepnFMZLdQr5a37HHeAcouK+v8J7yswpeTv5SPLbBy6m</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADc0YDNetvMIk2wghZRSQGX3EgHN5Y/wialCf7qi03nBgAAAAAOgAAAAAIAACAAAADYe3NoNK7VM7aGD7CHBKhUsUKAqsEjIRDOWcYZmgfXKSAAAADRRp5c+4RdavNLeA2hdIlHH2odh/ps5HqjaCCiXiJs60AAAADy0zfMXuucRk67KreS6cL1LNZsqpKBpb0BHECA7ZEunSgJQ2qfSH3zxE443Y5RG1szUW3YPQbLvMtmORYtdwIU</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,7 +42,12 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DESKTOP-CKMEJ54\MSSQLSERVER01;Initial Catalog=eTicketing_tbs_fs;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Sale-{5E6597DE-3B3C-4029-8BB1-051127E797D0}eTicketing_tbs_old;" />
+          DTS:ConnectionString="Data Source=10.20.40.111;User ID=kiosk;Initial Catalog=eTicketing;Provider=MSOLEDBSQL.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Sale-{5E6597DE-3B3C-4029-8BB1-051127E797D0}eTicketing_tbs_old;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABiwNnaNjee3ROYfdX/6mF4irrPux1oXIiv8QjFL1GIvQAAAAAOgAAAAAIAACAAAAACaIaRP+eXVTMGmOD7z1X2+KIIlcIavUG/eInJCtHfLiAAAABdsCZK8VeaX09hwzxUhYDvabWpcDA/3fdVM/FzUWfIbUAAAACaxKHYjCe3EP9brbJjcv+3O40H2EdQF+TX57Va2yoLSzTEupEj0WQbjSa5x3unfRZCHPEe66PJkZRYxP35F6cC</DTS:Password>
+        </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -956,6 +961,10 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           Size="126.4,41.6"
           Id="Package\Sequence Container\SysRunno"
           TopLeft="71.9666414423159,39.4666655577554" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Sequence Container\SysRunnoFixed"
+          TopLeft="60.633308427699,107.729628007779" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 16]"
           TopLeft="135.899974935006,81.0666655577554">
@@ -978,10 +987,6 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\Sequence Container\SysRunnoFixed"
-          TopLeft="60.633308427699,107.729628007779" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"

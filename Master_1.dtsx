@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Master_1"
   DTS:PackageType="5"
-  DTS:VersionBuild="174"
-  DTS:VersionGUID="{F2393914-F12B-4340-9D93-187234D41CF1}">
+  DTS:VersionBuild="177"
+  DTS:VersionGUID="{8A696070-7FED-4222-A4E6-FC574CF48D9A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC4SPOykM6ysPJ+H+pwzGUAoTbh47OGd90WSHa9bNAZiAAAAAAOgAAAAAIAACAAAABAFpVkQP29sX+PLrHMYn5sEOWgnm7DY3n7gkt7zVknPSAAAAA4cODVDR6oZEZHyFG51hnIUhaxuvhYMrbjaG6hMrog1UAAAAD4SAPF5DbLlHdHG6FM0a+sqgPk7hT2SNbTy+lcZQFtMXaimNYE4QIT//Bs5JVUs7ifnORDsIjK0hM818wEx8IE</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAPlM0ivOn+yIG1ILvPSMhW1O9vWOYi+vVA+EqZFzIAKwAAAAAOgAAAAAIAACAAAAAq7G1wBhBMeevDLKJpaYw+bnHy/haJFMR/pWG/LsCphyAAAABMrhuzlThZ16gQtLfmXGP/JP3W79XK5hMAdRRi/v4s/kAAAADnWMtHH48qRAcXtKvJ3Gkts3nS4ezNCSdLwWMZ3HFFwHmoy0oE3qe8jtF6JLh2saXlx1lilvi9kTexi+ZfKgqu</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,7 +42,12 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DESKTOP-CKMEJ54\MSSQLSERVER01;Initial Catalog=eTicketing_tbs_fs;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-MasterData-{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}eTicketing_tbs_old;" />
+          DTS:ConnectionString="Data Source=10.20.40.111;User ID=kiosk;Initial Catalog=eTicketing;Provider=MSOLEDBSQL.1;Auto Translate=False;Application Name=SSIS-MasterData-{D4B760AE-178E-43AA-9E23-BA839DEDF0E9}eTicketing_tbs_old;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABZKYnI/cxWixQ9o3VXVcbNDZQ5b56p/PltJTJb0nlD3QAAAAAOgAAAAAIAACAAAACe73/bo5VHP8EfsfPzR7FrR36blgzEHDxeW+wkoOvPuiAAAACp8HSIZ2gI5pK0AQ5EUgHzd9D8HTmlnUlO0zKXSTbqcEAAAADz1LpWG3vKkIN3Mieyee0Kkc+pTgTNqCSTMEjtaz4oCH9lv8ojJRmH2h4w4qk+VVlrhUhk1cURUS+E+IGR1awq</DTS:Password>
+        </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -11312,7 +11317,7 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         <NodeLayout
           Size="143.2,41.6"
           Id="Package\Package Start"
-          TopLeft="517.26187649996,41.0476230235132" />
+          TopLeft="516.428543212158,41.0476230235132" />
         <NodeLayout
           Size="113.6,41.6"
           Id="Package\Sequence Container\BusInfo"
@@ -11794,18 +11799,18 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="660.46187649996,60.1071447335961">
+          TopLeft="659.628543212158,60.1071447335961">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="60.0380844341634,0"
+              EndConnector="60.8714177219662,0"
               Start="0,0"
-              End="52.5380844341634,0">
+              End="53.3714177219662,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="52.5380844341634,0" />
+                    End="53.3714177219662,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
