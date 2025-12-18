@@ -40,6 +40,7 @@ class Program
     {
         try
         {
+            // Load configuration
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -47,7 +48,7 @@ class Program
 
             string sourceConn = config.GetConnectionString("Source");
 
-            // 2️⃣ Initialize Serilog loggers with custom columns
+            // Initialize Serilog loggers with custom columns
             var columnOptions = new ColumnOptions();
             // Remove unwanted standard columns from the Store collection
             columnOptions.Store.Remove(StandardColumn.MessageTemplate);
@@ -83,7 +84,6 @@ class Program
                     columnOptions: columnOptions)
                 .CreateLogger();
 
-            // 3️⃣ Load URL section
             Application.URL.TOSWebService = config["URL:TOSWebService"];
             Application.URL.SoapActionBase = config["URL:SoapActionBase"];
             Application.URL.Xmlns = config["URL:Xmlns"];
@@ -99,7 +99,7 @@ class Program
         }
         finally
         {
-            // Ensure logs are flushed
+            // Ensure logs are flushed before exit
             (LogMigrationProcess.Logger as IDisposable)?.Dispose();
             (LogMigrationException.Logger as IDisposable)?.Dispose();
         }
