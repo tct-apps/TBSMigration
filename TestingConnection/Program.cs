@@ -27,17 +27,24 @@ class Program
         // continue your process here
     }
 
-
     static async Task<bool> TestConnectionAsync(string connectionString)
     {
         try
         {
             using var conn = new SqlConnection(connectionString);
             await conn.OpenAsync();
+            Console.WriteLine("Connected to: " + conn.DataSource);
+            Console.WriteLine("Database: " + conn.Database);
             return conn.State == ConnectionState.Open;
         }
-        catch
+        catch (SqlException ex)
         {
+            Console.WriteLine("SQL Exception: " + ex.Message);
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("General Exception: " + ex.Message);
             return false;
         }
     }
