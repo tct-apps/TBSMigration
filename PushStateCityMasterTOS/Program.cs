@@ -44,12 +44,13 @@ class Program
                 .Build();
 
             // Initialize Serilog logger(s) from configuration
-            LogMigrationProcess.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationProcess")
-                .CreateLogger();
             LogMigrationException.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationException")
                 .CreateLogger();
+            LogMigrationProcess.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationProcess")
+                .CreateLogger();
+            
 
             string sourceConn = config.GetConnectionString("Source");
 
