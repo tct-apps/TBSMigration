@@ -6,8 +6,11 @@ using PushMaster.City;
 using PushMaster.Common;
 using PushMaster.State;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using Setting.Configuration.Application;
 using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;
@@ -37,29 +40,54 @@ class Program
     {
         try
         {
-            // Load configuration
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            // Initialize Serilog logger(s) from configuration
-            LogMigrationException.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationException")
-                .CreateLogger();
-            LogMigrationProcess.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationProcess")
-                .CreateLogger();
-            
-
             string sourceConn = config.GetConnectionString("Source");
 
-            // Load your URL section
+            // 2️⃣ Initialize Serilog loggers with custom columns
+            var columnOptions = new ColumnOptions();
+            // Remove unwanted standard columns from the Store collection
+            columnOptions.Store.Remove(StandardColumn.MessageTemplate);
+            columnOptions.Store.Remove(StandardColumn.Level);
+            columnOptions.Store.Remove(StandardColumn.Exception);
+            columnOptions.Store.Remove(StandardColumn.Properties);
+
+            columnOptions.AdditionalColumns = new Collection<SqlColumn>
+            {
+                new SqlColumn("Type", SqlDbType.NVarChar, dataLength: 100),
+                new SqlColumn("Process", SqlDbType.NVarChar, dataLength: 100),
+                new SqlColumn("IsSuccess", SqlDbType.Bit),
+                new SqlColumn("RequestXml", SqlDbType.NVarChar),
+                new SqlColumn("ResponseXml", SqlDbType.NVarChar),
+                new SqlColumn("CustomData", SqlDbType.NVarChar)
+            };
+
+            LogMigrationProcess.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.MSSqlServer(
+                    connectionString: sourceConn,
+                    tableName: "LogMigrationProcess",
+                    autoCreateSqlTable: true,
+                    columnOptions: columnOptions)
+                .CreateLogger();
+
+            LogMigrationException.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.MSSqlServer(
+                    connectionString: sourceConn,
+                    tableName: "LogMigrationException",
+                    autoCreateSqlTable: true,
+                    columnOptions: columnOptions)
+                .CreateLogger();
+
+            // 3️⃣ Load URL section
             Application.URL.TOSWebService = config["URL:TOSWebService"];
             Application.URL.SoapActionBase = config["URL:SoapActionBase"];
             Application.URL.Xmlns = config["URL:Xmlns"];
 
-            // await the async worker
             await State(sourceConn).ConfigureAwait(false);
             await City(sourceConn).ConfigureAwait(false);
         }
@@ -71,7 +99,7 @@ class Program
         }
         finally
         {
-            // Ensure logs are flushed before exit
+            // Ensure logs are flushed
             (LogMigrationProcess.Logger as IDisposable)?.Dispose();
             (LogMigrationException.Logger as IDisposable)?.Dispose();
         }

@@ -5,8 +5,16 @@ namespace Plugin.Logging
     {
         public static Serilog.Core.Logger Logger { get; set; }
 
-        public static void Error(DateTime timestamp, string type, string process, string requestXml, string responseXml, string customData, string message, Exception exception)
+        public static void Error(DateTime timestamp,string type, string process,string requestXml, string responseXml,string customData,string message,Exception exception)
         {
+            if (Logger == null)
+            {
+                Console.WriteLine("LOGGER NOT INITIALIZED");
+                Console.WriteLine(message);
+                Console.WriteLine(exception);
+                return;
+            }
+
             Logger
                 .ForContext("Type", type)
                 .ForContext("Process", process)
@@ -15,6 +23,7 @@ namespace Plugin.Logging
                 .ForContext("CustomData", customData)
                 .Error(exception, message);
         }
+
 
         public static void Error(DateTime timestamp, string type, string process, string requestXml, string responseXml, string customData, Exception exception)
         {
