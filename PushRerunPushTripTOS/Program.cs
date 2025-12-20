@@ -5,16 +5,18 @@ using Plugin.Logging;
 using PushTrip.AdhocSchedule;
 using PushTrip.Common;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
+using Setting.Configuration.Application;
+using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using Setting.Configuration.Application;
 using static Dapper.SqlMapper;
-using System.Data;
-using System.Text.Json;
-using System.Collections.Concurrent;
 
 class Program
 {
@@ -44,15 +46,43 @@ class Program
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            // Initialize Serilog logger(s) from configuration
+            string sourceConn = config.GetConnectionString("Source");
+
+            // Initialize Serilog loggers with custom columns
+            var columnOptions = new ColumnOptions();
+            // Remove unwanted standard columns from the Store collection
+            columnOptions.Store.Remove(StandardColumn.MessageTemplate);
+            columnOptions.Store.Remove(StandardColumn.Level);
+            columnOptions.Store.Remove(StandardColumn.Exception);
+            columnOptions.Store.Remove(StandardColumn.Properties);
+
+            columnOptions.AdditionalColumns = new Collection<SqlColumn>
+            {
+                new SqlColumn("Type", SqlDbType.NVarChar, dataLength: 100),
+                new SqlColumn("Process", SqlDbType.NVarChar, dataLength: 100),
+                new SqlColumn("IsSuccess", SqlDbType.Bit),
+                new SqlColumn("RequestXml", SqlDbType.NVarChar, dataLength: -1),
+                new SqlColumn("ResponseXml", SqlDbType.NVarChar,dataLength: -1),
+                new SqlColumn("CustomData", SqlDbType.NVarChar, dataLength : -1)
+            };
+
             LogMigrationProcess.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationProcess")
-                .CreateLogger();
-            LogMigrationException.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(config, sectionName: "Serilog_MigrationException")
+                .MinimumLevel.Information()
+                .WriteTo.MSSqlServer(
+                    connectionString: sourceConn,
+                    tableName: "LogMigrationProcess",
+                    autoCreateSqlTable: true,
+                    columnOptions: columnOptions)
                 .CreateLogger();
 
-            string sourceConn = config.GetConnectionString("Source");
+            LogMigrationException.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.MSSqlServer(
+                    connectionString: sourceConn,
+                    tableName: "LogMigrationException",
+                    autoCreateSqlTable: true,
+                    columnOptions: columnOptions)
+                .CreateLogger();
 
             // Load your URL section
             Application.URL.TOSWebService = config["URL:TOSWebService"];
@@ -83,6 +113,7 @@ class Program
 
         try
         {
+            // Load SQL
             string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "RerunAdhocSchedule.sql");
             string sql = File.ReadAllText(sqlPath);
 
@@ -109,131 +140,124 @@ class Program
             foreach (var group in groupedByTripDate)
             {
                 DateTime tripDate = group.Key;
-                List<AdhocScheduleModel> batch = group.ToList();
+                List<AdhocScheduleModel> allTrips = group.ToList();
 
-                // Build batch request per TripDate
-                var requestContent = new AdhocScheduleRequestModel
+                // Process each TripDate in batches of 50
+                foreach (var batch in allTrips.Chunk(100))
                 {
-                    InsertList = new InsertList
+                    int batchSize = batch.Length;
+
+                    string requestXml = null;
+                    string responseXml = null;
+                    AdhocScheduleResponseModel response;
+
+                    var requestContent = new AdhocScheduleRequestModel
                     {
-                        Schedule = new Schedule
+                        InsertList = new InsertList
                         {
-                            AdhocList = batch.Select(a => new Adhoc
+                            Schedule = new Schedule
                             {
-                                OperatorCode = a.OperatorCode,
-                                RouteNo = a.RouteNo,
-                                TripNo = a.TripNo,
-                                Type = a.Type,
-                                TripDate = a.TripDate.ToString("yyyy-MM-dd"),
-                                Date = a.Date.ToString("yyyy-MM-dd"),
-                                Time = FormatTime(a.Time),
-                                PlateNo = a.PlateNo,
-                                Position = a.Position,
-                                Remark = a.Remark
-                            }).ToList()
-                        }
-                    }
-                };
-
-                string requestXml = null;
-                string responseXml = null;
-
-                AdhocScheduleResponseModel response;
-
-                // CancellationToken per-call (optionally pass a global token).
-                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
-
-                try
-                {
-                    requestXml = SerializeToXml(requestContent, xmlns);
-
-                    response = await WebServicePostAsync<AdhocScheduleResponseModel>(
-                        requestUrl, soapAction, xmlns, requestContent, cts.Token);
-
-                    responseXml = SerializeToXml(response, xmlns);
-
-                    var adhocList = response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList;
-
-                    var successTripNos = adhocList?
-                        .Where(x => x.Code == "1")
-                        .Select(x => x.TripNo)
-                        .ToList() ?? new List<string>();
-
-                    var errorTripNos = adhocList?
-                        .Where(x => x.Code == "0")
-                        .Select(x => x.TripNo)
-                        .ToList() ?? new List<string>();
-
-                    var customDataObj = new
-                    {
-                        success = successTripNos,
-                        error = errorTripNos
-                    };
-
-                    string customData = JsonSerializer.Serialize(customDataObj);
-
-                    bool isSuccess = adhocList != null && !errorTripNos.Any();
-
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "RerunTrip", "Insert", $"Date: {tripDate:yyyy-MM-dd} Records: {batch.Count}", requestXml, responseXml, customData, isSuccess));
-                }
-                catch (Exception ex)
-                {
-                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogMigrationException.Error(ts, "RerunTrip", "Insert", requestXml, responseXml, $"{tripDate:yyyy-MM-dd}", "Exception during Insert phase", ex);
-                    continue;
-                }
-
-                try
-                {
-                    string updateSqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocDetailUpdate.sql");
-                    string updateSql = File.ReadAllText(updateSqlPath);
-
-                    using var conn = new SqlConnection(sourceConn);
-                    await conn.OpenAsync();
-
-                    bool isSuccess = true;
-
-                    if (response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList != null)
-                    {
-                        foreach (var adhoc in response.AdhocScheduleInsertResult.InsertStatus.AdhocList)
-                        {
-                            var param = new AdhocDetailUpdateModel.Request()
-                            {
-                                TripNo = adhoc.TripNo,
-                                GateNo = adhoc.Bay,
-                                GateNo2 = adhoc.Gate,
-                                TripDate = DateTime.Parse(adhoc.TripDate),
-                                AdhocId = adhoc.ScheduleId,
-                                Position = adhoc.Position,
-                                CompanyCode = adhoc.OperatorCode
-                            };
-
-                            int rows = await conn.ExecuteAsync(updateSql, param);
-
-                            if (rows == 0)
-                            {
-                                isSuccess = false;
+                                AdhocList = batch.Select(a => new Adhoc
+                                {
+                                    OperatorCode = a.OperatorCode,
+                                    RouteNo = a.RouteNo,
+                                    TripNo = a.TripNo,
+                                    Type = a.Type,
+                                    TripDate = a.TripDate.ToString("yyyy-MM-dd"),
+                                    Date = a.Date.ToString("yyyy-MM-dd"),
+                                    Time = FormatTime(a.Time),
+                                    PlateNo = a.PlateNo,
+                                    Position = a.Position,
+                                    Remark = a.Remark
+                                }).ToList()
                             }
                         }
+                    };
+
+                    using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+
+                    // --- SOAP Insert ---
+                    try
+                    {
+                        requestXml = SerializeToXml(requestContent, xmlns);
+
+                        response = await WebServicePostAsync<AdhocScheduleResponseModel>(
+                            requestUrl, soapAction, xmlns, requestContent, cts.Token);
+
+                        responseXml = SerializeToXml(response, xmlns);
+
+                        var adhocList = response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList;
+
+                        var successTripNos = adhocList?.Where(x => x.Code == "1").Select(x => x.TripNo).ToList() ?? new List<string>();
+                        var errorTripNos = adhocList?.Where(x => x.Code == "0").Select(x => x.TripNo).ToList() ?? new List<string>();
+
+                        string customData = JsonSerializer.Serialize(new { success = successTripNos, error = errorTripNos });
+                        bool isSuccess = adhocList != null && !errorTripNos.Any();
+
+                        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                                  "RerunTrip", "Insert", $"Date: {tripDate:yyyy-MM-dd} Batch Records: {batchSize}",
+                                  requestXml, responseXml, customData, isSuccess));
+                    }
+                    catch (Exception ex)
+                    {
+                        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                        LogMigrationException.Error(ts, "RerunTrip", "Insert", requestXml, responseXml,
+                                                   $"{tripDate:yyyy-MM-dd}", "Exception during Insert batch", ex);
+                        continue; // move to next batch
                     }
 
-                    logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "RerunTrip", "Update", $"Date: {tripDate:yyyy-MM-dd} Records: {batch.Count}", null, null, $"{tripDate:yyyy-MM-dd}", isSuccess));
-                }
-                catch (Exception ex)
-                {
-                    var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                    LogMigrationException.Error(ts, "RerunTrip", "Update", requestXml, responseXml, $"{tripDate:yyyy-MM-dd}", "Exception during Update phase", ex);
-                }
-            }
+                    // --- Database Update for this batch ---
+                    try
+                    {
+                        string updateSqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocDetailUpdate.sql");
+                        string updateSql = File.ReadAllText(updateSqlPath);
+
+                        using var conn = new SqlConnection(sourceConn);
+                        await conn.OpenAsync();
+
+                        bool isSuccess = true;
+
+                        if (response?.AdhocScheduleInsertResult?.InsertStatus?.AdhocList != null)
+                        {
+                            foreach (var adhoc in response.AdhocScheduleInsertResult.InsertStatus.AdhocList)
+                            {
+                                var param = new AdhocDetailUpdateModel.Request()
+                                {
+                                    TripNo = adhoc.TripNo,
+                                    GateNo = adhoc.Bay,
+                                    GateNo2 = adhoc.Gate,
+                                    TripDate = DateTime.Parse(adhoc.TripDate),
+                                    AdhocId = adhoc.ScheduleId,
+                                    Position = adhoc.Position,
+                                    CompanyCode = adhoc.OperatorCode
+                                };
+
+                                int rows = await conn.ExecuteAsync(updateSql, param);
+                                if (rows == 0) isSuccess = false;
+                            }
+                        }
+
+                        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
+                                  "RerunTrip", "Update", $"Date: {tripDate:yyyy-MM-dd} Batch Records: {batchSize}",
+                                  null, null, $"{tripDate:yyyy-MM-dd}", isSuccess));
+                    }
+                    catch (Exception ex)
+                    {
+                        var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
+                        LogMigrationException.Error(ts, "RerunTrip", "Update", requestXml, responseXml,
+                                                   $"{tripDate:yyyy-MM-dd}", "Exception during Update batch", ex);
+                    }
+                } // end batch foreach
+            } // end groupedByTripDate foreach
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "RerunTrip", "Overall", null, null, null, "Unhandled exception in RerunAdhocSchedule() overall", ex);
+            LogMigrationException.Error(ts, "RerunTrip", "Overall", null, null, null, "Unhandled exception in AdhocSchedule() overall", ex);
         }
         finally
         {
-            // Write process logs
+            // Write all process logs at the end
             LogMigrationProcess.WriteAll(logs);
         }
     }
