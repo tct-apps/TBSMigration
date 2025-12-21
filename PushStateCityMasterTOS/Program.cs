@@ -110,6 +110,8 @@ class Program
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "Start", null, null, null, null, null));
+
         try
         {
             string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "State.sql");
@@ -164,7 +166,6 @@ class Program
                         isSuccess = false;
                     }
 
-                    // logging process read
                     logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "Insert", $"State: {state.StateName}", requestXml, responseXml, $"{state.StateCode}", isSuccess));
 
                 }
@@ -174,6 +175,8 @@ class Program
                     LogMigrationException.Error(ts, "State", "Insert", requestXml, responseXml, $"{state.StateCode}", "Exception during Insert phase", ex);
                 }
             }
+
+            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "End", null, null, null, null, null));
         }
         catch (Exception ex)
         {
@@ -191,6 +194,8 @@ class Program
     {
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Start", null, null, null, null, null));
 
         try
         {
@@ -247,7 +252,6 @@ class Program
                         isSuccess = false;
                     }
 
-                    // logging process read
                     logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Insert", $"City: {city.CityName}", requestXml, responseXml, $"{city.CityCode}", isSuccess));
                 }
                 catch (Exception ex)
@@ -257,13 +261,17 @@ class Program
                 }
             }
 
-            // Write process logs
-            LogMigrationProcess.WriteAll(logs);
+            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "End", null, null, null, null, null));
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
             LogMigrationException.Error(ts, "City", "Overall", null, null, null, "Unhandled exception in City() overall", ex);
+        }
+        finally
+        {
+            // Write process logs
+            LogMigrationProcess.WriteAll(logs);
         }
     }
 
