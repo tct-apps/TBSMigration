@@ -1,12 +1,12 @@
 ﻿
-DECLARE @DateFrom VARCHAR(10) = '20251220';
-DECLARE @DateTo VARCHAR(10) = '20251222';
+DECLARE @DateFrom VARCHAR(10) = '20251225';
+DECLARE @DateTo VARCHAR(10) = '20260831';
 
 DECLARE @AdhocArr INT = 0;
 SELECT @AdhocArr = ISNULL(CAST(30 AS INT), 0) FROM sysPara;
 
-DECLARE @DateFromSQL DATE = CONVERT(DATE, @DateFrom, 103);
-DECLARE @DateToSQL   DATE = CONVERT(DATE, @DateTo, 103);
+DECLARE @DateFromSQL DATE = CONVERT(DATE, @DateFrom, 112);
+DECLARE @DateToSQL   DATE = CONVERT(DATE, @DateTo, 112);
 
 DECLARE @YearMonthFrom INT = YEAR(@DateFromSQL) * 100 + MONTH(@DateFromSQL);
 DECLARE @YearMonthTo   INT = YEAR(@DateToSQL) * 100 + MONTH(@DateToSQL);
@@ -14,13 +14,6 @@ DECLARE @CurrentYM INT = @YearMonthFrom;
 
 DECLARE @SQL NVARCHAR(MAX) = N'';
 DECLARE @PartSQL NVARCHAR(MAX);
-
-SET @DateFromSQL = CONVERT(DATE, @DateFrom, 103);
-SET @DateToSQL = CONVERT(DATE, @DateTo, 103);
-
-SET @YearMonthFrom = YEAR(@DateFromSQL) * 100 + MONTH(@DateFromSQL);
-SET @YearMonthTo = YEAR(@DateToSQL) * 100 + MONTH(@DateToSQL);
-SET @CurrentYM = @YearMonthFrom;
 
 WHILE @CurrentYM <= @YearMonthTo
 BEGIN
