@@ -1,4 +1,6 @@
-﻿using System.Reflection.Metadata;
+﻿using Serilog.Events;
+using Serilog.Parsing;
+using System.Reflection.Metadata;
 
 namespace Plugin.Logging
 {
@@ -18,30 +20,34 @@ namespace Plugin.Logging
                 .Information(message);
         }
 
-        public static void WriteAll(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)> logs)
+        public static void WriteAll(IEnumerable<(DateTime TimeStamp, string Type, string Process, string Message,
+                 string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)> logs)
         {
-            var logEvents = logs.Select(log => new
-            {
-                log.TimeStamp,
-                log.Type,
-                log.Process,
-                log.IsSuccess,
-                log.RequestXml,
-                log.ResponseXml,
-                log.CustomData,
-                log.Message
-            }).ToList();
+            var parser = new MessageTemplateParser();
 
-            foreach (var log in logEvents)
+            foreach (var log in logs)
             {
-                Logger
-                    .ForContext("Type", log.Type)
-                    .ForContext("Process", log.Process)
-                    .ForContext("IsSuccess", log.IsSuccess)
-                    .ForContext("RequestXml", log.RequestXml)
-                    .ForContext("ResponseXml", log.ResponseXml)
-                    .ForContext("CustomData", log.CustomData)
-                    .Information(log.Message);
+                 var props = new List<LogEventProperty>
+                {
+                    new("Type", new ScalarValue(log.Type)),
+                    new("Process", new ScalarValue(log.Process)),
+                    new("RequestXml", new ScalarValue(log.RequestXml)),
+                    new("ResponseXml", new ScalarValue(log.ResponseXml)),
+                    new("CustomData", new ScalarValue(log.CustomData))
+                };
+
+                if (log.IsSuccess.HasValue)
+                    props.Add(new LogEventProperty("IsSuccess", new ScalarValue(log.IsSuccess)));
+
+                var logEvent = new LogEvent(
+                    timestamp: new DateTimeOffset(log.TimeStamp), // 🔒 YOUR TIME, NOT REPLACED
+                    level: LogEventLevel.Information,
+                    exception: null,
+                    messageTemplate: parser.Parse(log.Message),
+                    properties: props
+                );
+
+                Logger.Write(logEvent);
             }
         }
 

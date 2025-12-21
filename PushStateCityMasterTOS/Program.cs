@@ -60,10 +60,10 @@ class Program
             {
                 new SqlColumn("Type", SqlDbType.NVarChar, dataLength: 100),
                 new SqlColumn("Process", SqlDbType.NVarChar, dataLength: 100),
-                new SqlColumn("IsSuccess", SqlDbType.Bit),
-                new SqlColumn("RequestXml", SqlDbType.NVarChar),
-                new SqlColumn("ResponseXml", SqlDbType.NVarChar),
-                new SqlColumn("CustomData", SqlDbType.NVarChar)
+                new SqlColumn("IsSuccess", SqlDbType.Bit, allowNull: true),
+                new SqlColumn("RequestXml", SqlDbType.NVarChar, dataLength: -1, allowNull: true),
+                new SqlColumn("ResponseXml", SqlDbType.NVarChar, dataLength: -1, allowNull: true),
+                new SqlColumn("CustomData", SqlDbType.NVarChar, dataLength: -1, allowNull: true)
             };
 
             LogMigrationProcess.Logger = new LoggerConfiguration()
@@ -110,7 +110,7 @@ class Program
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "Start", null, null, null, null, null));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "Start", "State migration started", null, null, null, null));
 
         try
         {
@@ -176,7 +176,7 @@ class Program
                 }
             }
 
-            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "End", null, null, null, null, null));
+            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "State", "End", "State migration ended", null, null, null, null));
         }
         catch (Exception ex)
         {
@@ -195,7 +195,7 @@ class Program
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Start", null, null, null, null, null));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "Start", "City migration started", null, null, null, null));
 
         try
         {
@@ -261,7 +261,7 @@ class Program
                 }
             }
 
-            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "End", null, null, null, null, null));
+            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "City", "End", "City migration ended", null, null, null, null));
         }
         catch (Exception ex)
         {

@@ -61,9 +61,9 @@ class Program
                 new SqlColumn("Type", SqlDbType.NVarChar, dataLength: 100),
                 new SqlColumn("Process", SqlDbType.NVarChar, dataLength: 100),
                 new SqlColumn("IsSuccess", SqlDbType.Bit),
-                new SqlColumn("RequestXml", SqlDbType.NVarChar),
-                new SqlColumn("ResponseXml", SqlDbType.NVarChar),
-                new SqlColumn("CustomData", SqlDbType.NVarChar)
+                new SqlColumn("RequestXml", SqlDbType.NVarChar, dataLength: -1, allowNull: true),
+                new SqlColumn("ResponseXml", SqlDbType.NVarChar, dataLength: -1, allowNull: true),
+                new SqlColumn("CustomData", SqlDbType.NVarChar, dataLength: -1, allowNull: true)
             };
 
             LogMigrationProcess.Logger = new LoggerConfiguration()
@@ -110,6 +110,8 @@ class Program
         // Thread-safe collection
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Route", "Start", "Route migration started", null, null, null, null));
 
         try
         {
@@ -194,6 +196,8 @@ class Program
 
                 await Task.WhenAll(tasks);
             }
+
+            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "Route", "End", "Route migration ended", null, null, null, null));
         }
         catch (Exception ex)
         {
