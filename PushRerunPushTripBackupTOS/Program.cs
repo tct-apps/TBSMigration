@@ -90,13 +90,13 @@ class Program
             Application.URL.Xmlns = config["URL:Xmlns"];
 
             // await the async worker
-            await RerunAdhocSchedule(sourceConn).ConfigureAwait(false);
+            await RerunAdhocScheduleBackup(sourceConn).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
             var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "RerunTrip", "Main", null, null, null, "Unhandled exception in Main()", ex);
+            LogMigrationException.Error(ts, "RerunTripBackup", "Main", null, null, null, "Unhandled exception in Main()", ex);
         }
         finally
         {
@@ -106,17 +106,17 @@ class Program
         }
     }
 
-    static async Task RerunAdhocSchedule(string sourceConn)
+    static async Task RerunAdhocScheduleBackup(string sourceConn)
     {
         var logs = new ConcurrentBag<(DateTime TimeStamp, string Type, string Process, string Message, string RequestXml, string ResponseXml, string CustomData, bool? IsSuccess)>();
         var malaysiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
 
-        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "RerunTrip", "Start", "RerunTrip migration started", null, null, null, null));
+        logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "RerunTripBackup", "Start", "RerunTripBackup migration started", null, null, null, null));
 
         try
         {
             // Load SQL
-            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "RerunAdhocSchedule.sql");
+            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "RerunAdhocScheduleBackup.sql");
             string sql = File.ReadAllText(sqlPath);
 
             using var source = new SqlConnection(sourceConn);
@@ -197,13 +197,13 @@ class Program
                         bool isSuccess = adhocList != null && !errorTripNos.Any();
 
                         logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                                  "RerunTrip", "Insert", $"Date: {tripDate:yyyy-MM-dd} Batch Records: {batchSize}",
+                                  "RerunTripBackup", "Insert", $"Date: {tripDate:yyyy-MM-dd} Batch Records: {batchSize}",
                                   requestXml, responseXml, customData, isSuccess));
                     }
                     catch (Exception ex)
                     {
                         var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                        LogMigrationException.Error(ts, "RerunTrip", "Insert", requestXml, responseXml,
+                        LogMigrationException.Error(ts, "RerunTripBackup", "Insert", requestXml, responseXml,
                                                    $"{tripDate:yyyy-MM-dd}", "Exception during Insert batch", ex);
                         continue; // move to next batch
                     }
@@ -230,7 +230,7 @@ class Program
                                     GateNo2 = adhoc.Gate,
                                     TripDate = DateTime.Parse(adhoc.TripDate),
                                     AdhocId = adhoc.ScheduleId,
-                                    Position = adhoc.Position,
+                                    Position = adhoc.Position,  
                                     CompanyCode = adhoc.OperatorCode
                                 };
 
@@ -240,24 +240,24 @@ class Program
                         }
 
                         logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone),
-                                  "RerunTrip", "Update", $"Date: {tripDate:yyyy-MM-dd} Batch Records: {batchSize}",
+                                  "RerunTripBackup", "Update", $"Date: {tripDate:yyyy-MM-dd} Batch Records: {batchSize}",
                                   null, null, $"{tripDate:yyyy-MM-dd}", isSuccess));
                     }
                     catch (Exception ex)
                     {
                         var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-                        LogMigrationException.Error(ts, "RerunTrip", "Update", requestXml, responseXml,
+                        LogMigrationException.Error(ts, "RerunTripBackup", "Update", requestXml, responseXml,
                                                    $"{tripDate:yyyy-MM-dd}", "Exception during Update batch", ex);
                     }
                 } // end batch foreach
             } // end groupedByTripDate foreach
 
-            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "RerunTrip", "End", "RerunTrip migration ended", null, null, null, null));
+            logs.Add((TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone), "RerunTripBackup", "End", "RerunTripBackup migration ended", null, null, null, null));
         }
         catch (Exception ex)
         {
             var ts = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, malaysiaTimeZone);
-            LogMigrationException.Error(ts, "RerunTrip", "Overall", null, null, null, "Unhandled exception in RerunAdhocSchedule() overall", ex);
+            LogMigrationException.Error(ts, "RerunTripBackup", "Overall", null, null, null, "Unhandled exception in RerunAdhocScheduleBackup() overall", ex);
         }
         finally
         {
