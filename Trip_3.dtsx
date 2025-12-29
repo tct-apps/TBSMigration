@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Trip_3"
   DTS:PackageType="5"
-  DTS:VersionBuild="107"
-  DTS:VersionGUID="{8C496C55-5185-4310-A46C-48108D3F1DA9}">
+  DTS:VersionBuild="109"
+  DTS:VersionGUID="{CC79A720-03C2-4860-A037-915FDC5A14AF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACQ7YQYb/+0wwIK9t0OC5s7A2SskRDPG/1LIfFcS5kpZQAAAAAOgAAAAAIAACAAAACMl4rQ4ze2Pc7GDGWjDj1qexVottomDRC4W2cZPhbDEiAAAACrhO28PMrV046TqMWfLvJtXDKu4S+0tvrr6E+Rcm2l6kAAAABO3MbfeMxtn61C9Ett6Kdnvp+tkQYeup+R0OGwR+jRj0lFFgHsxWh+5+qv4n8t1m46bpGjf/jbEW7Osrey3odv</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAfOUexPGW4zOufT/99RrtJp0/dx0QfXH5djRC3LhGP6AAAAAAOgAAAAAIAACAAAAA/Esc9xHhyBCnH7et/Wi6ztgz+JrKks5JXhOWdDW4g7yAAAAC8xoHO4w8EOvBdcvDJoKVCwkimxo7gD0fcQj4Bw+6B90AAAAApZDi264MPOWhALo8VG/vNmwypvAlTRrUpoCODBz8FOKPV3F063n2FHd+Di+B0nE0Hroz2oLi5iP3hcKksYhO7</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABJyICXabXid1VcqVDqEfL6YNRWt7mXSQvJoacZ1Iy+IwAAAAAOgAAAAAIAACAAAACxInVowcwEqxbe+cjINYM3mAGK4KSIiswKWfn/kpxAsSAAAACDRoVRzMnJQ5Bqc6bymrpFGonk/lVR4aU1vOIW7IOrrkAAAAC0NfhuG6unAqyhh41sYYfXPop+sIdnmBzGiZdZ9yTWCge9a0q+kzv3m0BrZ2EifF+nBIEgoBvQjeQ7hPRMPclm</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWTXQqSgEZEGXBDfRM6ASuQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABc+XqQmv02bca7sO+w+rYy8H4xATnHW5BPoQGonU/5xgAAAAAOgAAAAAIAACAAAAC3gzNWw30Lvpqqkiqf18RKDbH/XANaZb7ua6RXoNqJ2SAAAACoUc2OlOTzAdoM2Bjvl56mJlLTMyCwaDz5YK8f/wvRTEAAAAB8ZGnPq/IlGDXsjxWAX5CNJR4Wp6A+16vwgzPXu8cDu3IQEPvfcxzYyr+goXlaoKp0NgKRkfQRVyU4VgrVWU1n</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -432,23 +432,23 @@ FROM dbo.TripLog tl
 INNER JOIN (
     SELECT DISTINCT TID
     FROM (
-        SELECT TID FROM dbo.DERInfo_202512
+        SELECT TID FROM dbo.DERInfo_202512 WITH(NOLOCK)
         UNION ALL
-        SELECT TID FROM dbo.DERInfo_202601
+        SELECT TID FROM dbo.DERInfo_202601 WITH(NOLOCK)
         UNION ALL
-        SELECT TID FROM dbo.DERInfo_202602
+        SELECT TID FROM dbo.DERInfo_202602 WITH(NOLOCK)
         UNION ALL
-        SELECT TID FROM dbo.DERInfo_202603
+        SELECT TID FROM dbo.DERInfo_202603 WITH(NOLOCK)
         UNION ALL
-        SELECT TID FROM dbo.DERInfo_202604
+        SELECT TID FROM dbo.DERInfo_202604 WITH(NOLOCK)
         UNION ALL
-        SELECT TID FROM dbo.DERInfo_202605
+        SELECT TID FROM dbo.DERInfo_202605 WITH(NOLOCK)
         UNION ALL
-        SELECT TID FROM dbo.DERInfo_202606
+        SELECT TID FROM dbo.DERInfo_202606 WITH(NOLOCK)
         UNION ALL
-        SELECT TID FROM dbo.DERInfo_202607
+        SELECT TID FROM dbo.DERInfo_202607 WITH(NOLOCK)
         UNION ALL
-        SELECT TID FROM dbo.DERInfo_202608
+        SELECT TID FROM dbo.DERInfo_202608 WITH(NOLOCK)
     ) x
 ) d ON tl.TID = d.TID;</property>
                 <property
@@ -798,35 +798,13 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
           Id="Package\Package Start"
           TopLeft="204.88094118675,379.98915403448" />
         <NodeLayout
-          Size="119.2,41.6"
-          Id="Package\Truncate"
-          TopLeft="420.505929405522,378.582007949398" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="348.08094118675,400.085580991939">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="72.4249882187709,0"
-              Start="0,0"
-              End="64.9249882187709,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="64.9249882187709,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
           Size="113.6,41.6"
           Id="Package\TripLog"
           TopLeft="602.499967080852,380.466664020949" />
+        <NodeLayout
+          Size="119.2,41.6"
+          Id="Package\Truncate"
+          TopLeft="420.505929405522,378.582007949398" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="539.705929405522,400.324335985174">
@@ -841,6 +819,28 @@ select '"+ @[System::PackageName] +"', 'Package Fail', getdate(), '"+ replace(@[
                   Capacity="5">
                   <mssgle:LineSegment
                     End="55.2940376753302,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="348.08094118675,400.085580991939">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.4249882187709,0"
+              Start="0,0"
+              End="64.9249882187709,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="64.9249882187709,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
