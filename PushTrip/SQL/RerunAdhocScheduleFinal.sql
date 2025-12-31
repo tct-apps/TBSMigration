@@ -199,12 +199,12 @@ CREATE TABLE #ResultS
     RouteNo      NVARCHAR(50),
     TripNo       NVARCHAR(50),
     Type         NVARCHAR(10),
-    Date         DATETIME,
+    Date         DATE,
     Time         NVARCHAR(10),
     PlateNo      NVARCHAR(50),
     Remark       NVARCHAR(255),
     Position     INT,
-    TripDate     DATETIME
+    TripDate     DATE
 );
 
 DECLARE @AdhocArr INT = 30;
