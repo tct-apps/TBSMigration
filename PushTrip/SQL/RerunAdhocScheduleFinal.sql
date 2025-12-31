@@ -197,12 +197,12 @@ CREATE TABLE #ResultS
     RouteNo      NVARCHAR(50),
     TripNo       NVARCHAR(50),
     Type         NVARCHAR(10),
-    Date         NVARCHAR(10),
+    Date         DATETIME,
     Time         NVARCHAR(10),
     PlateNo      NVARCHAR(50),
     Remark       NVARCHAR(255),
     Position     INT,
-    TripDate     DATE
+    TripDate     DATETIME
 );
 
 DECLARE @AdhocArr INT = 30;
@@ -215,12 +215,12 @@ SELECT
     f.RouteNo,
     f.TripNo,
     f.Type,
-    f.Date,
+	CAST(f.Date AS DATE) AS [Date],
     f.Time,
     f.PlateNo,
     f.Remark,
     f.Position,
-    f.TripDate
+    CAST(f.TripDate AS DATE) AS TripDate
 FROM #FinalSuccess f
 LEFT JOIN DerWaybill_' + YrPr + ' w
     ON w.TID = f.TripNo
