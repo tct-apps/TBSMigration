@@ -120,10 +120,11 @@ class Program
             string sql = File.ReadAllText(sqlPath);
 
             using var source = new SqlConnection(sourceConn);
-            await source.OpenAsync().ConfigureAwait(false);
+            await source.OpenAsync();
 
-            using var multi = await source.QueryMultipleAsync(sql).ConfigureAwait(false);
-            List<AdhocScheduleModel> adhocModels = multi.Read<AdhocScheduleModel>().ToList();
+            // Run the script
+            using var multi = await source.QueryMultipleAsync(sql, commandTimeout: 300); // give enough timeout
+            var adhocModels = multi.Read<AdhocScheduleModel>().ToList();
 
             var groupedByTripDate = adhocModels
                 .GroupBy(a => a.TripDate.Date)
