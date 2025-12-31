@@ -168,7 +168,7 @@ class Program
                                     Type = a.Type,
                                     TripDate = a.TripDate.ToString("yyyy-MM-dd"),
                                     Date = a.Date.ToString("yyyy-MM-dd"),
-                                    Time = FormatTime(a.Time),
+                                    Time = a.Time,
                                     PlateNo = a.PlateNo,
                                     Position = a.Position,
                                     Remark = a.Remark
