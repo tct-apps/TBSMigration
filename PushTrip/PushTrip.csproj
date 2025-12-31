@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="SQL\AdhocDetailUpdate.sql" />
     <None Remove="SQL\AdhocSchedule.sql" />
+    <None Remove="SQL\AdhocScheduleFinal.sql" />
     <None Remove="SQL\RerunAdhocScheduleBackup.sql" />
     <None Remove="SQL\RerunAdhocScheduleFinal.sql" />
   </ItemGroup>
@@ -20,13 +21,16 @@
     <Content Include="SQL\AdhocSchedule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SQL\RerunAdhocScheduleFinal.sql">
+    <Content Include="SQL\AdhocScheduleFinal.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SQL\RerunAdhocSchedule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SQL\RerunAdhocScheduleBackup.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SQL\RerunAdhocScheduleFinal.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

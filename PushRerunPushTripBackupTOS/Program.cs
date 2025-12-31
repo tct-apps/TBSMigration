@@ -116,7 +116,7 @@ class Program
         try
         {
             // Load SQL
-            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "RerunAdhocScheduleFinal.sql");
+            string sqlPath = Path.Combine(Directory.GetCurrentDirectory(), "SQL", "AdhocScheduleFinal.sql");
             string sql = File.ReadAllText(sqlPath);
 
             using var source = new SqlConnection(sourceConn);
